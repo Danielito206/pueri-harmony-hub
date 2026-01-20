@@ -22,6 +22,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
+const NO_TEACHER_VALUE = '__none__';
+
 const ClassesManagement = () => {
   const { user, isAuthenticated } = useAuth();
   const { toast } = useToast();
@@ -29,7 +31,7 @@ const ClassesManagement = () => {
   const [teachers] = useState<Teacher[]>(mockTeachers);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedClass, setSelectedClass] = useState<Class | null>(null);
-  const [selectedTeacherId, setSelectedTeacherId] = useState<string>('');
+  const [selectedTeacherId, setSelectedTeacherId] = useState<string>(NO_TEACHER_VALUE);
 
   if (!isAuthenticated || user?.role !== 'admin') {
     return <Navigate to="/login" replace />;
@@ -42,25 +44,28 @@ const ClassesManagement = () => {
 
   const openAssignModal = (classItem: Class) => {
     setSelectedClass(classItem);
-    setSelectedTeacherId(classItem.teacherId || '');
+    setSelectedTeacherId(classItem.teacherId || NO_TEACHER_VALUE);
     setIsModalOpen(true);
   };
 
   const handleAssign = () => {
     if (!selectedClass) return;
 
+    const nextTeacherId =
+      selectedTeacherId === NO_TEACHER_VALUE ? undefined : selectedTeacherId;
+
     setClasses(prev =>
       prev.map(c =>
         c.id === selectedClass.id
-          ? { ...c, teacherId: selectedTeacherId || undefined }
+          ? { ...c, teacherId: nextTeacherId }
           : c
       )
     );
 
-    const teacher = teachers.find(t => t.id === selectedTeacherId);
+    const teacher = teachers.find(t => t.id === nextTeacherId);
     toast({
-      title: selectedTeacherId ? "Titulaire assigné" : "Titulaire retiré",
-      description: selectedTeacherId
+      title: nextTeacherId ? "Titulaire assigné" : "Titulaire retiré",
+      description: nextTeacherId
         ? `${teacher?.firstName} ${teacher?.lastName} est maintenant titulaire de ${selectedClass.name}.`
         : `Le titulaire de ${selectedClass.name} a été retiré.`,
     });
@@ -158,7 +163,7 @@ const ClassesManagement = () => {
                     <SelectValue placeholder="Choisir un professeur" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover">
-                    <SelectItem value="">Aucun (retirer le titulaire)</SelectItem>
+                    <SelectItem value={NO_TEACHER_VALUE}>Aucun (retirer le titulaire)</SelectItem>
                     {getAvailableTeachers().map((teacher) => (
                       <SelectItem key={teacher.id} value={teacher.id}>
                         {teacher.firstName} {teacher.lastName}

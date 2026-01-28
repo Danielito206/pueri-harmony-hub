@@ -1,45 +1,78 @@
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
-import { mockTeachers, mockStudents, mockParents, mockClasses } from '@/lib/mockData';
 import { Users, BookOpen, GraduationCap, UserCheck } from 'lucide-react';
+import { apiGet } from '@/lib/api';
+import type { Class } from '@/lib/types';
+
+interface AdminSummary {
+  teachersCount: number;
+  studentsCount: number;
+  parentsCount: number;
+  classesCount: number;
+  classesWithTeacher: number;
+  classesWithoutTeacher: number;
+}
 
 const AdminDashboard = () => {
   const { user, isAuthenticated } = useAuth();
+  const [summary, setSummary] = useState<AdminSummary | null>(null);
+  const [classes, setClasses] = useState<Class[]>([]);
+
+  useEffect(() => {
+    apiGet<AdminSummary>('/admin/dashboard/summary/')
+      .then(setSummary)
+      .catch(() => setSummary(null));
+    apiGet<any[]>('/classes/')
+      .then(data => {
+        const mapped: Class[] = data.map(c => ({
+          id: String(c.id),
+          name: c.name,
+          teacherId: c.teacher ? String(c.teacher.id) : undefined,
+          studentIds: Array.from({ length: c.students_count ?? 0 }, (_, i) => String(i)),
+          schedule: c.schedule || [],
+        }));
+        setClasses(mapped);
+      })
+      .catch(() => setClasses([]));
+  }, []);
 
   if (!isAuthenticated || user?.role !== 'admin') {
     return <Navigate to="/login" replace />;
   }
 
-  const stats = [
-    {
-      title: 'Professeurs',
-      value: mockTeachers.length,
-      icon: UserCheck,
-      color: 'bg-primary/10 text-primary',
-    },
-    {
-      title: 'Élèves',
-      value: mockStudents.length,
-      icon: GraduationCap,
-      color: 'bg-green-100 text-green-600',
-    },
-    {
-      title: 'Parents',
-      value: mockParents.length,
-      icon: Users,
-      color: 'bg-amber-100 text-amber-600',
-    },
-    {
-      title: 'Classes',
-      value: mockClasses.length,
-      icon: BookOpen,
-      color: 'bg-purple-100 text-purple-600',
-    },
-  ];
+  const stats = summary
+    ? [
+        {
+          title: 'Professeurs',
+          value: summary.teachersCount,
+          icon: UserCheck,
+          color: 'bg-primary/10 text-primary',
+        },
+        {
+          title: 'Élèves',
+          value: summary.studentsCount,
+          icon: GraduationCap,
+          color: 'bg-green-100 text-green-600',
+        },
+        {
+          title: 'Parents',
+          value: summary.parentsCount,
+          icon: Users,
+          color: 'bg-amber-100 text-amber-600',
+        },
+        {
+          title: 'Classes',
+          value: summary.classesCount,
+          icon: BookOpen,
+          color: 'bg-purple-100 text-purple-600',
+        },
+      ]
+    : [];
 
-  const classesWithTeachers = mockClasses.filter(c => c.teacherId).length;
-  const classesWithoutTeachers = mockClasses.length - classesWithTeachers;
+  const classesWithTeachers = summary?.classesWithTeacher ?? 0;
+  const classesWithoutTeachers = summary?.classesWithoutTeacher ?? 0;
 
   return (
     <DashboardLayout>
@@ -92,7 +125,9 @@ const AdminDashboard = () => {
               <div className="h-2 bg-muted rounded-full overflow-hidden">
                 <div
                   className="h-full bg-primary rounded-full"
-                  style={{ width: `${(classesWithTeachers / mockClasses.length) * 100}%` }}
+                  style={{ width: summary && summary.classesCount > 0
+                    ? `${(classesWithTeachers / summary.classesCount) * 100}%`
+                    : '0%' }}
                 />
               </div>
             </div>
@@ -146,22 +181,19 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
-                {mockClasses.map((classItem) => {
-                  const teacher = mockTeachers.find(t => t.id === classItem.teacherId);
-                  return (
-                    <tr key={classItem.id} className="hover:bg-muted/30">
-                      <td className="px-6 py-4 text-foreground font-medium">{classItem.name}</td>
-                      <td className="px-6 py-4">
-                        {teacher ? (
-                          <span className="text-foreground">{teacher.firstName} {teacher.lastName}</span>
-                        ) : (
-                          <span className="text-muted-foreground italic">Non assigné</span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 text-foreground">{classItem.studentIds.length}</td>
-                    </tr>
-                  );
-                })}
+                {classes.map((classItem) => (
+                  <tr key={classItem.id} className="hover:bg-muted/30">
+                    <td className="px-6 py-4 text-foreground font-medium">{classItem.name}</td>
+                    <td className="px-6 py-4">
+                      {classItem.teacherId ? (
+                        <span className="text-foreground">Assigné</span>
+                      ) : (
+                        <span className="text-muted-foreground italic">Non assigné</span>
+                      )}
+                    </td>
+                    <td className="px-6 py-4 text-foreground">{classItem.studentIds.length}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

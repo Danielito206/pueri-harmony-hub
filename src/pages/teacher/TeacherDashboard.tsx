@@ -1,26 +1,40 @@
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
-import { mockStudents, mockClasses, mockTeachers } from '@/lib/mockData';
+import { apiGet } from '@/lib/api';
 import { Users, BookOpen, Clock } from 'lucide-react';
+
+interface TeacherClassResponse {
+  id: string;
+  name: string;
+  students: { id: string; firstName: string; lastName: string; postName?: string }[];
+  schedule: { id: string; day: string; startTime: string; endTime: string; subject: string }[];
+}
 
 const TeacherDashboard = () => {
   const { user, isAuthenticated } = useAuth();
+  const [data, setData] = useState<TeacherClassResponse | null>(null);
+
+  useEffect(() => {
+    apiGet<TeacherClassResponse | { class: null }>('/teacher/class/')
+      .then(res => {
+        if ((res as any).class === null) {
+          setData(null);
+        } else {
+          setData(res as TeacherClassResponse);
+        }
+      })
+      .catch(() => setData(null));
+  }, []);
 
   if (!isAuthenticated || user?.role !== 'teacher') {
     return <Navigate to="/login" replace />;
   }
 
-  // Find teacher's class
-  const teacher = mockTeachers.find(t => t.email === user.email);
-  const teacherClass = mockClasses.find(c => c.teacherId === teacher?.id);
-  const classStudents = teacherClass
-    ? mockStudents.filter(s => s.classId === teacherClass.id)
-    : [];
-
-  const todaySchedule = teacherClass?.schedule.filter(
-    (s) => s.day === 'Lundi' // For demo, showing Monday
-  ) || [];
+  const teacherClass = data;
+  const classStudents = data?.students ?? [];
+  const todaySchedule = (data?.schedule ?? []).filter(s => s.day === 'Lundi');
 
   return (
     <DashboardLayout>

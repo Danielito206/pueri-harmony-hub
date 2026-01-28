@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { Button } from '@/components/ui/button';
@@ -6,9 +6,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { mockParents, mockStudents } from '@/lib/mockData';
+import { apiGet, apiPost, apiPut, apiDelete } from '@/lib/api';
 import { Parent } from '@/lib/types';
-import { Plus, Pencil, Trash2, Search } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, KeyRound } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -19,7 +19,7 @@ import {
 const ParentsManagement = () => {
   const { user, isAuthenticated } = useAuth();
   const { toast } = useToast();
-  const [parents, setParents] = useState<Parent[]>(mockParents);
+  const [parents, setParents] = useState<(Parent & { children: { id: string; firstName: string }[] })[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingParent, setEditingParent] = useState<Parent | null>(null);
@@ -30,6 +30,26 @@ const ParentsManagement = () => {
     phone: '',
     address: '',
   });
+
+  useEffect(() => {
+    apiGet<any[]>('/parents/')
+      .then(data => {
+        const mapped = data.map(p => ({
+          id: String(p.id),
+          email: p.email,
+          firstName: p.first_name,
+          lastName: p.last_name,
+          role: 'parent' as const,
+          childrenIds: [],
+          phone: p.phone || undefined,
+          address: p.address || undefined,
+          createdAt: new Date(p.date_joined),
+          children: p.children || [],
+        }));
+        setParents(mapped);
+      })
+      .catch(() => setParents([]));
+  }, []);
 
   if (!isAuthenticated || user?.role !== 'admin') {
     return <Navigate to="/login" replace />;
@@ -59,30 +79,66 @@ const ParentsManagement = () => {
     setIsModalOpen(true);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (editingParent) {
-      setParents(prev =>
-        prev.map(p =>
-          p.id === editingParent.id
-            ? { ...p, ...formData }
-            : p
-        )
-      );
+      try {
+        const payload = {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone || null,
+          address: formData.address || null,
+        };
+        const updated = await apiPut<any>(`/parents/${editingParent.id}/`, payload);
+        setParents(prev =>
+          prev.map(p =>
+            p.id === editingParent.id
+              ? {
+                  ...p,
+                  firstName: updated.first_name,
+                  lastName: updated.last_name,
+                  email: updated.email,
+                  phone: updated.phone || undefined,
+                  address: updated.address || undefined,
+                }
+              : p
+          )
+        );
+      } catch (err) {
+        console.error(err);
+      }
       toast({
         title: "Parent modifié",
         description: `${formData.firstName} ${formData.lastName} a été mis à jour.`,
       });
     } else {
-      const newParent: Parent = {
-        id: `p${Date.now()}`,
-        ...formData,
-        role: 'parent',
-        childrenIds: [],
-        createdAt: new Date(),
-      };
-      setParents(prev => [...prev, newParent]);
+      try {
+        const payload = {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone || null,
+          address: formData.address || null,
+        };
+        const created = await apiPost<any>('/parents/', payload);
+        const newParent = {
+          id: String(created.id),
+          email: created.email,
+          firstName: created.first_name,
+          lastName: created.last_name,
+          role: 'parent' as const,
+          childrenIds: [],
+          phone: created.phone || undefined,
+          address: created.address || undefined,
+          createdAt: new Date(created.date_joined),
+          children: created.children || [],
+        };
+        setParents(prev => [...prev, newParent]);
+      } catch (err) {
+        console.error(err);
+      }
       toast({
         title: "Parent ajouté",
         description: `${formData.firstName} ${formData.lastName} a été créé.`,
@@ -91,12 +147,38 @@ const ParentsManagement = () => {
     setIsModalOpen(false);
   };
 
-  const handleDelete = (parent: Parent) => {
-    if (confirm(`Êtes-vous sûr de vouloir supprimer ${parent.firstName} ${parent.lastName} ?`)) {
+  const handleDelete = async (parent: Parent) => {
+    if (!confirm(`Êtes-vous sûr de vouloir supprimer ${parent.firstName} ${parent.lastName} ?`)) {
+      return;
+    }
+    try {
+      await apiDelete(`/parents/${parent.id}/`);
       setParents(prev => prev.filter(p => p.id !== parent.id));
       toast({
         title: "Parent supprimé",
         description: `${parent.firstName} ${parent.lastName} a été supprimé.`,
+        variant: "destructive",
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleResetPassword = async (parent: Parent) => {
+    if (!confirm(`Réinitialiser le mot de passe de ${parent.firstName} ${parent.lastName} ?`)) {
+      return;
+    }
+    try {
+      await apiPost(`/admin/users/${parent.id}/reset_password/`, {});
+      toast({
+        title: "Mot de passe réinitialisé",
+        description: "Le mot de passe a été remis à la valeur par défaut.",
+      });
+    } catch (err) {
+      console.error(err);
+      toast({
+        title: "Erreur",
+        description: "Impossible de réinitialiser le mot de passe.",
         variant: "destructive",
       });
     }
@@ -142,7 +224,7 @@ const ParentsManagement = () => {
               </thead>
               <tbody className="divide-y divide-border">
                 {filteredParents.map((parent) => {
-                  const children = mockStudents.filter(s => s.parentIds.includes(parent.id));
+                  const children = (parent as any).children || [];
                   return (
                     <tr key={parent.id} className="hover:bg-muted/30">
                       <td className="px-6 py-4">
@@ -172,6 +254,9 @@ const ParentsManagement = () => {
                           </Button>
                           <Button variant="ghost" size="sm" onClick={() => handleDelete(parent)} className="text-destructive hover:text-destructive">
                             <Trash2 className="h-4 w-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" onClick={() => handleResetPassword(parent)}>
+                            <KeyRound className="h-4 w-4" />
                           </Button>
                         </div>
                       </td>

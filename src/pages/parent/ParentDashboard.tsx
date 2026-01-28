@@ -1,21 +1,39 @@
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
-import { mockStudents, mockClasses, mockParents, mockTeachers } from '@/lib/mockData';
+import { apiGet } from '@/lib/api';
 import { GraduationCap, BookOpen, User } from 'lucide-react';
+
+interface ParentChild {
+  id: string;
+  firstName: string;
+  lastName: string;
+  postName?: string;
+  class?: {
+    id: string;
+    name: string;
+  } | null;
+  homeroomTeacher?: {
+    id: string;
+    firstName: string;
+    lastName: string;
+  } | null;
+}
 
 const ParentDashboard = () => {
   const { user, isAuthenticated } = useAuth();
+  const [children, setChildren] = useState<ParentChild[]>([]);
+
+  useEffect(() => {
+    apiGet<ParentChild[]>('/parent/children/')
+      .then(setChildren)
+      .catch(() => setChildren([]));
+  }, []);
 
   if (!isAuthenticated || user?.role !== 'parent') {
     return <Navigate to="/login" replace />;
   }
-
-  // Find parent's children
-  const parent = mockParents.find(p => p.email === user.email);
-  const children = parent
-    ? mockStudents.filter(s => s.parentIds.includes(parent.id))
-    : [];
 
   return (
     <DashboardLayout>
@@ -50,7 +68,7 @@ const ParentDashboard = () => {
               <div>
                 <p className="text-sm text-muted-foreground">Classes</p>
                 <p className="text-3xl font-bold text-foreground">
-                  {new Set(children.map(c => c.classId)).size}
+                  {new Set(children.map(c => c.class?.id).filter(Boolean)).size}
                 </p>
               </div>
             </div>
@@ -65,9 +83,8 @@ const ParentDashboard = () => {
           {children.length > 0 ? (
             <div className="grid md:grid-cols-2 gap-6">
               {children.map((child) => {
-                const childClass = mockClasses.find(c => c.id === child.classId);
-                const teacher = mockTeachers.find(t => t.id === childClass?.teacherId);
-                
+                const childClass = child.class;
+                const teacher = child.homeroomTeacher;
                 return (
                   <div key={child.id} className="card-elevated p-6">
                     <div className="flex items-start gap-4 mb-4">
@@ -96,8 +113,7 @@ const ParentDashboard = () => {
                         <span className="font-medium text-foreground">
                           {teacher 
                             ? `${teacher.firstName} ${teacher.lastName}`
-                            : 'Non assigné'
-                          }
+                            : 'Non assigné'}
                         </span>
                       </div>
                     </div>

@@ -1,11 +1,29 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import { mockGalleryImages } from '@/lib/mockData';
+import { apiGet } from '@/lib/api';
+import type { GalleryImage } from '@/lib/types';
 
 export function GalleryPreview() {
   const navigate = useNavigate();
-  const previewImages = mockGalleryImages.slice(0, 4);
+  const [previewImages, setPreviewImages] = useState<GalleryImage[]>([]);
+
+  useEffect(() => {
+    apiGet<any[]>('/gallery/images/')
+      .then(data => {
+        const mapped: GalleryImage[] = data.map(img => ({
+          id: String(img.id),
+          url: img.url,
+          title: img.title,
+          description: img.description || undefined,
+          uploadedAt: new Date(img.uploaded_at),
+          uploadedBy: img.uploaded_by?.id ? String(img.uploaded_by.id) : 'admin',
+        }));
+        setPreviewImages(mapped.slice(0, 4));
+      })
+      .catch(() => setPreviewImages([]));
+  }, []);
 
   return (
     <section className="section-padding bg-muted/30">

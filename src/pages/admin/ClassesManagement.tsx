@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { mockTeachers, mockClasses } from '@/lib/mockData';
+import { apiGet, apiPost, apiDelete, apiPut } from '@/lib/api';
 import { Class, Teacher } from '@/lib/types';
-import { UserPlus, UserMinus } from 'lucide-react';
+import { UserPlus, UserMinus, Plus, Pencil, Trash2 } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -27,11 +28,44 @@ const NO_TEACHER_VALUE = '__none__';
 const ClassesManagement = () => {
   const { user, isAuthenticated } = useAuth();
   const { toast } = useToast();
-  const [classes, setClasses] = useState<Class[]>(mockClasses);
-  const [teachers] = useState<Teacher[]>(mockTeachers);
+  const [classes, setClasses] = useState<Class[]>([]);
+  const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedClass, setSelectedClass] = useState<Class | null>(null);
   const [selectedTeacherId, setSelectedTeacherId] = useState<string>(NO_TEACHER_VALUE);
+  const [isClassModalOpen, setIsClassModalOpen] = useState(false);
+  const [editingClass, setEditingClass] = useState<Class | null>(null);
+  const [className, setClassName] = useState('');
+
+  useEffect(() => {
+    apiGet<any[]>('/classes/')
+      .then(data => {
+        const mapped: Class[] = data.map(c => ({
+          id: String(c.id),
+          name: c.name,
+          teacherId: c.teacher ? String(c.teacher.id) : undefined,
+          studentIds: Array.from({ length: c.students_count ?? 0 }, (_, i) => String(i)),
+          schedule: c.schedule || [],
+        }));
+        setClasses(mapped);
+      })
+      .catch(() => setClasses([]));
+
+    apiGet<any[]>('/teachers/')
+      .then(data => {
+        const mapped: Teacher[] = data.map(t => ({
+          id: String(t.id),
+          email: t.email,
+          firstName: t.first_name,
+          lastName: t.last_name,
+          role: 'teacher',
+          phone: t.phone || undefined,
+          createdAt: new Date(t.date_joined),
+        }));
+        setTeachers(mapped);
+      })
+      .catch(() => setTeachers([]));
+  }, []);
 
   if (!isAuthenticated || user?.role !== 'admin') {
     return <Navigate to="/login" replace />;
@@ -42,42 +76,128 @@ const ClassesManagement = () => {
     return teachers.filter(t => !assignedTeacherIds.includes(t.id));
   };
 
+  const openClassModal = (classItem?: Class) => {
+    if (classItem) {
+      setEditingClass(classItem);
+      setClassName(classItem.name);
+    } else {
+      setEditingClass(null);
+      setClassName('');
+    }
+    setIsClassModalOpen(true);
+  };
+
+  const handleClassSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!className.trim()) return;
+
+    try {
+      if (editingClass) {
+        const updated = await apiPut<any>(`/classes/${editingClass.id}/`, { name: className.trim() });
+        setClasses(prev =>
+          prev.map(c =>
+            c.id === editingClass.id
+              ? {
+                  ...c,
+                  name: updated.name,
+                }
+              : c
+          )
+        );
+        toast({ title: 'Classe mise à jour', description: `La classe a été renommée.` });
+      } else {
+        const created = await apiPost<any>('/classes/', { name: className.trim() });
+        const newClass: Class = {
+          id: String(created.id),
+          name: created.name,
+          teacherId: created.teacher ? String(created.teacher.id) : undefined,
+          studentIds: [],
+          schedule: created.schedule || [],
+        };
+        setClasses(prev => [...prev, newClass]);
+        toast({ title: 'Classe créée', description: `La classe "${created.name}" a été ajoutée.` });
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsClassModalOpen(false);
+    }
+  };
+
+  const handleDeleteClass = async (classItem: Class) => {
+    if (!confirm(`Êtes-vous sûr de vouloir supprimer la classe ${classItem.name} ?`)) {
+      return;
+    }
+    try {
+      await apiDelete(`/classes/${classItem.id}/`);
+      setClasses(prev => prev.filter(c => c.id !== classItem.id));
+      toast({
+        title: 'Classe supprimée',
+        description: `La classe ${classItem.name} a été supprimée.`,
+        variant: 'destructive',
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const openAssignModal = (classItem: Class) => {
     setSelectedClass(classItem);
     setSelectedTeacherId(classItem.teacherId || NO_TEACHER_VALUE);
     setIsModalOpen(true);
   };
 
-  const handleAssign = () => {
+  const handleAssign = async () => {
     if (!selectedClass) return;
 
     const nextTeacherId =
-      selectedTeacherId === NO_TEACHER_VALUE ? undefined : selectedTeacherId;
+      selectedTeacherId === NO_TEACHER_VALUE ? null : selectedTeacherId;
 
-    setClasses(prev =>
-      prev.map(c =>
-        c.id === selectedClass.id
-          ? { ...c, teacherId: nextTeacherId }
-          : c
-      )
-    );
+    try {
+      const updated = await apiPost<any>(`/classes/${selectedClass.id}/assign_teacher/`, {
+        teacher_id: nextTeacherId,
+      });
 
-    const teacher = teachers.find(t => t.id === nextTeacherId);
-    toast({
-      title: nextTeacherId ? "Titulaire assigné" : "Titulaire retiré",
-      description: nextTeacherId
-        ? `${teacher?.firstName} ${teacher?.lastName} est maintenant titulaire de ${selectedClass.name}.`
-        : `Le titulaire de ${selectedClass.name} a été retiré.`,
-    });
-    setIsModalOpen(false);
+      setClasses(prev =>
+        prev.map(c =>
+          c.id === selectedClass.id
+            ? {
+                ...c,
+                teacherId: updated.teacher ? String(updated.teacher.id) : undefined,
+              }
+            : c
+        )
+      );
+
+      const teacher = teachers.find(t => t.id === nextTeacherId);
+      toast({
+        title: nextTeacherId ? "Titulaire assigné" : "Titulaire retiré",
+        description: nextTeacherId
+          ? `${teacher?.firstName} ${teacher?.lastName} est maintenant titulaire de ${selectedClass.name}.`
+          : `Le titulaire de ${selectedClass.name} a été retiré.`,
+      });
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsModalOpen(false);
+    }
   };
 
-  const handleRemoveTeacher = (classItem: Class) => {
-    if (confirm(`Êtes-vous sûr de vouloir retirer le titulaire de ${classItem.name} ?`)) {
+  const handleRemoveTeacher = async (classItem: Class) => {
+    if (!confirm(`Êtes-vous sûr de vouloir retirer le titulaire de ${classItem.name} ?`)) {
+      return;
+    }
+    try {
+      const updated = await apiPost<any>(`/classes/${classItem.id}/assign_teacher/`, {
+        teacher_id: null,
+      });
       setClasses(prev =>
         prev.map(c =>
           c.id === classItem.id
-            ? { ...c, teacherId: undefined }
+            ? {
+                ...c,
+                teacherId: updated.teacher ? String(updated.teacher.id) : undefined,
+              }
             : c
         )
       );
@@ -85,15 +205,23 @@ const ClassesManagement = () => {
         title: "Titulaire retiré",
         description: `Le titulaire de ${classItem.name} a été retiré.`,
       });
+    } catch (err) {
+      console.error(err);
     }
   };
 
   return (
     <DashboardLayout>
       <div className="space-y-6">
-        <div>
-          <h1 className="font-heading text-3xl font-bold text-foreground">Classes</h1>
-          <p className="text-muted-foreground mt-1">Gérer les classes et affecter les titulaires</p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="font-heading text-3xl font-bold text-foreground">Classes</h1>
+            <p className="text-muted-foreground mt-1">Gérer les classes et affecter les titulaires</p>
+          </div>
+          <Button onClick={() => openClassModal()}>
+            <Plus className="h-4 w-4 mr-2" />
+            Ajouter une classe
+          </Button>
         </div>
 
         {/* Classes Grid */}
@@ -121,7 +249,8 @@ const ClassesManagement = () => {
                     )}
                   </div>
                 </div>
-                <div className="mt-4 pt-4 border-t border-border flex gap-2">
+                <div className="mt-4 pt-4 border-t border-border flex gap-2 justify-between">
+                  <div className="flex gap-2 flex-1">
                   <Button
                     variant="outline"
                     size="sm"
@@ -141,6 +270,24 @@ const ClassesManagement = () => {
                       <UserMinus className="h-4 w-4" />
                     </Button>
                   )}
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => openClassModal(classItem)}
+                    >
+                      <Pencil className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-destructive hover:text-destructive"
+                      onClick={() => handleDeleteClass(classItem)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             );
@@ -181,6 +328,36 @@ const ClassesManagement = () => {
                 </Button>
               </div>
             </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* Class create/edit modal */}
+        <Dialog open={isClassModalOpen} onOpenChange={setIsClassModalOpen}>
+          <DialogContent className="bg-card">
+            <DialogHeader>
+              <DialogTitle className="font-heading">
+                {editingClass ? 'Modifier la classe' : 'Ajouter une classe'}
+              </DialogTitle>
+            </DialogHeader>
+            <form onSubmit={handleClassSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="className">Nom de la classe</Label>
+                <Input
+                  id="className"
+                  value={className}
+                  onChange={(e) => setClassName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="flex justify-end gap-2 pt-4">
+                <Button type="button" variant="outline" onClick={() => setIsClassModalOpen(false)}>
+                  Annuler
+                </Button>
+                <Button type="submit">
+                  {editingClass ? 'Mettre à jour' : 'Créer'}
+                </Button>
+              </div>
+            </form>
           </DialogContent>
         </Dialog>
       </div>

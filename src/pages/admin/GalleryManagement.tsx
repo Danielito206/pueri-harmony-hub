@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { Button } from '@/components/ui/button';
@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { mockGalleryImages } from '@/lib/mockData';
+import { apiGet, apiPost, apiDelete } from '@/lib/api';
 import { GalleryImage } from '@/lib/types';
 import { Plus, Trash2, ImageIcon } from 'lucide-react';
 import {
@@ -20,7 +20,7 @@ import {
 const GalleryManagement = () => {
   const { user, isAuthenticated } = useAuth();
   const { toast } = useToast();
-  const [images, setImages] = useState<GalleryImage[]>(mockGalleryImages);
+  const [images, setImages] = useState<GalleryImage[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     url: '',
@@ -28,39 +28,71 @@ const GalleryManagement = () => {
     description: '',
   });
 
+  useEffect(() => {
+    apiGet<any[]>('/gallery/images/')
+      .then(data => {
+        const mapped: GalleryImage[] = data.map(img => ({
+          id: String(img.id),
+          url: img.url,
+          title: img.title,
+          description: img.description || undefined,
+          uploadedAt: new Date(img.uploaded_at),
+          uploadedBy: img.uploaded_by?.id ? String(img.uploaded_by.id) : 'admin',
+        }));
+        setImages(mapped);
+      })
+      .catch(() => setImages([]));
+  }, []);
+
   if (!isAuthenticated || user?.role !== 'admin') {
     return <Navigate to="/login" replace />;
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    const newImage: GalleryImage = {
-      id: `g${Date.now()}`,
-      url: formData.url,
-      title: formData.title,
-      description: formData.description,
-      uploadedAt: new Date(),
-      uploadedBy: user?.id || 'admin',
-    };
-    
-    setImages(prev => [...prev, newImage]);
-    toast({
-      title: "Image ajoutée",
-      description: "La photo a été ajoutée à la galerie.",
-    });
-    setIsModalOpen(false);
-    setFormData({ url: '', title: '', description: '' });
+    try {
+      const created = await apiPost<any>('/gallery/images/', {
+        url: formData.url,
+        title: formData.title,
+        description: formData.description || null,
+      });
+
+      const newImage: GalleryImage = {
+        id: String(created.id),
+        url: created.url,
+        title: created.title,
+        description: created.description || undefined,
+        uploadedAt: new Date(created.uploaded_at),
+        uploadedBy: created.uploaded_by?.id ? String(created.uploaded_by.id) : 'admin',
+      };
+
+      setImages(prev => [...prev, newImage]);
+      toast({
+        title: "Image ajoutée",
+        description: "La photo a été ajoutée à la galerie.",
+      });
+      setIsModalOpen(false);
+      setFormData({ url: '', title: '', description: '' });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleDelete = (image: GalleryImage) => {
-    if (confirm(`Êtes-vous sûr de vouloir supprimer "${image.title}" ?`)) {
+  const handleDelete = async (image: GalleryImage) => {
+    if (!confirm(`Êtes-vous sûr de vouloir supprimer "${image.title}" ?`)) {
+      return;
+    }
+    try {
+      await apiDelete(`/gallery/images/${image.id}/`);
       setImages(prev => prev.filter(i => i.id !== image.id));
       toast({
         title: "Image supprimée",
         description: "La photo a été retirée de la galerie.",
         variant: "destructive",
       });
+    } catch (err) {
+      console.error(err);
     }
   };
 

@@ -1,11 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { mockGalleryImages } from '@/lib/mockData';
 import { X } from 'lucide-react';
+import { apiGet } from '@/lib/api';
+import { GalleryImage } from '@/lib/types';
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [images, setImages] = useState<GalleryImage[]>([]);
+
+  useEffect(() => {
+    apiGet<any[]>('/gallery/images/')
+      .then(data => {
+        const mapped: GalleryImage[] = data.map(img => ({
+          id: String(img.id),
+          url: img.url,
+          title: img.title,
+          description: img.description || undefined,
+          uploadedAt: new Date(img.uploaded_at),
+          uploadedBy: img.uploaded_by?.id ? String(img.uploaded_by.id) : 'admin',
+        }));
+        setImages(mapped);
+      })
+      .catch(() => setImages([]));
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -30,7 +48,7 @@ const Gallery = () => {
         <section className="section-padding">
           <div className="container-narrow mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {mockGalleryImages.map((image) => (
+              {images.map((image) => (
                 <div
                   key={image.id}
                   className="group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer card-elevated"

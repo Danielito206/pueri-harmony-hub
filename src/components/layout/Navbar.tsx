@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, GraduationCap, User, LogOut } from 'lucide-react';
+import { Menu, X, User, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import {
@@ -45,7 +45,11 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <GraduationCap className="h-8 w-8 text-primary" />
+            <img
+              src="/logo.png"
+              alt="C.S Pueri Angeli"
+              className="h-10 w-10 rounded-full object-contain bg-white"
+            />
             <span className="font-heading text-xl font-semibold text-foreground">
               Pueri Angeli
             </span>
@@ -92,9 +96,6 @@ export function Navbar() {
               </DropdownMenu>
             ) : (
               <>
-                <Button variant="ghost" onClick={() => navigate('/login')}>
-                  Connexion
-                </Button>
                 <Button onClick={() => navigate('/login')}>
                   Espace personnel
                 </Button>

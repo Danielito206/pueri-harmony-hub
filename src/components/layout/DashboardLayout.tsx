@@ -1,7 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
-  GraduationCap, 
   User, 
   LogOut, 
   Menu, 
@@ -82,7 +81,11 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="flex items-center gap-2 p-4 border-b border-border">
-            <GraduationCap className="h-8 w-8 text-primary" />
+            <img
+              src="/logo.png"
+              alt="C.S Pueri Angeli"
+              className="h-9 w-9 rounded-full object-contain bg-white"
+            />
             <span className="font-heading text-lg font-semibold">Pueri Angeli</span>
           </div>
 

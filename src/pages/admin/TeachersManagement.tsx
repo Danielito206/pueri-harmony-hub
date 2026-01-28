@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { Button } from '@/components/ui/button';
@@ -6,9 +6,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { mockTeachers, mockClasses } from '@/lib/mockData';
-import { Teacher } from '@/lib/types';
-import { Plus, Pencil, Trash2, X, Search } from 'lucide-react';
+import { apiGet, apiPost, apiPut, apiDelete } from '@/lib/api';
+import { Teacher, Class } from '@/lib/types';
+import { Plus, Pencil, Trash2, X, Search, KeyRound } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -19,7 +19,8 @@ import {
 const TeachersManagement = () => {
   const { user, isAuthenticated } = useAuth();
   const { toast } = useToast();
-  const [teachers, setTeachers] = useState<Teacher[]>(mockTeachers);
+  const [teachers, setTeachers] = useState<Teacher[]>([]);
+  const [classes, setClasses] = useState<Class[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTeacher, setEditingTeacher] = useState<Teacher | null>(null);
@@ -29,6 +30,36 @@ const TeachersManagement = () => {
     email: '',
     phone: '',
   });
+
+  useEffect(() => {
+    apiGet<any[]>('/teachers/')
+      .then(data => {
+        const mapped: Teacher[] = data.map(t => ({
+          id: String(t.id),
+          email: t.email,
+          firstName: t.first_name,
+          lastName: t.last_name,
+          role: 'teacher',
+          phone: t.phone || undefined,
+          createdAt: new Date(t.date_joined),
+        }));
+        setTeachers(mapped);
+      })
+      .catch(() => setTeachers([]));
+
+    apiGet<any[]>('/classes/')
+      .then(data => {
+        const mapped: Class[] = data.map(c => ({
+          id: String(c.id),
+          name: c.name,
+          teacherId: c.teacher ? String(c.teacher.id) : undefined,
+          studentIds: Array.from({ length: c.students_count ?? 0 }, (_, i) => String(i)),
+          schedule: c.schedule || [],
+        }));
+        setClasses(mapped);
+      })
+      .catch(() => setClasses([]));
+  }, []);
 
   if (!isAuthenticated || user?.role !== 'admin') {
     return <Navigate to="/login" replace />;
@@ -57,29 +88,60 @@ const TeachersManagement = () => {
     setIsModalOpen(true);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (editingTeacher) {
-      setTeachers(prev =>
-        prev.map(t =>
-          t.id === editingTeacher.id
-            ? { ...t, ...formData }
-            : t
-        )
-      );
+      try {
+        const payload = {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone || null,
+        };
+        const updated = await apiPut<any>(`/teachers/${editingTeacher.id}/`, payload);
+        setTeachers(prev =>
+          prev.map(t =>
+            t.id === editingTeacher.id
+              ? {
+                  ...t,
+                  firstName: updated.first_name,
+                  lastName: updated.last_name,
+                  email: updated.email,
+                  phone: updated.phone || undefined,
+                }
+              : t
+          )
+        );
+      } catch (err) {
+        console.error(err);
+      }
       toast({
         title: "Professeur modifié",
         description: `${formData.firstName} ${formData.lastName} a été mis à jour.`,
       });
     } else {
-      const newTeacher: Teacher = {
-        id: `t${Date.now()}`,
-        ...formData,
-        role: 'teacher',
-        createdAt: new Date(),
-      };
-      setTeachers(prev => [...prev, newTeacher]);
+      try {
+        const payload = {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone || null,
+        };
+        const created = await apiPost<any>('/teachers/', payload);
+        const newTeacher: Teacher = {
+          id: String(created.id),
+          email: created.email,
+          firstName: created.first_name,
+          lastName: created.last_name,
+          role: 'teacher',
+          phone: created.phone || undefined,
+          createdAt: new Date(created.date_joined),
+        };
+        setTeachers(prev => [...prev, newTeacher]);
+      } catch (err) {
+        console.error(err);
+      }
       toast({
         title: "Professeur ajouté",
         description: `${formData.firstName} ${formData.lastName} a été créé.`,
@@ -88,12 +150,38 @@ const TeachersManagement = () => {
     setIsModalOpen(false);
   };
 
-  const handleDelete = (teacher: Teacher) => {
-    if (confirm(`Êtes-vous sûr de vouloir supprimer ${teacher.firstName} ${teacher.lastName} ?`)) {
+  const handleDelete = async (teacher: Teacher) => {
+    if (!confirm(`Êtes-vous sûr de vouloir supprimer ${teacher.firstName} ${teacher.lastName} ?`)) {
+      return;
+    }
+    try {
+      await apiDelete(`/teachers/${teacher.id}/`);
       setTeachers(prev => prev.filter(t => t.id !== teacher.id));
       toast({
         title: "Professeur supprimé",
         description: `${teacher.firstName} ${teacher.lastName} a été supprimé.`,
+        variant: "destructive",
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleResetPassword = async (teacher: Teacher) => {
+    if (!confirm(`Réinitialiser le mot de passe de ${teacher.firstName} ${teacher.lastName} ?`)) {
+      return;
+    }
+    try {
+      await apiPost(`/admin/users/${teacher.id}/reset_password/`, {});
+      toast({
+        title: "Mot de passe réinitialisé",
+        description: "Le mot de passe a été remis à la valeur par défaut.",
+      });
+    } catch (err) {
+      console.error(err);
+      toast({
+        title: "Erreur",
+        description: "Impossible de réinitialiser le mot de passe.",
         variant: "destructive",
       });
     }
@@ -139,7 +227,7 @@ const TeachersManagement = () => {
               </thead>
               <tbody className="divide-y divide-border">
                 {filteredTeachers.map((teacher) => {
-                  const assignedClass = mockClasses.find(c => c.teacherId === teacher.id);
+                  const assignedClass = classes.find(c => c.teacherId === teacher.id);
                   return (
                     <tr key={teacher.id} className="hover:bg-muted/30">
                       <td className="px-6 py-4">
@@ -165,6 +253,9 @@ const TeachersManagement = () => {
                           </Button>
                           <Button variant="ghost" size="sm" onClick={() => handleDelete(teacher)} className="text-destructive hover:text-destructive">
                             <Trash2 className="h-4 w-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" onClick={() => handleResetPassword(teacher)}>
+                            <KeyRound className="h-4 w-4" />
                           </Button>
                         </div>
                       </td>

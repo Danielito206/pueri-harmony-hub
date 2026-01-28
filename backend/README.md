@@ -5,6 +5,7 @@ Ce dossier contiendra le backend Django de **Pueri Angeli**.
 ### Prérequis
 
 - Python 3.11+ recommandé
+- MySQL 8+ installé (ou MariaDB compatible)
 - `pip` ou `pipenv` / `poetry`
 
 ### Installation rapide
@@ -13,19 +14,43 @@ Dans le dossier `backend` :
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate  # Windows PowerShell : .venv\Scripts\Activate.ps1
+# Windows PowerShell :
+.venv\Scripts\Activate.ps1
 
 pip install -r requirements.txt
 ```
 
-### Lancement du projet (à venir)
+### Configuration base de données MySQL
 
-Dans les prochaines étapes on créera le projet Django (commandes typiques) :
+Dans `core/settings.py`, la base par défaut est configurée pour MySQL.  
+Tu peux surcharger via les variables d'environnement :
 
 ```bash
-django-admin startproject core .
-python manage.py startapp api
+set DB_ENGINE=django.db.backends.mysql
+set DB_NAME=pueri_harmony
+set DB_USER=root
+set DB_PASSWORD=ton_mot_de_passe
+set DB_HOST=127.0.0.1
+set DB_PORT=3306
 ```
 
-Ensuite, on branchera les modèles et endpoints sur le schéma SQL et les APIs définies pour le frontend.
+Ensuite, crée la base de données côté MySQL (une fois) :
+
+```sql
+CREATE DATABASE pueri_harmony CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+### Initialisation du projet
+
+Depuis `backend` :
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+Les endpoints de l'API sont exposés sous `/api/...` (voir `api/urls.py`).
+
 

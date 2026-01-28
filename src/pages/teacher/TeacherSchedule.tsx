@@ -1,20 +1,39 @@
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
-import { mockClasses, mockTeachers } from '@/lib/mockData';
+import { apiGet } from '@/lib/api';
 import { Schedule } from '@/lib/types';
 import { Calendar } from 'lucide-react';
 
+interface TeacherClassSchedule {
+  id: string;
+  name: string;
+  schedule: { id: string; day: string; startTime: string; endTime: string; subject: string }[];
+}
+
 const TeacherSchedule = () => {
   const { user, isAuthenticated } = useAuth();
+  const [data, setData] = useState<TeacherClassSchedule | null>(null);
+
+  useEffect(() => {
+    apiGet<any>('/teacher/class/')
+      .then(res => {
+        if (res && !('class' in res)) {
+          setData(res as TeacherClassSchedule);
+        } else {
+          setData(null);
+        }
+      })
+      .catch(() => setData(null));
+  }, []);
 
   if (!isAuthenticated || user?.role !== 'teacher') {
     return <Navigate to="/login" replace />;
   }
 
-  const teacher = mockTeachers.find(t => t.email === user.email);
-  const teacherClass = mockClasses.find(c => c.teacherId === teacher?.id);
-  const schedule = teacherClass?.schedule || [];
+  const teacherClass = data;
+  const schedule = data?.schedule || [];
 
   const days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'] as const;
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { Button } from '@/components/ui/button';
@@ -6,8 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { mockStudents, mockClasses, mockParents } from '@/lib/mockData';
-import { Student } from '@/lib/types';
+import { apiGet, apiPost, apiPut, apiDelete } from '@/lib/api';
+import { Student, Class, Parent } from '@/lib/types';
 import { Plus, Pencil, Trash2, Search } from 'lucide-react';
 import {
   Dialog,
@@ -26,7 +26,9 @@ import {
 const StudentsManagement = () => {
   const { user, isAuthenticated } = useAuth();
   const { toast } = useToast();
-  const [students, setStudents] = useState<Student[]>(mockStudents);
+  const [students, setStudents] = useState<Student[]>([]);
+  const [classes, setClasses] = useState<Class[]>([]);
+  const [parents, setParents] = useState<Parent[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingStudent, setEditingStudent] = useState<Student | null>(null);
@@ -37,6 +39,54 @@ const StudentsManagement = () => {
     classId: '',
     parentIds: [] as string[],
   });
+
+  useEffect(() => {
+    apiGet<any[]>('/students/')
+      .then(data => {
+        const mapped: Student[] = data.map(s => ({
+          id: String(s.id),
+          firstName: s.first_name,
+          lastName: s.last_name,
+          postName: s.post_name || undefined,
+          classId: String(s.class_id),
+          parentIds: (s.parents_ids || []).map((id: number) => String(id)),
+          dateOfBirth: s.date_of_birth ? new Date(s.date_of_birth) : undefined,
+          createdAt: new Date(s.created_at),
+        }));
+        setStudents(mapped);
+      })
+      .catch(() => setStudents([]));
+
+    apiGet<any[]>('/classes/')
+      .then(data => {
+        const mapped: Class[] = data.map(c => ({
+          id: String(c.id),
+          name: c.name,
+          teacherId: c.teacher ? String(c.teacher.id) : undefined,
+          studentIds: Array.from({ length: c.students_count ?? 0 }, (_, i) => String(i)),
+          schedule: c.schedule || [],
+        }));
+        setClasses(mapped);
+      })
+      .catch(() => setClasses([]));
+
+    apiGet<any[]>('/parents/')
+      .then(data => {
+        const mapped: Parent[] = data.map(p => ({
+          id: String(p.id),
+          email: p.email,
+          firstName: p.first_name,
+          lastName: p.last_name,
+          role: 'parent',
+          childrenIds: [],
+          phone: p.phone || undefined,
+          address: p.address || undefined,
+          createdAt: new Date(p.date_joined),
+        }));
+        setParents(mapped);
+      })
+      .catch(() => setParents([]));
+  }, []);
 
   if (!isAuthenticated || user?.role !== 'admin') {
     return <Navigate to="/login" replace />;
@@ -65,28 +115,58 @@ const StudentsManagement = () => {
     setIsModalOpen(true);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    const payload = {
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      post_name: formData.postName || null,
+      class_id: formData.classId,
+      parents_ids: formData.parentIds,
+    };
+
     if (editingStudent) {
-      setStudents(prev =>
-        prev.map(s =>
-          s.id === editingStudent.id
-            ? { ...s, ...formData }
-            : s
-        )
-      );
+      try {
+        const updated = await apiPut<any>(`/students/${editingStudent.id}/`, payload);
+        setStudents(prev =>
+          prev.map(s =>
+            s.id === editingStudent.id
+              ? {
+                  ...s,
+                  firstName: updated.first_name,
+                  lastName: updated.last_name,
+                  postName: updated.post_name || undefined,
+                  classId: String(updated.class_id),
+                  parentIds: (updated.parents_ids || []).map((id: number) => String(id)),
+                }
+              : s
+          )
+        );
+      } catch (err) {
+        console.error(err);
+      }
       toast({
         title: "Élève modifié",
         description: `${formData.firstName} ${formData.lastName} a été mis à jour.`,
       });
     } else {
-      const newStudent: Student = {
-        id: `s${Date.now()}`,
-        ...formData,
-        createdAt: new Date(),
-      };
-      setStudents(prev => [...prev, newStudent]);
+      try {
+        const created = await apiPost<any>('/students/', payload);
+        const newStudent: Student = {
+          id: String(created.id),
+          firstName: created.first_name,
+          lastName: created.last_name,
+          postName: created.post_name || undefined,
+          classId: String(created.class_id),
+          parentIds: (created.parents_ids || []).map((id: number) => String(id)),
+          dateOfBirth: created.date_of_birth ? new Date(created.date_of_birth) : undefined,
+          createdAt: new Date(created.created_at),
+        };
+        setStudents(prev => [...prev, newStudent]);
+      } catch (err) {
+        console.error(err);
+      }
       toast({
         title: "Élève ajouté",
         description: `${formData.firstName} ${formData.lastName} a été inscrit.`,
@@ -95,14 +175,20 @@ const StudentsManagement = () => {
     setIsModalOpen(false);
   };
 
-  const handleDelete = (student: Student) => {
-    if (confirm(`Êtes-vous sûr de vouloir supprimer ${student.firstName} ${student.lastName} ?`)) {
+  const handleDelete = async (student: Student) => {
+    if (!confirm(`Êtes-vous sûr de vouloir supprimer ${student.firstName} ${student.lastName} ?`)) {
+      return;
+    }
+    try {
+      await apiDelete(`/students/${student.id}/`);
       setStudents(prev => prev.filter(s => s.id !== student.id));
       toast({
         title: "Élève supprimé",
         description: `${student.firstName} ${student.lastName} a été supprimé.`,
         variant: "destructive",
       });
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -154,8 +240,8 @@ const StudentsManagement = () => {
               </thead>
               <tbody className="divide-y divide-border">
                 {filteredStudents.map((student) => {
-                  const studentClass = mockClasses.find(c => c.id === student.classId);
-                  const studentParents = mockParents.filter(p => student.parentIds.includes(p.id));
+                  const studentClass = classes.find(c => c.id === student.classId);
+                  const studentParents = parents.filter(p => student.parentIds.includes(p.id));
                   return (
                     <tr key={student.id} className="hover:bg-muted/30">
                       <td className="px-6 py-4">
@@ -231,12 +317,12 @@ const StudentsManagement = () => {
               </div>
               <div className="space-y-2">
                 <Label>Classe</Label>
-                <Select value={formData.classId} onValueChange={(v) => setFormData({ ...formData, classId: v })}>
+                    <Select value={formData.classId} onValueChange={(v) => setFormData({ ...formData, classId: v })}>
                   <SelectTrigger className="bg-background">
                     <SelectValue placeholder="Sélectionner une classe" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover">
-                    {mockClasses.map((c) => (
+                    {classes.map((c) => (
                       <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
                     ))}
                   </SelectContent>
@@ -245,7 +331,7 @@ const StudentsManagement = () => {
               <div className="space-y-2">
                 <Label>Parents</Label>
                 <div className="border border-border rounded-md p-3 space-y-2 max-h-32 overflow-y-auto">
-                  {mockParents.map((parent) => (
+                  {parents.map((parent) => (
                     <label key={parent.id} className="flex items-center gap-2 cursor-pointer">
                       <input
                         type="checkbox"

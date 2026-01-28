@@ -1,20 +1,46 @@
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
-import { mockStudents, mockClasses, mockParents, mockTeachers } from '@/lib/mockData';
+import { apiGet } from '@/lib/api';
 import { User, Calendar, BookOpen } from 'lucide-react';
+
+interface ParentChild {
+  id: string;
+  firstName: string;
+  lastName: string;
+  postName?: string;
+  class?: {
+    id: string;
+    name: string;
+    schedule?: {
+      id: string;
+      day: string;
+      startTime: string;
+      endTime: string;
+      subject: string;
+    }[];
+  } | null;
+  homeroomTeacher?: {
+    id: string;
+    firstName: string;
+    lastName: string;
+  } | null;
+}
 
 const ParentChildren = () => {
   const { user, isAuthenticated } = useAuth();
+  const [children, setChildren] = useState<ParentChild[]>([]);
+
+  useEffect(() => {
+    apiGet<ParentChild[]>('/parent/children/')
+      .then(setChildren)
+      .catch(() => setChildren([]));
+  }, []);
 
   if (!isAuthenticated || user?.role !== 'parent') {
     return <Navigate to="/login" replace />;
   }
-
-  const parent = mockParents.find(p => p.email === user.email);
-  const children = parent
-    ? mockStudents.filter(s => s.parentIds.includes(parent.id))
-    : [];
 
   return (
     <DashboardLayout>
@@ -29,10 +55,11 @@ const ParentChildren = () => {
         {children.length > 0 ? (
           <div className="space-y-6">
             {children.map((child) => {
-              const childClass = mockClasses.find(c => c.id === child.classId);
-              const teacher = mockTeachers.find(t => t.id === childClass?.teacherId);
-              const todaySchedule = childClass?.schedule.filter(s => s.day === 'Lundi').slice(0, 4) || [];
-              
+              const childClass = child.class;
+              const teacher = child.homeroomTeacher;
+              const schedule = (childClass as any)?.schedule || [];
+              const todaySchedule = schedule.filter((s: any) => s.day === 'Lundi').slice(0, 4);
+
               return (
                 <div key={child.id} className="card-elevated overflow-hidden">
                   {/* Header */}

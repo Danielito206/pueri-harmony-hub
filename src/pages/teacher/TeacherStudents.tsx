@@ -1,21 +1,31 @@
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
-import { mockStudents, mockClasses, mockTeachers, mockParents } from '@/lib/mockData';
+import { apiGet } from '@/lib/api';
 import { Users } from 'lucide-react';
+
+interface TeacherStudentsResponse {
+  class: { id: string; name: string } | null;
+  students: { id: string; firstName: string; lastName: string; postName?: string }[];
+}
 
 const TeacherStudents = () => {
   const { user, isAuthenticated } = useAuth();
+  const [data, setData] = useState<TeacherStudentsResponse | null>(null);
+
+  useEffect(() => {
+    apiGet<TeacherStudentsResponse>('/teacher/students/')
+      .then(setData)
+      .catch(() => setData(null));
+  }, []);
 
   if (!isAuthenticated || user?.role !== 'teacher') {
     return <Navigate to="/login" replace />;
   }
 
-  const teacher = mockTeachers.find(t => t.email === user.email);
-  const teacherClass = mockClasses.find(c => c.teacherId === teacher?.id);
-  const classStudents = teacherClass
-    ? mockStudents.filter(s => s.classId === teacherClass.id)
-    : [];
+  const teacherClass = data?.class || null;
+  const classStudents = data?.students || [];
 
   return (
     <DashboardLayout>
@@ -40,7 +50,6 @@ const TeacherStudents = () => {
                 </thead>
                 <tbody className="divide-y divide-border">
                   {classStudents.map((student, index) => {
-                    const studentParents = mockParents.filter(p => student.parentIds.includes(p.id));
                     return (
                       <tr key={student.id} className="hover:bg-muted/30">
                         <td className="px-6 py-4 text-muted-foreground">{index + 1}</td>
@@ -59,10 +68,7 @@ const TeacherStudents = () => {
                           </div>
                         </td>
                         <td className="px-6 py-4 text-muted-foreground">
-                          {studentParents.length > 0
-                            ? studentParents.map(p => `${p.firstName} ${p.lastName}`).join(', ')
-                            : <span className="italic">Non renseigné</span>
-                          }
+                          <span className="italic">Voir fiche élève / parents</span>
                         </td>
                       </tr>
                     );

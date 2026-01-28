@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { GraduationCap, Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -20,22 +20,22 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    const success = await login(email, password);
+    const loggedInUser = await login(email, password);
 
-    if (success) {
+    if (loggedInUser) {
       toast({
         title: "Connexion réussie",
         description: "Bienvenue dans votre espace personnel.",
       });
       
       // Redirect based on user role
-      if (email.includes('admin')) {
+      if (loggedInUser.role === 'admin') {
         navigate('/admin');
-      } else if (email.includes('dupont') || email.includes('kabongo')) {
+      } else if (loggedInUser.role === 'teacher') {
         navigate('/teacher');
-      } else {
+      } else if (loggedInUser.role === 'parent') {
         navigate('/parent');
-      }
+      } 
     } else {
       toast({
         title: "Erreur de connexion",
@@ -52,8 +52,12 @@ const Login = () => {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center gap-2">
-            <GraduationCap className="h-12 w-12 text-primary" />
+          <Link to="/" className="inline-flex items-center gap-3">
+            <img
+              src="/logo.png"
+              alt="C.S Pueri Angeli"
+              className="h-12 w-12 rounded-full object-contain bg-white mx-auto"
+            />
             <span className="font-heading text-2xl font-semibold text-foreground">
               Pueri Angeli
             </span>
@@ -113,13 +117,8 @@ const Login = () => {
           {/* Demo Credentials */}
           <div className="mt-6 pt-6 border-t border-border">
             <p className="text-sm text-muted-foreground text-center mb-3">
-              Comptes de démonstration :
+              Utilisez les identifiants fournis par l'administration.
             </p>
-            <div className="space-y-2 text-xs text-muted-foreground">
-              <p><strong>Admin :</strong> admin@pueriangeli.cd / admin123</p>
-              <p><strong>Prof :</strong> marie.dupont@pueriangeli.cd / prof123</p>
-              <p><strong>Parent :</strong> parent.mutombo@email.com / parent123</p>
-            </div>
           </div>
         </div>
 

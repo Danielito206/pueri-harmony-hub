@@ -1,49 +1,47 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { User, UserRole } from '@/lib/types';
-import { mockTeachers, mockParents } from '@/lib/mockData';
+import { User } from '@/lib/types';
 
 interface AuthContextType {
   user: User | null;
-  login: (email: string, password: string) => Promise<boolean>;
+  login: (email: string, password: string) => Promise<User | null>;
   logout: () => void;
   isAuthenticated: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Mock admin user
-const mockAdmin: User = {
-  id: 'admin1',
-  email: 'admin@pueriangeli.cd',
-  firstName: 'Administrateur',
-  lastName: 'Système',
-  role: 'admin',
-  createdAt: new Date('2023-01-01'),
-};
-
-// Mock credentials for demo
-const mockCredentials: { email: string; password: string; user: User }[] = [
-  { email: 'admin@pueriangeli.cd', password: 'admin123', user: mockAdmin },
-  { email: 'marie.dupont@pueriangeli.cd', password: 'prof123', user: mockTeachers[0] },
-  { email: 'parent.mutombo@email.com', password: 'parent123', user: mockParents[0] },
-];
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    const credential = mockCredentials.find(
-      c => c.email === email && c.password === password
-    );
-    
-    if (credential) {
-      setUser(credential.user);
-      return true;
+  const login = async (email: string, password: string): Promise<User | null> => {
+    const res = await fetch('/api/auth/login/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+      credentials: 'include',
+    });
+
+    if (!res.ok) {
+      return null;
     }
-    return false;
+
+    const data = await res.json();
+    const apiUser = data.user;
+
+    const mappedUser: User = {
+      id: String(apiUser.id),
+      email: apiUser.email,
+      firstName: apiUser.first_name,
+      lastName: apiUser.last_name,
+      role: apiUser.role,
+      avatar: apiUser.avatar || undefined,
+      createdAt: new Date(apiUser.date_joined),
+    };
+
+    setUser(mappedUser);
+    return mappedUser;
   };
 
   const logout = () => {

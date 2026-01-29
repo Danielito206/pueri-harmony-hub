@@ -48,6 +48,6 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
+## How can I deploy this project?S
 
 Deployment depends on your hosting choice (e.g. Vercel, Netlify, static hosting).

@@ -1,4 +1,4 @@
-export const API_BASE = 'https://pueri-backend-kltk.onrender.com/api';
+export const API_BASE = 'https://pueri-backend-kltk.onrender.com';
 
 async function fetchJson<T>(url: string, options: RequestInit = {}): Promise<T> {
   const res = await fetch(url, {

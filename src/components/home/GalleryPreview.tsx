@@ -42,6 +42,12 @@ export function GalleryPreview() {
           </p>
         </div>
 
+        {isLoading ? (
+          <div className="flex flex-col items-center justify-center py-16 gap-4">
+            <Loader2 className="h-10 w-10 animate-spin text-primary" />
+            <p className="text-muted-foreground text-sm">Chargement de la galerie...</p>
+          </div>
+        ) : (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {previewImages.map((image, index) => (
             <div

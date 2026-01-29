@@ -8,7 +8,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { apiGet, apiPost, apiDelete, apiPut } from '@/lib/api';
 import { Class, Teacher } from '@/lib/types';
-import { UserPlus, UserMinus, Plus, Pencil, Trash2 } from 'lucide-react';
+import { UserPlus, UserMinus, Plus, Pencil, Trash2, Loader2 } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -36,24 +36,25 @@ const ClassesManagement = () => {
   const [isClassModalOpen, setIsClassModalOpen] = useState(false);
   const [editingClass, setEditingClass] = useState<Class | null>(null);
   const [className, setClassName] = useState('');
+  const [classSubmitLoading, setClassSubmitLoading] = useState(false);
+  const [deletingClassId, setDeletingClassId] = useState<string | null>(null);
+  const [assignLoading, setAssignLoading] = useState(false);
+  const [removingTeacherClassId, setRemovingTeacherClassId] = useState<string | null>(null);
+  const [listLoading, setListLoading] = useState(true);
 
   useEffect(() => {
-    apiGet<any[]>('/classes/')
-      .then(data => {
-        const mapped: Class[] = data.map(c => ({
+    Promise.all([
+      apiGet<any[]>('/classes/').then(data =>
+        data.map((c: any) => ({
           id: String(c.id),
           name: c.name,
           teacherId: c.teacher ? String(c.teacher.id) : undefined,
           studentIds: Array.from({ length: c.students_count ?? 0 }, (_, i) => String(i)),
           schedule: c.schedule || [],
-        }));
-        setClasses(mapped);
-      })
-      .catch(() => setClasses([]));
-
-    apiGet<any[]>('/teachers/')
-      .then(data => {
-        const mapped: Teacher[] = data.map(t => ({
+        }))
+      ).catch(() => []),
+      apiGet<any[]>('/teachers/').then(data =>
+        data.map((t: any) => ({
           id: String(t.id),
           email: t.email,
           firstName: t.first_name,
@@ -61,14 +62,27 @@ const ClassesManagement = () => {
           role: 'teacher',
           phone: t.phone || undefined,
           createdAt: new Date(t.date_joined),
-        }));
-        setTeachers(mapped);
-      })
-      .catch(() => setTeachers([]));
+        }))
+      ).catch(() => []),
+    ]).then(([c, t]) => {
+      setClasses(c);
+      setTeachers(t);
+    }).finally(() => setListLoading(false));
   }, []);
 
   if (!isAuthenticated || user?.role !== 'admin') {
     return <Navigate to="/login" replace />;
+  }
+
+  if (listLoading) {
+    return (
+      <DashboardLayout>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+          <Loader2 className="h-10 w-10 animate-spin text-primary" />
+          <p className="text-muted-foreground">Chargement des classes...</p>
+        </div>
+      </DashboardLayout>
+    );
   }
 
   const getAvailableTeachers = () => {
@@ -91,6 +105,7 @@ const ClassesManagement = () => {
     e.preventDefault();
     if (!className.trim()) return;
 
+    setClassSubmitLoading(true);
     try {
       if (editingClass) {
         const updated = await apiPut<any>(`/classes/${editingClass.id}/`, { name: className.trim() });
@@ -117,10 +132,11 @@ const ClassesManagement = () => {
         setClasses(prev => [...prev, newClass]);
         toast({ title: 'Classe créée', description: `La classe "${created.name}" a été ajoutée.` });
       }
+      setIsClassModalOpen(false);
     } catch (err) {
       console.error(err);
     } finally {
-      setIsClassModalOpen(false);
+      setClassSubmitLoading(false);
     }
   };
 
@@ -128,6 +144,7 @@ const ClassesManagement = () => {
     if (!confirm(`Êtes-vous sûr de vouloir supprimer la classe ${classItem.name} ?`)) {
       return;
     }
+    setDeletingClassId(classItem.id);
     try {
       await apiDelete(`/classes/${classItem.id}/`);
       setClasses(prev => prev.filter(c => c.id !== classItem.id));
@@ -138,6 +155,8 @@ const ClassesManagement = () => {
       });
     } catch (err) {
       console.error(err);
+    } finally {
+      setDeletingClassId(null);
     }
   };
 
@@ -153,6 +172,7 @@ const ClassesManagement = () => {
     const nextTeacherId =
       selectedTeacherId === NO_TEACHER_VALUE ? null : selectedTeacherId;
 
+    setAssignLoading(true);
     try {
       const updated = await apiPost<any>(`/classes/${selectedClass.id}/assign_teacher/`, {
         teacher_id: nextTeacherId,
@@ -176,10 +196,11 @@ const ClassesManagement = () => {
           ? `${teacher?.firstName} ${teacher?.lastName} est maintenant titulaire de ${selectedClass.name}.`
           : `Le titulaire de ${selectedClass.name} a été retiré.`,
       });
+      setIsModalOpen(false);
     } catch (err) {
       console.error(err);
     } finally {
-      setIsModalOpen(false);
+      setAssignLoading(false);
     }
   };
 
@@ -187,6 +208,7 @@ const ClassesManagement = () => {
     if (!confirm(`Êtes-vous sûr de vouloir retirer le titulaire de ${classItem.name} ?`)) {
       return;
     }
+    setRemovingTeacherClassId(classItem.id);
     try {
       const updated = await apiPost<any>(`/classes/${classItem.id}/assign_teacher/`, {
         teacher_id: null,
@@ -207,6 +229,8 @@ const ClassesManagement = () => {
       });
     } catch (err) {
       console.error(err);
+    } finally {
+      setRemovingTeacherClassId(null);
     }
   };
 
@@ -256,6 +280,7 @@ const ClassesManagement = () => {
                     size="sm"
                     className="flex-1"
                     onClick={() => openAssignModal(classItem)}
+                    disabled={!!deletingClassId || !!removingTeacherClassId || assignLoading}
                   >
                     <UserPlus className="h-4 w-4 mr-2" />
                     {teacher ? 'Changer' : 'Assigner'}
@@ -266,8 +291,9 @@ const ClassesManagement = () => {
                       size="sm"
                       className="text-destructive hover:text-destructive"
                       onClick={() => handleRemoveTeacher(classItem)}
+                      disabled={removingTeacherClassId === classItem.id || !!deletingClassId || assignLoading}
                     >
-                      <UserMinus className="h-4 w-4" />
+                      {removingTeacherClassId === classItem.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <UserMinus className="h-4 w-4" />}
                     </Button>
                   )}
                   </div>
@@ -276,6 +302,7 @@ const ClassesManagement = () => {
                       variant="ghost"
                       size="sm"
                       onClick={() => openClassModal(classItem)}
+                      disabled={!!deletingClassId || !!removingTeacherClassId || assignLoading}
                     >
                       <Pencil className="h-4 w-4" />
                     </Button>
@@ -284,8 +311,9 @@ const ClassesManagement = () => {
                       size="sm"
                       className="text-destructive hover:text-destructive"
                       onClick={() => handleDeleteClass(classItem)}
+                      disabled={deletingClassId === classItem.id || !!removingTeacherClassId || assignLoading}
                     >
-                      <Trash2 className="h-4 w-4" />
+                      {deletingClassId === classItem.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
                     </Button>
                   </div>
                 </div>
@@ -320,10 +348,11 @@ const ClassesManagement = () => {
                 </Select>
               </div>
               <div className="flex justify-end gap-2 pt-4">
-                <Button variant="outline" onClick={() => setIsModalOpen(false)}>
+                <Button variant="outline" onClick={() => setIsModalOpen(false)} disabled={assignLoading}>
                   Annuler
                 </Button>
-                <Button onClick={handleAssign}>
+                <Button onClick={handleAssign} disabled={assignLoading}>
+                  {assignLoading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : null}
                   Confirmer
                 </Button>
               </div>
@@ -350,10 +379,11 @@ const ClassesManagement = () => {
                 />
               </div>
               <div className="flex justify-end gap-2 pt-4">
-                <Button type="button" variant="outline" onClick={() => setIsClassModalOpen(false)}>
+                <Button type="button" variant="outline" onClick={() => setIsClassModalOpen(false)} disabled={classSubmitLoading}>
                   Annuler
                 </Button>
-                <Button type="submit">
+                <Button type="submit" disabled={classSubmitLoading}>
+                  {classSubmitLoading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : null}
                   {editingClass ? 'Mettre à jour' : 'Créer'}
                 </Button>
               </div>

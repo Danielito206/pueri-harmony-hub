@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
 import { apiGet } from '@/lib/api';
-import { GraduationCap, BookOpen, User } from 'lucide-react';
+import { GraduationCap, BookOpen, User, Loader2 } from 'lucide-react';
 
 interface ParentChild {
   id: string;
@@ -24,15 +24,28 @@ interface ParentChild {
 const ParentDashboard = () => {
   const { user, isAuthenticated } = useAuth();
   const [children, setChildren] = useState<ParentChild[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     apiGet<ParentChild[]>('/parent/children/')
       .then(setChildren)
-      .catch(() => setChildren([]));
+      .catch(() => setChildren([]))
+      .finally(() => setIsLoading(false));
   }, []);
 
   if (!isAuthenticated || user?.role !== 'parent') {
     return <Navigate to="/login" replace />;
+  }
+
+  if (isLoading) {
+    return (
+      <DashboardLayout>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+          <Loader2 className="h-10 w-10 animate-spin text-primary" />
+          <p className="text-muted-foreground">Chargement...</p>
+        </div>
+      </DashboardLayout>
+    );
   }
 
   return (

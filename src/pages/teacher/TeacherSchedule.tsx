@@ -4,7 +4,7 @@ import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
 import { apiGet } from '@/lib/api';
 import { Schedule } from '@/lib/types';
-import { Calendar } from 'lucide-react';
+import { Calendar, Loader2 } from 'lucide-react';
 
 interface TeacherClassSchedule {
   id: string;
@@ -15,6 +15,7 @@ interface TeacherClassSchedule {
 const TeacherSchedule = () => {
   const { user, isAuthenticated } = useAuth();
   const [data, setData] = useState<TeacherClassSchedule | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     apiGet<any>('/teacher/class/')
@@ -25,11 +26,23 @@ const TeacherSchedule = () => {
           setData(null);
         }
       })
-      .catch(() => setData(null));
+      .catch(() => setData(null))
+      .finally(() => setIsLoading(false));
   }, []);
 
   if (!isAuthenticated || user?.role !== 'teacher') {
     return <Navigate to="/login" replace />;
+  }
+
+  if (isLoading) {
+    return (
+      <DashboardLayout>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+          <Loader2 className="h-10 w-10 animate-spin text-primary" />
+          <p className="text-muted-foreground">Chargement de l'horaire...</p>
+        </div>
+      </DashboardLayout>
+    );
   }
 
   const teacherClass = data;

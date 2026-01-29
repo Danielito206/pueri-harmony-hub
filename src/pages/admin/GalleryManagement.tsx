@@ -9,7 +9,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { apiGet, apiPost, apiDelete } from '@/lib/api';
 import { GalleryImage } from '@/lib/types';
-import { Plus, Trash2, ImageIcon } from 'lucide-react';
+import { Plus, Trash2, ImageIcon, Loader2 } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -27,6 +27,9 @@ const GalleryManagement = () => {
     title: '',
     description: '',
   });
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [listLoading, setListLoading] = useState(true);
 
   useEffect(() => {
     apiGet<any[]>('/gallery/images/')
@@ -48,9 +51,20 @@ const GalleryManagement = () => {
     return <Navigate to="/login" replace />;
   }
 
+  if (listLoading) {
+    return (
+      <DashboardLayout>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+          <Loader2 className="h-10 w-10 animate-spin text-primary" />
+          <p className="text-muted-foreground">Chargement de la galerie...</p>
+        </div>
+      </DashboardLayout>
+    );
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+    setSubmitLoading(true);
     try {
       const created = await apiPost<any>('/gallery/images/', {
         url: formData.url,
@@ -76,6 +90,8 @@ const GalleryManagement = () => {
       setFormData({ url: '', title: '', description: '' });
     } catch (err) {
       console.error(err);
+    } finally {
+      setSubmitLoading(false);
     }
   };
 
@@ -83,6 +99,7 @@ const GalleryManagement = () => {
     if (!confirm(`Êtes-vous sûr de vouloir supprimer "${image.title}" ?`)) {
       return;
     }
+    setDeletingId(image.id);
     try {
       await apiDelete(`/gallery/images/${image.id}/`);
       setImages(prev => prev.filter(i => i.id !== image.id));
@@ -93,6 +110,8 @@ const GalleryManagement = () => {
       });
     } catch (err) {
       console.error(err);
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -125,8 +144,9 @@ const GalleryManagement = () => {
                     variant="destructive"
                     size="sm"
                     onClick={() => handleDelete(image)}
+                    disabled={deletingId === image.id}
                   >
-                    <Trash2 className="h-4 w-4 mr-2" />
+                    {deletingId === image.id ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Trash2 className="h-4 w-4 mr-2" />}
                     Supprimer
                   </Button>
                 </div>
@@ -201,11 +221,11 @@ const GalleryManagement = () => {
               )}
 
               <div className="flex justify-end gap-2 pt-4">
-                <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)}>
+                <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)} disabled={submitLoading}>
                   Annuler
                 </Button>
-                <Button type="submit">
-                  <ImageIcon className="h-4 w-4 mr-2" />
+                <Button type="submit" disabled={submitLoading}>
+                  {submitLoading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <ImageIcon className="h-4 w-4 mr-2" />}
                   Ajouter
                 </Button>
               </div>

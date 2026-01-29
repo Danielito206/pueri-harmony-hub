@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
 import { apiGet } from '@/lib/api';
-import { Users } from 'lucide-react';
+import { Users, Loader2 } from 'lucide-react';
 
 interface TeacherStudentsResponse {
   class: { id: string; name: string } | null;
@@ -22,6 +22,17 @@ const TeacherStudents = () => {
 
   if (!isAuthenticated || user?.role !== 'teacher') {
     return <Navigate to="/login" replace />;
+  }
+
+  if (isLoading) {
+    return (
+      <DashboardLayout>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+          <Loader2 className="h-10 w-10 animate-spin text-primary" />
+          <p className="text-muted-foreground">Chargement des élèves...</p>
+        </div>
+      </DashboardLayout>
+    );
   }
 
   const teacherClass = data?.class || null;

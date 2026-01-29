@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
-import { Users, BookOpen, GraduationCap, UserCheck } from 'lucide-react';
+import { Users, BookOpen, GraduationCap, UserCheck, Loader2 } from 'lucide-react';
 import { apiGet } from '@/lib/api';
 import type { Class } from '@/lib/types';
 
@@ -19,23 +19,24 @@ const AdminDashboard = () => {
   const { user, isAuthenticated } = useAuth();
   const [summary, setSummary] = useState<AdminSummary | null>(null);
   const [classes, setClasses] = useState<Class[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    apiGet<AdminSummary>('/admin/dashboard/summary/')
-      .then(setSummary)
-      .catch(() => setSummary(null));
-    apiGet<any[]>('/classes/')
-      .then(data => {
-        const mapped: Class[] = data.map(c => ({
+    Promise.all([
+      apiGet<AdminSummary>('/admin/dashboard/summary/').catch(() => null),
+      apiGet<any[]>('/classes/').then(data =>
+        data.map((c: any) => ({
           id: String(c.id),
           name: c.name,
           teacherId: c.teacher ? String(c.teacher.id) : undefined,
           studentIds: Array.from({ length: c.students_count ?? 0 }, (_, i) => String(i)),
           schedule: c.schedule || [],
-        }));
-        setClasses(mapped);
-      })
-      .catch(() => setClasses([]));
+        }))
+      ).catch(() => []),
+    ]).then(([s, c]) => {
+      setSummary(s ?? null);
+      setClasses(c);
+    }).finally(() => setIsLoading(false));
   }, []);
 
   if (!isAuthenticated || user?.role !== 'admin') {
@@ -73,6 +74,17 @@ const AdminDashboard = () => {
 
   const classesWithTeachers = summary?.classesWithTeacher ?? 0;
   const classesWithoutTeachers = summary?.classesWithoutTeacher ?? 0;
+
+  if (isLoading) {
+    return (
+      <DashboardLayout>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+          <Loader2 className="h-10 w-10 animate-spin text-primary" />
+          <p className="text-muted-foreground">Chargement du tableau de bord...</p>
+        </div>
+      </DashboardLayout>
+    );
+  }
 
   return (
     <DashboardLayout>

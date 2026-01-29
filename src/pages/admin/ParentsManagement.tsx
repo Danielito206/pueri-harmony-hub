@@ -8,7 +8,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { apiGet, apiPost, apiPut, apiDelete } from '@/lib/api';
 import { Parent } from '@/lib/types';
-import { Plus, Pencil, Trash2, Search, KeyRound } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, KeyRound, Loader2 } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -30,11 +30,15 @@ const ParentsManagement = () => {
     phone: '',
     address: '',
   });
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [resettingId, setResettingId] = useState<string | null>(null);
+  const [listLoading, setListLoading] = useState(true);
 
   useEffect(() => {
     apiGet<any[]>('/parents/')
       .then(data => {
-        const mapped = data.map(p => ({
+        const mapped = data.map((p: any) => ({
           id: String(p.id),
           email: p.email,
           firstName: p.first_name,
@@ -48,11 +52,23 @@ const ParentsManagement = () => {
         }));
         setParents(mapped);
       })
-      .catch(() => setParents([]));
+      .catch(() => setParents([]))
+      .finally(() => setListLoading(false));
   }, []);
 
   if (!isAuthenticated || user?.role !== 'admin') {
     return <Navigate to="/login" replace />;
+  }
+
+  if (listLoading) {
+    return (
+      <DashboardLayout>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+          <Loader2 className="h-10 w-10 animate-spin text-primary" />
+          <p className="text-muted-foreground">Chargement des parents...</p>
+        </div>
+      </DashboardLayout>
+    );
   }
 
   const filteredParents = parents.filter(
@@ -81,76 +97,81 @@ const ParentsManagement = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (editingParent) {
-      try {
-        const payload = {
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          email: formData.email,
-          phone: formData.phone || null,
-          address: formData.address || null,
-        };
-        const updated = await apiPut<any>(`/parents/${editingParent.id}/`, payload);
-        setParents(prev =>
-          prev.map(p =>
-            p.id === editingParent.id
-              ? {
-                  ...p,
-                  firstName: updated.first_name,
-                  lastName: updated.last_name,
-                  email: updated.email,
-                  phone: updated.phone || undefined,
-                  address: updated.address || undefined,
-                }
-              : p
-          )
-        );
-      } catch (err) {
-        console.error(err);
+    setSubmitLoading(true);
+    try {
+      if (editingParent) {
+        try {
+          const payload = {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone || null,
+            address: formData.address || null,
+          };
+          const updated = await apiPut<any>(`/parents/${editingParent.id}/`, payload);
+          setParents(prev =>
+            prev.map(p =>
+              p.id === editingParent.id
+                ? {
+                    ...p,
+                    firstName: updated.first_name,
+                    lastName: updated.last_name,
+                    email: updated.email,
+                    phone: updated.phone || undefined,
+                    address: updated.address || undefined,
+                  }
+                : p
+            )
+          );
+          toast({
+            title: "Parent modifié",
+            description: `${formData.firstName} ${formData.lastName} a été mis à jour.`,
+          });
+        } catch (err) {
+          console.error(err);
+        }
+      } else {
+        try {
+          const payload = {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone || null,
+            address: formData.address || null,
+          };
+          const created = await apiPost<any>('/parents/', payload);
+          const newParent = {
+            id: String(created.id),
+            email: created.email,
+            firstName: created.first_name,
+            lastName: created.last_name,
+            role: 'parent' as const,
+            childrenIds: [],
+            phone: created.phone || undefined,
+            address: created.address || undefined,
+            createdAt: new Date(created.date_joined),
+            children: created.children || [],
+          };
+          setParents(prev => [...prev, newParent]);
+          toast({
+            title: "Parent ajouté",
+            description: `${formData.firstName} ${formData.lastName} a été créé.`,
+          });
+        } catch (err) {
+          console.error(err);
+        }
       }
-      toast({
-        title: "Parent modifié",
-        description: `${formData.firstName} ${formData.lastName} a été mis à jour.`,
-      });
-    } else {
-      try {
-        const payload = {
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          email: formData.email,
-          phone: formData.phone || null,
-          address: formData.address || null,
-        };
-        const created = await apiPost<any>('/parents/', payload);
-        const newParent = {
-          id: String(created.id),
-          email: created.email,
-          firstName: created.first_name,
-          lastName: created.last_name,
-          role: 'parent' as const,
-          childrenIds: [],
-          phone: created.phone || undefined,
-          address: created.address || undefined,
-          createdAt: new Date(created.date_joined),
-          children: created.children || [],
-        };
-        setParents(prev => [...prev, newParent]);
-      } catch (err) {
-        console.error(err);
-      }
-      toast({
-        title: "Parent ajouté",
-        description: `${formData.firstName} ${formData.lastName} a été créé.`,
-      });
+      setIsModalOpen(false);
+    } finally {
+      setSubmitLoading(false);
     }
-    setIsModalOpen(false);
   };
 
   const handleDelete = async (parent: Parent) => {
     if (!confirm(`Êtes-vous sûr de vouloir supprimer ${parent.firstName} ${parent.lastName} ?`)) {
       return;
     }
+    setDeletingId(parent.id);
     try {
       await apiDelete(`/parents/${parent.id}/`);
       setParents(prev => prev.filter(p => p.id !== parent.id));
@@ -161,6 +182,8 @@ const ParentsManagement = () => {
       });
     } catch (err) {
       console.error(err);
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -168,6 +191,7 @@ const ParentsManagement = () => {
     if (!confirm(`Réinitialiser le mot de passe de ${parent.firstName} ${parent.lastName} ?`)) {
       return;
     }
+    setResettingId(parent.id);
     try {
       await apiPost(`/admin/users/${parent.id}/reset_password/`, {});
       toast({
@@ -181,6 +205,8 @@ const ParentsManagement = () => {
         description: "Impossible de réinitialiser le mot de passe.",
         variant: "destructive",
       });
+    } finally {
+      setResettingId(null);
     }
   };
 
@@ -249,14 +275,14 @@ const ParentsManagement = () => {
                       </td>
                       <td className="px-6 py-4 text-right">
                         <div className="flex justify-end gap-2">
-                          <Button variant="ghost" size="sm" onClick={() => openModal(parent)}>
+                          <Button variant="ghost" size="sm" onClick={() => openModal(parent)} disabled={!!deletingId || !!resettingId}>
                             <Pencil className="h-4 w-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" onClick={() => handleDelete(parent)} className="text-destructive hover:text-destructive">
-                            <Trash2 className="h-4 w-4" />
+                          <Button variant="ghost" size="sm" onClick={() => handleDelete(parent)} className="text-destructive hover:text-destructive" disabled={deletingId === parent.id || !!resettingId}>
+                            {deletingId === parent.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
                           </Button>
-                          <Button variant="ghost" size="sm" onClick={() => handleResetPassword(parent)}>
-                            <KeyRound className="h-4 w-4" />
+                          <Button variant="ghost" size="sm" onClick={() => handleResetPassword(parent)} disabled={!!deletingId || resettingId === parent.id}>
+                            {resettingId === parent.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <KeyRound className="h-4 w-4" />}
                           </Button>
                         </div>
                       </td>
@@ -324,10 +350,11 @@ const ParentsManagement = () => {
                 />
               </div>
               <div className="flex justify-end gap-2 pt-4">
-                <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)}>
+                <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)} disabled={submitLoading}>
                   Annuler
                 </Button>
-                <Button type="submit">
+                <Button type="submit" disabled={submitLoading}>
+                  {submitLoading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : null}
                   {editingParent ? 'Mettre à jour' : 'Ajouter'}
                 </Button>
               </div>

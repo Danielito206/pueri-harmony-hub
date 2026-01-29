@@ -8,7 +8,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { apiGet, apiPost, apiPut, apiDelete } from '@/lib/api';
 import { Teacher, Class } from '@/lib/types';
-import { Plus, Pencil, Trash2, X, Search, KeyRound } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, KeyRound, Loader2 } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -30,11 +30,15 @@ const TeachersManagement = () => {
     email: '',
     phone: '',
   });
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [resettingId, setResettingId] = useState<string | null>(null);
+  const [listLoading, setListLoading] = useState(true);
 
   useEffect(() => {
-    apiGet<any[]>('/teachers/')
-      .then(data => {
-        const mapped: Teacher[] = data.map(t => ({
+    Promise.all([
+      apiGet<any[]>('/teachers/').then(data =>
+        data.map((t: any) => ({
           id: String(t.id),
           email: t.email,
           firstName: t.first_name,
@@ -42,27 +46,36 @@ const TeachersManagement = () => {
           role: 'teacher',
           phone: t.phone || undefined,
           createdAt: new Date(t.date_joined),
-        }));
-        setTeachers(mapped);
-      })
-      .catch(() => setTeachers([]));
-
-    apiGet<any[]>('/classes/')
-      .then(data => {
-        const mapped: Class[] = data.map(c => ({
+        }))
+      ).catch(() => []),
+      apiGet<any[]>('/classes/').then(data =>
+        data.map((c: any) => ({
           id: String(c.id),
           name: c.name,
           teacherId: c.teacher ? String(c.teacher.id) : undefined,
           studentIds: Array.from({ length: c.students_count ?? 0 }, (_, i) => String(i)),
           schedule: c.schedule || [],
-        }));
-        setClasses(mapped);
-      })
-      .catch(() => setClasses([]));
+        }))
+      ).catch(() => []),
+    ]).then(([t, c]) => {
+      setTeachers(t);
+      setClasses(c);
+    }).finally(() => setListLoading(false));
   }, []);
 
   if (!isAuthenticated || user?.role !== 'admin') {
     return <Navigate to="/login" replace />;
+  }
+
+  if (listLoading) {
+    return (
+      <DashboardLayout>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+          <Loader2 className="h-10 w-10 animate-spin text-primary" />
+          <p className="text-muted-foreground">Chargement des professeurs...</p>
+        </div>
+      </DashboardLayout>
+    );
   }
 
   const filteredTeachers = teachers.filter(
@@ -90,70 +103,75 @@ const TeachersManagement = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (editingTeacher) {
-      try {
-        const payload = {
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          email: formData.email,
-          phone: formData.phone || null,
-        };
-        const updated = await apiPut<any>(`/teachers/${editingTeacher.id}/`, payload);
-        setTeachers(prev =>
-          prev.map(t =>
-            t.id === editingTeacher.id
-              ? {
-                  ...t,
-                  firstName: updated.first_name,
-                  lastName: updated.last_name,
-                  email: updated.email,
-                  phone: updated.phone || undefined,
-                }
-              : t
-          )
-        );
-      } catch (err) {
-        console.error(err);
+    setSubmitLoading(true);
+    try {
+      if (editingTeacher) {
+        try {
+          const payload = {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone || null,
+          };
+          const updated = await apiPut<any>(`/teachers/${editingTeacher.id}/`, payload);
+          setTeachers(prev =>
+            prev.map(t =>
+              t.id === editingTeacher.id
+                ? {
+                    ...t,
+                    firstName: updated.first_name,
+                    lastName: updated.last_name,
+                    email: updated.email,
+                    phone: updated.phone || undefined,
+                  }
+                : t
+            )
+          );
+          toast({
+            title: "Professeur modifié",
+            description: `${formData.firstName} ${formData.lastName} a été mis à jour.`,
+          });
+        } catch (err) {
+          console.error(err);
+        }
+      } else {
+        try {
+          const payload = {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone || null,
+          };
+          const created = await apiPost<any>('/teachers/', payload);
+          const newTeacher: Teacher = {
+            id: String(created.id),
+            email: created.email,
+            firstName: created.first_name,
+            lastName: created.last_name,
+            role: 'teacher',
+            phone: created.phone || undefined,
+            createdAt: new Date(created.date_joined),
+          };
+          setTeachers(prev => [...prev, newTeacher]);
+          toast({
+            title: "Professeur ajouté",
+            description: `${formData.firstName} ${formData.lastName} a été créé.`,
+          });
+        } catch (err) {
+          console.error(err);
+        }
       }
-      toast({
-        title: "Professeur modifié",
-        description: `${formData.firstName} ${formData.lastName} a été mis à jour.`,
-      });
-    } else {
-      try {
-        const payload = {
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          email: formData.email,
-          phone: formData.phone || null,
-        };
-        const created = await apiPost<any>('/teachers/', payload);
-        const newTeacher: Teacher = {
-          id: String(created.id),
-          email: created.email,
-          firstName: created.first_name,
-          lastName: created.last_name,
-          role: 'teacher',
-          phone: created.phone || undefined,
-          createdAt: new Date(created.date_joined),
-        };
-        setTeachers(prev => [...prev, newTeacher]);
-      } catch (err) {
-        console.error(err);
-      }
-      toast({
-        title: "Professeur ajouté",
-        description: `${formData.firstName} ${formData.lastName} a été créé.`,
-      });
+      setIsModalOpen(false);
+    } finally {
+      setSubmitLoading(false);
     }
-    setIsModalOpen(false);
   };
 
   const handleDelete = async (teacher: Teacher) => {
     if (!confirm(`Êtes-vous sûr de vouloir supprimer ${teacher.firstName} ${teacher.lastName} ?`)) {
       return;
     }
+    setDeletingId(teacher.id);
     try {
       await apiDelete(`/teachers/${teacher.id}/`);
       setTeachers(prev => prev.filter(t => t.id !== teacher.id));
@@ -164,6 +182,8 @@ const TeachersManagement = () => {
       });
     } catch (err) {
       console.error(err);
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -171,6 +191,7 @@ const TeachersManagement = () => {
     if (!confirm(`Réinitialiser le mot de passe de ${teacher.firstName} ${teacher.lastName} ?`)) {
       return;
     }
+    setResettingId(teacher.id);
     try {
       await apiPost(`/admin/users/${teacher.id}/reset_password/`, {});
       toast({
@@ -184,6 +205,8 @@ const TeachersManagement = () => {
         description: "Impossible de réinitialiser le mot de passe.",
         variant: "destructive",
       });
+    } finally {
+      setResettingId(null);
     }
   };
 
@@ -248,14 +271,14 @@ const TeachersManagement = () => {
                       </td>
                       <td className="px-6 py-4 text-right">
                         <div className="flex justify-end gap-2">
-                          <Button variant="ghost" size="sm" onClick={() => openModal(teacher)}>
+                          <Button variant="ghost" size="sm" onClick={() => openModal(teacher)} disabled={!!deletingId || !!resettingId}>
                             <Pencil className="h-4 w-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" onClick={() => handleDelete(teacher)} className="text-destructive hover:text-destructive">
-                            <Trash2 className="h-4 w-4" />
+                          <Button variant="ghost" size="sm" onClick={() => handleDelete(teacher)} className="text-destructive hover:text-destructive" disabled={deletingId === teacher.id || !!resettingId}>
+                            {deletingId === teacher.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
                           </Button>
-                          <Button variant="ghost" size="sm" onClick={() => handleResetPassword(teacher)}>
-                            <KeyRound className="h-4 w-4" />
+                          <Button variant="ghost" size="sm" onClick={() => handleResetPassword(teacher)} disabled={!!deletingId || resettingId === teacher.id}>
+                            {resettingId === teacher.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <KeyRound className="h-4 w-4" />}
                           </Button>
                         </div>
                       </td>
@@ -315,10 +338,11 @@ const TeachersManagement = () => {
                 />
               </div>
               <div className="flex justify-end gap-2 pt-4">
-                <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)}>
+                <Button type="button" variant="outline" onClick={() => setIsModalOpen(false)} disabled={submitLoading}>
                   Annuler
                 </Button>
-                <Button type="submit">
+                <Button type="submit" disabled={submitLoading}>
+                  {submitLoading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : null}
                   {editingTeacher ? 'Mettre à jour' : 'Ajouter'}
                 </Button>
               </div>

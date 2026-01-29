@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Loader2 } from 'lucide-react';
 import { apiGet } from '@/lib/api';
 import type { GalleryImage } from '@/lib/types';
 
 export function GalleryPreview() {
   const navigate = useNavigate();
   const [previewImages, setPreviewImages] = useState<GalleryImage[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     apiGet<any[]>('/gallery/images/')
       .then(data => {
-        const mapped: GalleryImage[] = data.map(img => ({
+        const mapped: GalleryImage[] = data.map((img: any) => ({
           id: String(img.id),
           url: img.url,
           title: img.title,
@@ -22,7 +23,8 @@ export function GalleryPreview() {
         }));
         setPreviewImages(mapped.slice(0, 4));
       })
-      .catch(() => setPreviewImages([]));
+      .catch(() => setPreviewImages([]))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -63,6 +65,7 @@ export function GalleryPreview() {
             </div>
           ))}
         </div>
+        )}
 
         <div className="text-center mt-10">
           <Button onClick={() => navigate('/gallery')} variant="outline" className="group">

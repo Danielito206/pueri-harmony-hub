@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
 import { apiGet } from '@/lib/api';
-import { Users, BookOpen, Clock } from 'lucide-react';
+import { Users, BookOpen, Clock, Loader2 } from 'lucide-react';
 
 interface TeacherClassResponse {
   id: string;
@@ -15,6 +15,7 @@ interface TeacherClassResponse {
 const TeacherDashboard = () => {
   const { user, isAuthenticated } = useAuth();
   const [data, setData] = useState<TeacherClassResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     apiGet<TeacherClassResponse | { class: null }>('/teacher/class/')
@@ -25,11 +26,23 @@ const TeacherDashboard = () => {
           setData(res as TeacherClassResponse);
         }
       })
-      .catch(() => setData(null));
+      .catch(() => setData(null))
+      .finally(() => setIsLoading(false));
   }, []);
 
   if (!isAuthenticated || user?.role !== 'teacher') {
     return <Navigate to="/login" replace />;
+  }
+
+  if (isLoading) {
+    return (
+      <DashboardLayout>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+          <Loader2 className="h-10 w-10 animate-spin text-primary" />
+          <p className="text-muted-foreground">Chargement...</p>
+        </div>
+      </DashboardLayout>
+    );
   }
 
   const teacherClass = data;

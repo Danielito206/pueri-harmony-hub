@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { X } from 'lucide-react';
+import { X, Loader2 } from 'lucide-react';
 import { apiGet } from '@/lib/api';
 import { GalleryImage } from '@/lib/types';
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [images, setImages] = useState<GalleryImage[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     apiGet<any[]>('/gallery/images/')
       .then(data => {
-        const mapped: GalleryImage[] = data.map(img => ({
+        const mapped: GalleryImage[] = data.map((img: any) => ({
           id: String(img.id),
           url: img.url,
           title: img.title,
@@ -22,7 +23,8 @@ const Gallery = () => {
         }));
         setImages(mapped);
       })
-      .catch(() => setImages([]));
+      .catch(() => setImages([]))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -47,6 +49,12 @@ const Gallery = () => {
         {/* Gallery Grid */}
         <section className="section-padding">
           <div className="container-narrow mx-auto">
+            {isLoading ? (
+              <div className="flex flex-col items-center justify-center py-24 gap-4">
+                <Loader2 className="h-10 w-10 animate-spin text-primary" />
+                <p className="text-muted-foreground">Chargement de la galerie...</p>
+              </div>
+            ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {images.map((image) => (
                 <div
@@ -70,6 +78,7 @@ const Gallery = () => {
                 </div>
               ))}
             </div>
+            )}
           </div>
         </section>
 

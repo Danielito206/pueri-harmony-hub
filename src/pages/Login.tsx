@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -19,32 +19,32 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    try {
+      const loggedInUser = await login(email, password);
 
-    const loggedInUser = await login(email, password);
+      if (loggedInUser) {
+        toast({
+          title: "Connexion réussie",
+          description: "Bienvenue dans votre espace personnel.",
+        });
 
-    if (loggedInUser) {
-      toast({
-        title: "Connexion réussie",
-        description: "Bienvenue dans votre espace personnel.",
-      });
-      
-      // Redirect based on user role
-      if (loggedInUser.role === 'admin') {
-        navigate('/admin');
-      } else if (loggedInUser.role === 'teacher') {
-        navigate('/teacher');
-      } else if (loggedInUser.role === 'parent') {
-        navigate('/parent');
-      } 
-    } else {
-      toast({
-        title: "Erreur de connexion",
-        description: "Email ou mot de passe incorrect.",
-        variant: "destructive",
-      });
+        if (loggedInUser.role === 'admin') {
+          navigate('/admin');
+        } else if (loggedInUser.role === 'teacher') {
+          navigate('/teacher');
+        } else if (loggedInUser.role === 'parent') {
+          navigate('/parent');
+        }
+      } else {
+        toast({
+          title: "Erreur de connexion",
+          description: "Email ou mot de passe incorrect.",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -110,7 +110,14 @@ const Login = () => {
             </div>
 
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? 'Connexion...' : 'Se connecter'}
+              {isLoading ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  Connexion...
+                </>
+              ) : (
+                'Se connecter'
+              )}
             </Button>
           </form>
 

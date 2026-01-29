@@ -1,5 +1,16 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { User } from '@/lib/types';
+import { User, UserRole } from '@/lib/types';
+import { apiPost } from '@/lib/api';
+
+interface AuthApiUser {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  role: UserRole;
+  avatar?: string | null;
+  date_joined: string;
+}
 
 interface AuthContextType {
   user: User | null;
@@ -14,20 +25,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   const login = async (email: string, password: string): Promise<User | null> => {
-    const res = await fetch('/api/auth/login/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-      credentials: 'include',
-    });
-
-    if (!res.ok) {
+    let data: { user: AuthApiUser };
+    try {
+      data = await apiPost<{ user: AuthApiUser }>('/auth/login/', { email, password });
+    } catch {
       return null;
     }
-
-    const data = await res.json();
     const apiUser = data.user;
 
     const mappedUser: User = {

@@ -19,6 +19,7 @@ import ChangePassword from "./pages/ChangePassword";
 
 // Admin pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import AcademicYearsManagement from "./pages/admin/AcademicYearsManagement";
 import TeachersManagement from "./pages/admin/TeachersManagement";
 import ClassesManagement from "./pages/admin/ClassesManagement";
 import StudentsManagement from "./pages/admin/StudentsManagement";
@@ -57,6 +58,7 @@ const App = () => (
 
             {/* Admin routes */}
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/academic-years" element={<AcademicYearsManagement />} />
             <Route path="/admin/teachers" element={<TeachersManagement />} />
             <Route path="/admin/classes" element={<ClassesManagement />} />
             <Route path="/admin/students" element={<StudentsManagement />} />

@@ -54,7 +54,13 @@ export interface Schedule {
   endTime: string;
   subject: string;
 }
-
+export interface AcademicYear {
+  id: string;
+  name: string;
+  active: boolean;
+  archived: boolean;
+  hasData: boolean;
+}
 export interface GalleryImage {
   id: string;
   url: string;

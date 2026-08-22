@@ -1,4 +1,4 @@
-export const API_BASE = 'https://pueri-backend-kltk.onrender.com/api';
+export const API_BASE = import.meta.env.VITE_API_BASE || 'https://pueri-backend-kltk.onrender.com/api';
 
 async function fetchJson<T>(url: string, options: RequestInit = {}): Promise<T> {
   const res = await fetch(url, {

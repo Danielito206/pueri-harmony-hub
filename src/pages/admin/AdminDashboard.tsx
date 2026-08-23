@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
 import { Users, BookOpen, GraduationCap, UserCheck, Loader2 } from 'lucide-react';
@@ -151,27 +151,27 @@ const AdminDashboard = () => {
               Actions rapides
             </h2>
             <div className="space-y-3">
-              <a
-                href="/admin/teachers"
+              <Link
+                to="/admin/teachers"
                 className="block p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
               >
                 <span className="font-medium text-foreground">Gérer les professeurs</span>
                 <p className="text-sm text-muted-foreground">Ajouter ou modifier des enseignants</p>
-              </a>
-              <a
-                href="/admin/students"
+              </Link>
+              <Link
+                to="/admin/students"
                 className="block p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
               >
                 <span className="font-medium text-foreground">Gérer les élèves</span>
                 <p className="text-sm text-muted-foreground">Inscrire ou gérer des élèves</p>
-              </a>
-              <a
-                href="/admin/classes"
+              </Link>
+              <Link
+                to="/admin/classes"
                 className="block p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
               >
                 <span className="font-medium text-foreground">Affecter les titulaires</span>
                 <p className="text-sm text-muted-foreground">Assigner des profs aux classes</p>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

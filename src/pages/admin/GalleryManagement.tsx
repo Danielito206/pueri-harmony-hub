@@ -44,7 +44,8 @@ const GalleryManagement = () => {
         }));
         setImages(mapped);
       })
-      .catch(() => setImages([]));
+      .catch(() => setImages([]))
+      .finally(() => setListLoading(false));
   }, []);
 
   if (!isAuthenticated || user?.role !== 'admin') {

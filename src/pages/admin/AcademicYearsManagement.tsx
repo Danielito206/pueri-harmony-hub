@@ -69,17 +69,17 @@ const AcademicYearsManagement = () => {
     try {
       if (editingYear) {
         await apiPut(`/academic-years/${editingYear.id}/`, { name: name.trim() });
-        toast({ title: 'Année académique mise à jour' });
+        toast({ title: 'Année scolaire mise à jour' });
       } else {
         await apiPost('/academic-years/', { name: name.trim() });
-        toast({ title: 'Année académique créée', description: `"${name.trim()}" a été ajoutée.` });
+        toast({ title: 'Année scolaire créée', description: `"${name.trim()}" a été ajoutée.` });
       }
       setIsModalOpen(false);
       loadYears();
     } catch (err: any) {
       toast({
         title: 'Erreur',
-        description: err?.message || "Impossible d'enregistrer l'année académique.",
+        description: err?.message || "Impossible d'enregistrer l'année scolaire.",
         variant: 'destructive',
       });
     } finally {
@@ -144,7 +144,7 @@ const AcademicYearsManagement = () => {
       <DashboardLayout>
         <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
           <Loader2 className="h-10 w-10 animate-spin text-primary" />
-          <p className="text-muted-foreground">Chargement des années académiques...</p>
+          <p className="text-muted-foreground">Chargement des années scolaires...</p>
         </div>
       </DashboardLayout>
     );
@@ -155,7 +155,7 @@ const AcademicYearsManagement = () => {
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="font-heading text-3xl font-bold text-foreground">Années académiques</h1>
+            <h1 className="font-heading text-3xl font-bold text-foreground">Années scolaires</h1>
             <p className="text-muted-foreground mt-1">
               Une seule année peut être active à la fois. Les enseignants et parents ne voient que l'année active.
             </p>
@@ -227,8 +227,8 @@ const AcademicYearsManagement = () => {
         {years.length === 0 && (
           <div className="card-elevated p-8 text-center">
             <CalendarRange className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-            <h2 className="font-heading text-xl font-semibold text-foreground mb-2">Aucune année académique</h2>
-            <p className="text-muted-foreground">Créez la première année académique pour commencer.</p>
+            <h2 className="font-heading text-xl font-semibold text-foreground mb-2">Aucune année scolaire</h2>
+            <p className="text-muted-foreground">Créez la première année scolaire pour commencer.</p>
           </div>
         )}
 
@@ -236,7 +236,7 @@ const AcademicYearsManagement = () => {
           <DialogContent className="bg-card">
             <DialogHeader>
               <DialogTitle className="font-heading">
-                {editingYear ? "Modifier l'année académique" : 'Ajouter une année académique'}
+                {editingYear ? "Modifier l'année scolaire" : 'Ajouter une année scolaire'}
               </DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -268,6 +268,3 @@ const AcademicYearsManagement = () => {
 };
 
 export default AcademicYearsManagement;
-
-
-

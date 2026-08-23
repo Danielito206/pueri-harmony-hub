@@ -43,7 +43,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       case 'admin':
         return [
           { icon: Home, label: 'Dashboard', href: '/admin' },
-          { icon: CalendarRange, label: 'Années académiques', href: '/admin/academic-years' },
+          { icon: CalendarRange, label: 'Années scolaires', href: '/admin/academic-years' },
           { icon: Users, label: 'Professeurs', href: '/admin/teachers' },
           { icon: BookOpen, label: 'Classes', href: '/admin/classes' },
           { icon: Users, label: 'Élèves', href: '/admin/students' },

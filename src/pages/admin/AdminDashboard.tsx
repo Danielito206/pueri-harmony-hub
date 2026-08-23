@@ -55,19 +55,19 @@ const AdminDashboard = () => {
           title: 'Élèves',
           value: summary.studentsCount,
           icon: GraduationCap,
-          color: 'bg-green-100 text-green-600',
+          color: 'bg-sky-dark/10 text-sky-dark',
         },
         {
           title: 'Parents',
           value: summary.parentsCount,
           icon: Users,
-          color: 'bg-amber-100 text-amber-600',
+          color: 'bg-secondary text-primary',
         },
         {
           title: 'Classes',
           value: summary.classesCount,
           icon: BookOpen,
-          color: 'bg-purple-100 text-purple-600',
+          color: 'bg-sky-light text-sky-dark',
         },
       ]
     : [];

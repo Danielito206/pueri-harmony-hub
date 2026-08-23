@@ -152,23 +152,23 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       {/* Main Content */}
       <div className="md:pl-64">
         {/* Top Bar */}
-        <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-4 bg-background border-b border-border md:px-6">
+              <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-4 bg-primary border-b border-primary/20 md:px-6">
           <button
-            className="md:hidden p-2 -ml-2"
+            className="md:hidden p-2 -ml-2 text-primary-foreground"
             onClick={() => setSidebarOpen(true)}
             aria-label="Open menu"
           >
             <Menu className="h-6 w-6" />
           </button>
 
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link to="/" className="hover:text-foreground">Accueil</Link>
+          <div className="flex items-center gap-2 text-sm text-primary-foreground/70">
+            <Link to="/" className="hover:text-primary-foreground">Accueil</Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-foreground capitalize">{user?.role === 'admin' ? 'Administration' : user?.role === 'teacher' ? 'Professeur' : 'Parent'}</span>
+            <span className="text-primary-foreground font-medium capitalize">{user?.role === 'admin' ? 'Administration' : user?.role === 'teacher' ? 'Professeur' : 'Parent'}</span>
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="text-sm text-muted-foreground hidden sm:block">
+            <span className="text-sm text-primary-foreground/70 hidden sm:block">
               {user?.email}
             </span>
           </div>

@@ -7,9 +7,9 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { apiGet, apiPost, apiDelete } from '@/lib/api';
+import { apiGet, apiUpload, apiDelete } from '@/lib/api';
 import { GalleryImage } from '@/lib/types';
-import { Plus, Trash2, ImageIcon, Loader2 } from 'lucide-react';
+import { Plus, Trash2, ImageIcon, Loader2, Upload, X } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -17,21 +17,29 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 
+const MAX_FILE_SIZE = 8 * 1024 * 1024; // 8 Mo, doit rester cohérent avec le backend
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+
+interface SelectedFile {
+  file: File;
+  previewUrl: string;
+}
+
 const GalleryManagement = () => {
   const { user, isAuthenticated } = useAuth();
   const { toast } = useToast();
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    url: '',
-    title: '',
-    description: '',
-  });
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [selectedFiles, setSelectedFiles] = useState<SelectedFile[]>([]);
   const [submitLoading, setSubmitLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<{ done: number; total: number } | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [listLoading, setListLoading] = useState(true);
 
-  useEffect(() => {
+  const loadImages = () => {
+    setListLoading(true);
     apiGet<any[]>('/gallery/images/')
       .then(data => {
         const mapped: GalleryImage[] = data.map(img => ({
@@ -46,6 +54,10 @@ const GalleryManagement = () => {
       })
       .catch(() => setImages([]))
       .finally(() => setListLoading(false));
+  };
+
+  useEffect(() => {
+    loadImages();
   }, []);
 
   if (!isAuthenticated || user?.role !== 'admin') {
@@ -63,37 +75,111 @@ const GalleryManagement = () => {
     );
   }
 
+  const resetForm = () => {
+    selectedFiles.forEach(f => URL.revokeObjectURL(f.previewUrl));
+    setTitle('');
+    setDescription('');
+    setSelectedFiles([]);
+    setUploadProgress(null);
+  };
+
+  const handleFilesChosen = (fileList: FileList | null) => {
+    if (!fileList) return;
+    const next: SelectedFile[] = [];
+    for (const file of Array.from(fileList)) {
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        toast({
+          title: 'Format non supporté',
+          description: `"${file.name}" — formats acceptés : JPG, PNG, WEBP, GIF.`,
+          variant: 'destructive',
+        });
+        continue;
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        toast({
+          title: 'Image trop lourde',
+          description: `"${file.name}" dépasse 8 Mo.`,
+          variant: 'destructive',
+        });
+        continue;
+      }
+      next.push({ file, previewUrl: URL.createObjectURL(file) });
+    }
+    setSelectedFiles(prev => [...prev, ...next]);
+  };
+
+  const removeSelectedFile = (index: number) => {
+    setSelectedFiles(prev => {
+      const target = prev[index];
+      if (target) URL.revokeObjectURL(target.previewUrl);
+      return prev.filter((_, i) => i !== index);
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitLoading(true);
-    try {
-      const created = await apiPost<any>('/gallery/images/', {
-        url: formData.url,
-        title: formData.title,
-        description: formData.description || null,
-      });
-
-      const newImage: GalleryImage = {
-        id: String(created.id),
-        url: created.url,
-        title: created.title,
-        description: created.description || undefined,
-        uploadedAt: new Date(created.uploaded_at),
-        uploadedBy: created.uploaded_by?.id ? String(created.uploaded_by.id) : 'admin',
-      };
-
-      setImages(prev => [...prev, newImage]);
+    if (selectedFiles.length === 0) {
       toast({
-        title: "Image ajoutée",
-        description: "La photo a été ajoutée à la galerie.",
+        title: 'Aucune image sélectionnée',
+        description: "Choisis au moins une photo depuis ton appareil.",
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setSubmitLoading(true);
+    setUploadProgress({ done: 0, total: selectedFiles.length });
+
+    const uploaded: GalleryImage[] = [];
+    let failCount = 0;
+
+    for (let i = 0; i < selectedFiles.length; i++) {
+      const { file } = selectedFiles[i];
+      const formData = new FormData();
+      formData.append('image', file);
+      // Quand plusieurs photos sont envoyées d'un coup, on numérote le titre
+      // pour garder des entrées distinctes et identifiables dans la galerie.
+      formData.append('title', selectedFiles.length > 1 ? `${title} (${i + 1}/${selectedFiles.length})` : title);
+      if (description) formData.append('description', description);
+
+      try {
+        const created = await apiUpload<any>('/gallery/images/', formData);
+        uploaded.push({
+          id: String(created.id),
+          url: created.url,
+          title: created.title,
+          description: created.description || undefined,
+          uploadedAt: new Date(created.uploaded_at),
+          uploadedBy: created.uploaded_by?.id ? String(created.uploaded_by.id) : 'admin',
+        });
+      } catch (err) {
+        console.error(err);
+        failCount += 1;
+      } finally {
+        setUploadProgress({ done: i + 1, total: selectedFiles.length });
+      }
+    }
+
+    if (uploaded.length > 0) {
+      setImages(prev => [...prev, ...uploaded]);
+    }
+
+    if (failCount === 0) {
+      toast({
+        title: uploaded.length > 1 ? 'Images ajoutées' : 'Image ajoutée',
+        description: `${uploaded.length} photo(s) ajoutée(s) à la galerie.`,
       });
       setIsModalOpen(false);
-      setFormData({ url: '', title: '', description: '' });
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setSubmitLoading(false);
+      resetForm();
+    } else {
+      toast({
+        title: 'Envoi partiel',
+        description: `${uploaded.length} réussie(s), ${failCount} échouée(s). Réessaie pour les photos manquantes.`,
+        variant: 'destructive',
+      });
     }
+
+    setSubmitLoading(false);
   };
 
   const handleDelete = async (image: GalleryImage) => {
@@ -126,7 +212,7 @@ const GalleryManagement = () => {
           </div>
           <Button onClick={() => setIsModalOpen(true)}>
             <Plus className="h-4 w-4 mr-2" />
-            Ajouter une photo
+            Ajouter des photos
           </Button>
         </div>
 
@@ -167,58 +253,98 @@ const GalleryManagement = () => {
           ))}
         </div>
 
+        {images.length === 0 && (
+          <div className="card-elevated p-8 text-center">
+            <ImageIcon className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+            <h2 className="font-heading text-xl font-semibold text-foreground mb-2">Aucune photo</h2>
+            <p className="text-muted-foreground">Ajoute la première photo de la galerie.</p>
+          </div>
+        )}
+
         {/* Add Modal */}
-        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <DialogContent className="bg-card">
+        <Dialog
+          open={isModalOpen}
+          onOpenChange={(open) => {
+            setIsModalOpen(open);
+            if (!open) resetForm();
+          }}
+        >
+          <DialogContent className="bg-card max-h-[90vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle className="font-heading">Ajouter une photo</DialogTitle>
+              <DialogTitle className="font-heading">Ajouter des photos</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="url">URL de l'image</Label>
-                <Input
-                  id="url"
-                  type="url"
-                  placeholder="https://..."
-                  value={formData.url}
-                  onChange={(e) => setFormData({ ...formData, url: e.target.value })}
-                  required
-                />
-              </div>
               <div className="space-y-2">
                 <Label htmlFor="title">Titre</Label>
                 <Input
                   id="title"
-                  value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Ex : Journée sportive 2026"
                   required
                 />
               </div>
+
               <div className="space-y-2">
                 <Label htmlFor="description">Description (optionnel)</Label>
                 <Textarea
                   id="description"
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                   rows={3}
                 />
               </div>
-              
-              {/* Preview */}
-              {formData.url && (
-                <div className="border border-border rounded-lg p-4">
-                  <p className="text-sm text-muted-foreground mb-2">Aperçu :</p>
-                  <div className="aspect-video rounded overflow-hidden bg-muted flex items-center justify-center">
-                    <img
-                      src={formData.url}
-                      alt="Aperçu"
-                      className="max-w-full max-h-full object-contain"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                      }}
-                    />
-                  </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="image-input">Photo(s) depuis ton appareil</Label>
+                <label
+                  htmlFor="image-input"
+                  className="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-border rounded-lg p-6 cursor-pointer hover:border-primary hover:bg-muted/30 transition-colors"
+                >
+                  <Upload className="h-8 w-8 text-muted-foreground" />
+                  <span className="text-sm text-muted-foreground text-center">
+                    Clique pour choisir une ou plusieurs images
+                    <br />
+                    (JPG, PNG, WEBP, GIF — 8 Mo max par image)
+                  </span>
+                </label>
+                <input
+                  id="image-input"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/gif"
+                  multiple
+                  className="hidden"
+                  onChange={(e) => {
+                    handleFilesChosen(e.target.files);
+                    e.target.value = '';
+                  }}
+                />
+              </div>
+
+              {/* Aperçu des fichiers sélectionnés */}
+              {selectedFiles.length > 0 && (
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                  {selectedFiles.map((f, idx) => (
+                    <div key={idx} className="relative aspect-square rounded overflow-hidden border border-border">
+                      <img src={f.previewUrl} alt={f.file.name} className="w-full h-full object-cover" />
+                      <button
+                        type="button"
+                        onClick={() => removeSelectedFile(idx)}
+                        className="absolute top-1 right-1 bg-foreground/70 text-background rounded-full p-1"
+                        aria-label="Retirer cette image"
+                        disabled={submitLoading}
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                  ))}
                 </div>
+              )}
+
+              {uploadProgress && (
+                <p className="text-sm text-muted-foreground">
+                  Envoi en cours : {uploadProgress.done} / {uploadProgress.total}
+                </p>
               )}
 
               <div className="flex justify-end gap-2 pt-4">
@@ -227,7 +353,7 @@ const GalleryManagement = () => {
                 </Button>
                 <Button type="submit" disabled={submitLoading}>
                   {submitLoading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <ImageIcon className="h-4 w-4 mr-2" />}
-                  Ajouter
+                  Ajouter {selectedFiles.length > 1 ? `(${selectedFiles.length})` : ''}
                 </Button>
               </div>
             </form>

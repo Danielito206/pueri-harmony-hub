@@ -40,3 +40,20 @@ export function apiDelete(path: string): Promise<void> {
   return fetchJson<void>(`${API_BASE}${path}`, { method: 'DELETE' });
 }
 
+// Upload de fichier (multipart/form-data) — ne PAS fixer le header
+// Content-Type ici : le navigateur doit générer lui-même la "boundary"
+// du multipart, sinon la requête est invalide côté serveur.
+export async function apiUpload<T>(path: string, formData: FormData): Promise<T> {
+  const res = await fetch(`${API_BASE}${path}`, {
+    credentials: 'include',
+    method: 'POST',
+    body: formData,
+  });
+
+  if (!res.ok) {
+    const text = await res.text().catch(() => '');
+    throw new Error(text || `Erreur API (${res.status})`);
+  }
+
+  return res.json() as Promise<T>;
+}

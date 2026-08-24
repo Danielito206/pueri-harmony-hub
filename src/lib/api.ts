@@ -1,13 +1,28 @@
 export const API_BASE = import.meta.env.VITE_API_BASE || 'https://pueri-backend-kltk.onrender.com/api';
 
+// Jeton d'authentification reçu à la connexion (voir AuthContext.tsx).
+// Conservé ici en mémoire et attaché automatiquement à chaque requête
+// protégée via l'en-tête "Authorization: Bearer <token>", que le backend
+// (MongoTokenAuthentication) exige pour reconnaître un admin/professeur/parent.
+let authToken: string | null = null;
+
+export function setAuthToken(token: string | null) {
+  authToken = token;
+}
+
 async function fetchJson<T>(url: string, options: RequestInit = {}): Promise<T> {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    ...((options.headers as Record<string, string>) || {}),
+  };
+  if (authToken) {
+    headers['Authorization'] = `Bearer ${authToken}`;
+  }
+
   const res = await fetch(url, {
     credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(options.headers || {}),
-    },
     ...options,
+    headers,
   });
 
   if (!res.ok) {
@@ -44,9 +59,15 @@ export function apiDelete(path: string): Promise<void> {
 // Content-Type ici : le navigateur doit générer lui-même la "boundary"
 // du multipart, sinon la requête est invalide côté serveur.
 export async function apiUpload<T>(path: string, formData: FormData): Promise<T> {
+  const headers: Record<string, string> = {};
+  if (authToken) {
+    headers['Authorization'] = `Bearer ${authToken}`;
+  }
+
   const res = await fetch(`${API_BASE}${path}`, {
     credentials: 'include',
     method: 'POST',
+    headers,
     body: formData,
   });
 

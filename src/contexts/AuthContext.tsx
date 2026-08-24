@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { User, UserRole } from '@/lib/types';
-import { apiPost } from '@/lib/api';
+import { apiPost, setAuthToken } from '@/lib/api';
 
 interface AuthApiUser {
   id: number;
@@ -25,13 +25,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   const login = async (email: string, password: string): Promise<User | null> => {
-    let data: { user: AuthApiUser };
+    let data: { user: AuthApiUser; token: string };
     try {
-      data = await apiPost<{ user: AuthApiUser }>('/auth/login/', { email, password });
+      data = await apiPost<{ user: AuthApiUser; token: string }>('/auth/login/', { email, password });
     } catch {
       return null;
     }
     const apiUser = data.user;
+
+    // Le serveur exige ce jeton sur chaque requête protégée (créer/modifier/
+    // supprimer). Sans lui, toute action admin est refusée avec une erreur 403,
+    // même une fois "connecté" côté affichage.
+    setAuthToken(data.token);
 
     const mappedUser: User = {
       id: String(apiUser.id),
@@ -48,6 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = () => {
+    setAuthToken(null);
     setUser(null);
   };
 

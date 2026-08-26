@@ -47,6 +47,7 @@ interface AdminClass {
   studentsCount: number;
 }
 
+// L'ecole ne compte que deux cycles.
 const CYCLES = [
   { value: 'maternelle', label: 'Maternelle' },
   { value: 'primaire', label: 'Primaire' },
@@ -410,6 +411,8 @@ const ClassesManagement = () => {
 
   const maternelle = parCycle('maternelle');
   const primaire = parCycle('primaire');
+  // Filet de securite : une classe d'un ancien type ne doit pas disparaitre
+  // silencieusement de l'ecran. En pratique cette section reste vide.
   const autres = classes.filter(c => c.type !== 'maternelle' && c.type !== 'primaire');
 
   const section = (titre: string, liste: AdminClass[]) =>

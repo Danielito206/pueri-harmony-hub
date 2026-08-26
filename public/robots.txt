@@ -1,14 +1,10 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+# Espaces privés : rien d'exploitable ne s'y trouve sans authentification,
+# mais inutile de les proposer à l'indexation.
+Disallow: /admin
+Disallow: /teacher
+Disallow: /parent
+Disallow: /profile
+Disallow: /change-password

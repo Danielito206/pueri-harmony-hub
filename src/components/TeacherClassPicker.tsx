@@ -22,10 +22,10 @@ interface Props {
   onChange: (id: string) => void;
 }
 
+// L'ecole ne compte que deux cycles : maternelle et primaire.
 export const cycleLabel = (type?: string) => {
   if (type === 'maternelle') return 'Maternelle';
   if (type === 'primaire') return 'Primaire';
-  if (type === 'secondaire') return 'Secondaire';
   return '';
 };
 

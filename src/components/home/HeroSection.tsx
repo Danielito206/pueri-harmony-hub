@@ -16,7 +16,7 @@ export function HeroSection() {
       <div className="container-narrow mx-auto px-4 py-20 relative z-10">
         <div className="max-w-3xl mx-auto text-center animate-slide-up">
           <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full mb-6">
-            École maternelle et primaire — ouverte en 2019
+            École maternelle et primaire ouverte en 2019
           </span>
 
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
@@ -26,7 +26,7 @@ export function HeroSection() {
 
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
             De la première maternelle à la sixième primaire, nous suivons chaque enfant
-            année après année — son parcours, ses progrès, ses enseignants — et nous en
+            année après année son parcours, ses progrès, ses enseignants et nous en
             tenons ses parents informés.
           </p>
 
@@ -53,8 +53,8 @@ export function HeroSection() {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 max-w-4xl mx-auto">
           {[
-            { icon: Users, value: '500+', label: 'Élèves' },
-            { icon: BookOpen, value: '30+', label: 'Enseignants qualifiés' },
+            { icon: Users, value: '100+', label: 'Élèves' },
+            { icon: BookOpen, value: '10+', label: 'Enseignants qualifiés' },
             { icon: Award, value: '95%', label: 'Taux de réussite' },
           ].map((stat, index) => {
             const Icon = stat.icon;

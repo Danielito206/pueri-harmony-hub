@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User, UserRole } from '@/lib/types';
-import { apiPost, setAuthToken } from '@/lib/api';
+import { apiPost, setAuthToken, getAuthToken, setUnauthorizedHandler } from '@/lib/api';
 
 interface AuthApiUser {
   id: number;
@@ -21,8 +21,61 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// L'utilisateur connecté est conservé à côté du jeton (voir api.ts). Sans
+// cela, un simple rafraîchissement de page renverrait vers l'écran de
+// connexion en pleine saisie de données.
+const USER_STORAGE_KEY = 'pueri.user';
+
+const readStoredUser = (): User | null => {
+  try {
+    const raw = sessionStorage.getItem(USER_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed?.id || !parsed?.role) return null;
+    return {
+      ...parsed,
+      // JSON.parse rend une chaîne : on restaure le type Date attendu ailleurs.
+      createdAt: parsed.createdAt ? new Date(parsed.createdAt) : new Date(),
+    } as User;
+  } catch {
+    return null;
+  }
+};
+
+const writeStoredUser = (user: User | null) => {
+  try {
+    if (user) {
+      sessionStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+    } else {
+      sessionStorage.removeItem(USER_STORAGE_KEY);
+    }
+  } catch {
+    // Navigation privée ou stockage indisponible : la session reste valable
+    // pour cet onglet, elle ne survivra simplement pas au rafraîchissement.
+  }
+};
+
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  // On ne restaure la session que si le jeton ET l'utilisateur sont présents :
+  // un utilisateur sans jeton produirait une interface connectée dont chaque
+  // action serait refusée par le serveur.
+  const [user, setUser] = useState<User | null>(() =>
+    getAuthToken() ? readStoredUser() : null
+  );
+
+  const clearSession = () => {
+    setAuthToken(null);
+    writeStoredUser(null);
+    setUser(null);
+  };
+
+  // Si le serveur signale que la session n'est plus valable (jeton expiré ou
+  // révoqué), on déconnecte proprement au lieu de laisser une interface
+  // connectée dont plus rien ne fonctionne.
+  useEffect(() => {
+    setUnauthorizedHandler(() => clearSession());
+    return () => setUnauthorizedHandler(null);
+  }, []);
 
   const login = async (email: string, password: string): Promise<User | null> => {
     let data: { user: AuthApiUser; token: string };
@@ -48,13 +101,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       createdAt: new Date(apiUser.date_joined),
     };
 
+    writeStoredUser(mappedUser);
     setUser(mappedUser);
     return mappedUser;
   };
 
   const logout = () => {
-    setAuthToken(null);
-    setUser(null);
+    clearSession();
   };
 
   return (

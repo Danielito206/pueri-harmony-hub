@@ -17,6 +17,7 @@ import NotFound from "./pages/NotFound";
 // Shared pages
 import Profile from "./pages/Profile";
 import ChangePassword from "./pages/ChangePassword";
+import Messages from "./pages/Messages";
 
 // Admin pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -56,6 +57,7 @@ const App = () => (
             {/* Shared authenticated routes */}
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/change-password" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
+            <Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
 
             {/* Admin routes */}
             <Route path="/admin" element={<ProtectedRoute roles={['admin']}><AdminDashboard /></ProtectedRoute>} />

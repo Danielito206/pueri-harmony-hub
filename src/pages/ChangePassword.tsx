@@ -6,7 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { Eye, EyeOff, Key, Save } from 'lucide-react';
+import { apiPost } from '@/lib/api';
+import { Eye, EyeOff, Key, Save, Loader2 } from 'lucide-react';
 
 const ChangePassword = () => {
   const { isAuthenticated } = useAuth();
@@ -21,14 +22,15 @@ const ChangePassword = () => {
     newPassword: '',
     confirmPassword: '',
   });
+  const [submitLoading, setSubmitLoading] = useState(false);
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (formData.newPassword !== formData.confirmPassword) {
       toast({
         title: "Erreur",
@@ -38,25 +40,49 @@ const ChangePassword = () => {
       return;
     }
 
-    if (formData.newPassword.length < 6) {
+    // Le serveur impose un minimum de 6 caractères. On est volontairement plus
+    // strict ici (8) : c'est une politique côté application, cohérente avec le
+    // serveur puisqu'elle ne fait que resserrer la contrainte.
+    if (formData.newPassword.length < 8) {
       toast({
         title: "Erreur",
-        description: "Le mot de passe doit contenir au moins 6 caractères.",
+        description: "Le mot de passe doit contenir au moins 8 caractères.",
         variant: "destructive",
       });
       return;
     }
 
-    toast({
-      title: "Mot de passe modifié",
-      description: "Votre mot de passe a été mis à jour avec succès.",
-    });
-    
-    setFormData({
-      currentPassword: '',
-      newPassword: '',
-      confirmPassword: '',
-    });
+    setSubmitLoading(true);
+    try {
+      // Le changement doit être fait par le SERVEUR. Sans cet appel, le
+      // formulaire affichait un succès sans rien modifier, et tous les comptes
+      // restaient sur le mot de passe attribué à la création.
+      // Noms de champs imposés par ChangePasswordSerializer côté serveur.
+      // Le serveur vérifie lui-même l'ancien mot de passe et hache le nouveau.
+      await apiPost('/auth/change-password/', {
+        ancien_mot_de_passe: formData.currentPassword,
+        nouveau_mot_de_passe: formData.newPassword,
+      });
+
+      toast({
+        title: "Mot de passe modifié",
+        description: "Votre mot de passe a été mis à jour avec succès.",
+      });
+
+      setFormData({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: '',
+      });
+    } catch (err: any) {
+      toast({
+        title: "Erreur",
+        description: err?.message || "Impossible de modifier le mot de passe.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitLoading(false);
+    }
   };
 
   const togglePasswordVisibility = (field: 'current' | 'new' | 'confirm') => {
@@ -143,8 +169,12 @@ const ChangePassword = () => {
               </div>
             </div>
 
-            <Button type="submit" className="w-full">
-              <Save className="h-4 w-4 mr-2" />
+            <Button type="submit" className="w-full" disabled={submitLoading}>
+              {submitLoading ? (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              ) : (
+                <Save className="h-4 w-4 mr-2" />
+              )}
               Mettre à jour le mot de passe
             </Button>
           </form>

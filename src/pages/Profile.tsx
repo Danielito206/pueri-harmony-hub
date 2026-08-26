@@ -25,9 +25,13 @@ const Profile = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Aucun endpoint de mise à jour du profil n'existe côté serveur : rien
+    // n'était enregistré, alors que le message affirmait le contraire.
     toast({
-      title: "Profil mis à jour",
-      description: "Vos informations ont été enregistrées avec succès.",
+      title: "Modification indisponible",
+      description:
+        "La modification du profil n'est pas encore active. Demande à l'administration de mettre tes informations à jour.",
+      variant: "destructive",
     });
     setIsEditing(false);
   };

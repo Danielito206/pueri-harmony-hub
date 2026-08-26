@@ -15,17 +15,20 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
+    // Ce formulaire n'est relié à aucun service d'envoi : le message saisi
+    // n'arrive nulle part. Annoncer "Message envoyé" trompait les parents,
+    // qui pensaient avoir contacté l'école. Tant qu'un backend d'envoi
+    // n'existe pas, on le dit honnêtement et on donne les vrais moyens de
+    // contact, affichés juste à côté sur cette page.
     toast({
-      title: "Message envoyé !",
-      description: "Nous vous répondrons dans les plus brefs délais.",
+      title: "Formulaire indisponible",
+      description:
+        "L'envoi en ligne n'est pas encore actif. Contactez l'école par téléphone ou par email, coordonnées ci-contre.",
+      variant: "destructive",
     });
-    
+
     setIsSubmitting(false);
-    (e.target as HTMLFormElement).reset();
   };
 
   const contactInfo = [

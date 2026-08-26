@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
 import { apiGet } from '@/lib/api';
 import { Schedule } from '@/lib/types';
+import { TeacherClassPicker, TeacherClass } from '@/components/TeacherClassPicker';
 import { Calendar, Loader2 } from 'lucide-react';
 
 interface TeacherClassSchedule {
@@ -16,11 +17,30 @@ interface TeacherClassSchedule {
 
 const TeacherSchedule = () => {
   const { user, isAuthenticated } = useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [classes, setClasses] = useState<TeacherClass[]>([]);
+  const [selectedId, setSelectedId] = useState('');
   const [data, setData] = useState<TeacherClassSchedule | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    apiGet<any>('/teacher/class/')
+    // Un professeur peut avoir plusieurs classes : on charge la liste, puis
+    // l'horaire de celle qui est sélectionnée.
+    apiGet<TeacherClass[]>('/teacher/classes/')
+      .then(list => {
+        const mesClasses = Array.isArray(list) ? list : [];
+        setClasses(mesClasses);
+        const demandee = searchParams.get('class');
+        const initiale = mesClasses.find(c => c.id === demandee) || mesClasses[0];
+        if (initiale) setSelectedId(initiale.id);
+      })
+      .catch(() => setClasses([]))
+      .finally(() => setIsLoading(false));
+  }, []);
+
+  useEffect(() => {
+    if (!selectedId) return;
+    apiGet<any>(`/teacher/class/?class_id=${selectedId}`)
       .then(res => {
         if (res && !('class' in res)) {
           setData(res as TeacherClassSchedule);
@@ -28,9 +48,8 @@ const TeacherSchedule = () => {
           setData(null);
         }
       })
-      .catch(() => setData(null))
-      .finally(() => setIsLoading(false));
-  }, []);
+      .catch(() => setData(null));
+  }, [selectedId]);
 
   if (!isAuthenticated || user?.role !== 'teacher') {
     return <Navigate to="/login" replace />;
@@ -62,9 +81,22 @@ const TeacherSchedule = () => {
         <div>
           <h1 className="font-heading text-3xl font-bold text-foreground">Horaire des cours</h1>
           <p className="text-muted-foreground mt-1">
-            {teacherClass ? `Classe: ${teacherClass.name}` : 'Aucune classe assignée'}
+            {classes.length > 1
+              ? 'Choisissez une classe pour voir son horaire.'
+              : teacherClass
+              ? `Classe : ${teacherClass.name}`
+              : 'Aucune classe affectée'}
           </p>
         </div>
+
+        <TeacherClassPicker
+          classes={classes}
+          value={selectedId}
+          onChange={(id) => {
+            setSelectedId(id);
+            setSearchParams({ class: id }, { replace: true });
+          }}
+        />
 
         {schedule.length > 0 ? (
           <div className="grid gap-6">
@@ -110,7 +142,7 @@ const TeacherSchedule = () => {
               Aucun horaire
             </h2>
             <p className="text-muted-foreground">
-              L'horaire n'a pas encore été défini pour votre classe.
+              L'horaire n'a pas encore été défini pour cette classe.
             </p>
           </div>
         )}

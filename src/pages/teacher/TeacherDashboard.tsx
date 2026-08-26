@@ -1,32 +1,24 @@
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
+import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { apiGet } from '@/lib/api';
-import { Users, BookOpen, Clock, Loader2 } from 'lucide-react';
-
-interface TeacherClassResponse {
-  id: string;
-  name: string;
-  students: { id: string; firstName: string; lastName: string; postName?: string }[];
-  schedule: { id: string; day: string; startTime: string; endTime: string; subject: string }[];
-}
+import { TeacherClass, cycleLabel } from '@/components/TeacherClassPicker';
+import { Users, BookOpen, Loader2, ArrowRight, DoorOpen } from 'lucide-react';
 
 const TeacherDashboard = () => {
   const { user, isAuthenticated } = useAuth();
-  const [data, setData] = useState<TeacherClassResponse | null>(null);
+  const navigate = useNavigate();
+  const [classes, setClasses] = useState<TeacherClass[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    apiGet<TeacherClassResponse | { class: null }>('/teacher/class/')
-      .then(res => {
-        if ((res as any).class === null) {
-          setData(null);
-        } else {
-          setData(res as TeacherClassResponse);
-        }
-      })
-      .catch(() => setData(null))
+    // Un professeur peut être titulaire de plusieurs classes : le serveur ne
+    // renvoie ici que celles qui lui sont affectées pour l'année active.
+    apiGet<TeacherClass[]>('/teacher/classes/')
+      .then(data => setClasses(Array.isArray(data) ? data : []))
+      .catch(() => setClasses([]))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -45,9 +37,49 @@ const TeacherDashboard = () => {
     );
   }
 
-  const teacherClass = data;
-  const classStudents = data?.students ?? [];
-  const todaySchedule = (data?.schedule ?? []).filter(s => s.day === 'Lundi');
+  const totalStudents = classes.reduce((n, c) => n + (c.students_count ?? 0), 0);
+  const maternelle = classes.filter(c => c.type === 'maternelle');
+  const autres = classes.filter(c => c.type !== 'maternelle');
+
+  const renderClasse = (c: TeacherClass) => (
+    <div key={c.id} className="card-elevated p-6 flex flex-col">
+      <div className="flex items-start justify-between gap-2 mb-3">
+        <h3 className="font-heading text-lg font-semibold text-foreground">{c.name}</h3>
+        {c.type && (
+          <span className="px-2 py-1 text-xs font-medium bg-primary/10 text-primary rounded shrink-0">
+            {cycleLabel(c.type)}
+          </span>
+        )}
+      </div>
+      <div className="space-y-2 text-sm flex-1">
+        <div className="flex items-center justify-between">
+          <span className="text-muted-foreground flex items-center gap-1.5">
+            <Users className="h-3.5 w-3.5" />
+            Élèves
+          </span>
+          <span className="font-medium text-foreground">{c.students_count ?? 0}</span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-muted-foreground flex items-center gap-1.5">
+            <DoorOpen className="h-3.5 w-3.5" />
+            Salle
+          </span>
+          <span className={c.room ? 'font-medium text-foreground' : 'text-muted-foreground italic'}>
+            {c.room || 'non renseignée'}
+          </span>
+        </div>
+      </div>
+      <Button
+        variant="outline"
+        size="sm"
+        className="w-full mt-4"
+        onClick={() => navigate(`/teacher/students?class=${c.id}`)}
+      >
+        Voir les élèves
+        <ArrowRight className="h-4 w-4 ml-2" />
+      </Button>
+    </div>
+  );
 
   return (
     <DashboardLayout>
@@ -57,131 +89,72 @@ const TeacherDashboard = () => {
             Bonjour, {user?.firstName}
           </h1>
           <p className="text-muted-foreground mt-2">
-            Bienvenue dans votre espace professeur.
+            {classes.length === 0
+              ? 'Bienvenue dans votre espace professeur.'
+              : `Vous avez ${classes.length} classe(s) et ${totalStudents} élève(s) cette année.`}
           </p>
         </div>
 
-        {teacherClass ? (
+        {classes.length === 0 ? (
+          <div className="card-elevated p-8 text-center">
+            <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+            <h2 className="font-heading text-xl font-semibold text-foreground mb-2">
+              Aucune classe affectée
+            </h2>
+            <p className="text-muted-foreground">
+              Vous n'êtes titulaire d'aucune classe pour l'année en cours. Contactez
+              l'administration.
+            </p>
+          </div>
+        ) : (
           <>
-            {/* Class Info */}
-            <div className="card-elevated p-6">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center">
-                  <BookOpen className="h-8 w-8 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Votre classe</p>
-                  <h2 className="font-heading text-2xl font-bold text-foreground">
-                    {teacherClass.name}
-                  </h2>
-                  <p className="text-muted-foreground">{classStudents.length} élèves</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Stats */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 gap-6">
               <div className="card-elevated p-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <Users className="h-6 w-6 text-primary" />
+                    <BookOpen className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">Élèves</p>
-                    <p className="text-2xl font-bold text-foreground">{classStudents.length}</p>
+                    <p className="text-sm text-muted-foreground">Mes classes</p>
+                    <p className="text-2xl font-bold text-foreground">{classes.length}</p>
                   </div>
                 </div>
               </div>
               <div className="card-elevated p-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                    <BookOpen className="h-6 w-6 text-green-600" />
+                    <Users className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">Cours / semaine</p>
-                    <p className="text-2xl font-bold text-foreground">{teacherClass.schedule.length}</p>
-                  </div>
-                </div>
-              </div>
-              <div className="card-elevated p-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
-                    <Clock className="h-6 w-6 text-amber-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Cours aujourd'hui</p>
-                    <p className="text-2xl font-bold text-foreground">{todaySchedule.length}</p>
+                    <p className="text-sm text-muted-foreground">Total élèves</p>
+                    <p className="text-2xl font-bold text-foreground">{totalStudents}</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Today's Schedule */}
-            <div className="card-elevated p-6">
-              <h3 className="font-heading text-xl font-semibold text-foreground mb-4">
-                Programme du jour (Lundi)
-              </h3>
-              {todaySchedule.length > 0 ? (
-                <div className="space-y-3">
-                  {todaySchedule.map((schedule) => (
-                    <div
-                      key={schedule.id}
-                      className="flex items-center gap-4 p-3 rounded-lg bg-muted/50"
-                    >
-                      <div className="text-center min-w-[80px]">
-                        <p className="text-sm font-medium text-foreground">{schedule.startTime}</p>
-                        <p className="text-xs text-muted-foreground">{schedule.endTime}</p>
-                      </div>
-                      <div className="flex-1">
-                        <p className="font-medium text-foreground">{schedule.subject}</p>
-                      </div>
-                    </div>
-                  ))}
+            {maternelle.length > 0 && (
+              <div>
+                <h2 className="font-heading text-xl font-semibold text-foreground mb-4">
+                  Maternelle
+                </h2>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {maternelle.map(renderClasse)}
                 </div>
-              ) : (
-                <p className="text-muted-foreground">Aucun cours programmé</p>
-              )}
-            </div>
-
-            {/* Students Preview */}
-            <div className="card-elevated p-6">
-              <h3 className="font-heading text-xl font-semibold text-foreground mb-4">
-                Vos élèves
-              </h3>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {classStudents.slice(0, 6).map((student) => (
-                  <div key={student.id} className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                      <span className="text-sm font-medium text-primary">
-                        {student.firstName.charAt(0)}
-                      </span>
-                    </div>
-                    <div>
-                      <p className="font-medium text-foreground">
-                        {student.firstName} {student.lastName}
-                      </p>
-                    </div>
-                  </div>
-                ))}
               </div>
-              {classStudents.length > 6 && (
-                <p className="text-sm text-muted-foreground mt-4 text-center">
-                  Et {classStudents.length - 6} autres élèves...
-                </p>
-              )}
-            </div>
+            )}
+
+            {autres.length > 0 && (
+              <div>
+                <h2 className="font-heading text-xl font-semibold text-foreground mb-4">
+                  {maternelle.length > 0 ? 'Primaire' : 'Mes classes'}
+                </h2>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {autres.map(renderClasse)}
+                </div>
+              </div>
+            )}
           </>
-        ) : (
-          <div className="card-elevated p-8 text-center">
-            <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-            <h2 className="font-heading text-xl font-semibold text-foreground mb-2">
-              Aucune classe assignée
-            </h2>
-            <p className="text-muted-foreground">
-              Vous n'êtes actuellement titulaire d'aucune classe.
-              Contactez l'administration pour plus d'informations.
-            </p>
-          </div>
         )}
       </div>
     </DashboardLayout>

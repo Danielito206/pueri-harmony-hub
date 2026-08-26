@@ -16,17 +16,18 @@ export function HeroSection() {
       <div className="container-narrow mx-auto px-4 py-20 relative z-10">
         <div className="max-w-3xl mx-auto text-center animate-slide-up">
           <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full mb-6">
-            Excellence académique depuis 1990
+            École maternelle et primaire — ouverte en 2019
           </span>
-          
+
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
             Bienvenue à l'École{' '}
             <span className="text-gradient">Pueri Angeli</span>
           </h1>
-          
+
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            Nous accompagnons chaque enfant dans son parcours d'apprentissage, 
-            de la maternelle au primaire, avec passion et dévouement.
+            De la première maternelle à la sixième primaire, nous suivons chaque enfant
+            année après année — son parcours, ses progrès, ses enseignants — et nous en
+            tenons ses parents informés.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

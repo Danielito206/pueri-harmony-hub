@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 // Public pages
 import Index from "./pages/Index";
@@ -53,26 +54,26 @@ const App = () => (
             <Route path="/login" element={<Login />} />
 
             {/* Shared authenticated routes */}
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path="/change-password" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
 
             {/* Admin routes */}
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/academic-years" element={<AcademicYearsManagement />} />
-            <Route path="/admin/teachers" element={<TeachersManagement />} />
-            <Route path="/admin/classes" element={<ClassesManagement />} />
-            <Route path="/admin/students" element={<StudentsManagement />} />
-            <Route path="/admin/parents" element={<ParentsManagement />} />
-            <Route path="/admin/gallery" element={<GalleryManagement />} />
+            <Route path="/admin" element={<ProtectedRoute roles={['admin']}><AdminDashboard /></ProtectedRoute>} />
+            <Route path="/admin/academic-years" element={<ProtectedRoute roles={['admin']}><AcademicYearsManagement /></ProtectedRoute>} />
+            <Route path="/admin/teachers" element={<ProtectedRoute roles={['admin']}><TeachersManagement /></ProtectedRoute>} />
+            <Route path="/admin/classes" element={<ProtectedRoute roles={['admin']}><ClassesManagement /></ProtectedRoute>} />
+            <Route path="/admin/students" element={<ProtectedRoute roles={['admin']}><StudentsManagement /></ProtectedRoute>} />
+            <Route path="/admin/parents" element={<ProtectedRoute roles={['admin']}><ParentsManagement /></ProtectedRoute>} />
+            <Route path="/admin/gallery" element={<ProtectedRoute roles={['admin']}><GalleryManagement /></ProtectedRoute>} />
 
             {/* Teacher routes */}
-            <Route path="/teacher" element={<TeacherDashboard />} />
-            <Route path="/teacher/students" element={<TeacherStudents />} />
-            <Route path="/teacher/schedule" element={<TeacherSchedule />} />
+            <Route path="/teacher" element={<ProtectedRoute roles={['teacher']}><TeacherDashboard /></ProtectedRoute>} />
+            <Route path="/teacher/students" element={<ProtectedRoute roles={['teacher']}><TeacherStudents /></ProtectedRoute>} />
+            <Route path="/teacher/schedule" element={<ProtectedRoute roles={['teacher']}><TeacherSchedule /></ProtectedRoute>} />
 
             {/* Parent routes */}
-            <Route path="/parent" element={<ParentDashboard />} />
-            <Route path="/parent/children" element={<ParentChildren />} />
+            <Route path="/parent" element={<ProtectedRoute roles={['parent']}><ParentDashboard /></ProtectedRoute>} />
+            <Route path="/parent/children" element={<ProtectedRoute roles={['parent']}><ParentChildren /></ProtectedRoute>} />
 
             {/* Catch-all */}
             <Route path="*" element={<NotFound />} />

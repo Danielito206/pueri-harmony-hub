@@ -1,19 +1,31 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useSearchParams } from 'react-router-dom';
+import { Navigate, useSearchParams, useNavigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/contexts/AuthContext';
 import { apiGet } from '@/lib/api';
 import { TeacherClassPicker, TeacherClass } from '@/components/TeacherClassPicker';
-import { Users, Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Users, Loader2, Mail } from 'lucide-react';
 
 interface TeacherStudentsResponse {
   class: { id: string; name: string } | null;
   students: { id: string; firstName: string; lastName: string; postName?: string }[];
 }
 
+// Le serveur ne renvoie au professeur que les parents de SES eleves. On s'en
+// sert pour proposer "Contacter le parent" en face du bon enfant.
+interface ParentJoignable {
+  id: string;
+  first_name: string;
+  last_name: string;
+  student?: { id: string; name: string; class_name: string };
+}
+
 const TeacherStudents = () => {
   const { user, isAuthenticated } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [parentsParEleve, setParentsParEleve] = useState<Record<string, ParentJoignable[]>>({});
 
   const [classes, setClasses] = useState<TeacherClass[]>([]);
   const [selectedId, setSelectedId] = useState('');
@@ -35,6 +47,21 @@ const TeacherStudents = () => {
       })
       .catch(() => setClasses([]))
       .finally(() => setIsLoading(false));
+  }, []);
+
+  useEffect(() => {
+    apiGet<{ group: string; people: ParentJoignable[] }[]>('/messages/recipients/')
+      .then(groupes => {
+        const carte: Record<string, ParentJoignable[]> = {};
+        (Array.isArray(groupes) ? groupes : []).forEach(g => {
+          g.people.forEach(p => {
+            if (!p.student) return;
+            carte[p.student.id] = [...(carte[p.student.id] || []), p];
+          });
+        });
+        setParentsParEleve(carte);
+      })
+      .catch(() => setParentsParEleve({}));
   }, []);
 
   useEffect(() => {
@@ -131,6 +158,7 @@ const TeacherStudents = () => {
                   <tr className="text-left text-muted-foreground border-b border-border">
                     <th className="pb-2 font-medium w-10">#</th>
                     <th className="pb-2 font-medium">Élève</th>
+                    <th className="pb-2 font-medium text-right">Parent</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -146,6 +174,33 @@ const TeacherStudents = () => {
                           </div>
                           <span className="font-medium text-foreground">{nomComplet(s)}</span>
                         </div>
+                      </td>
+                      <td className="py-2.5 text-right">
+                        {(parentsParEleve[s.id] || []).length === 0 ? (
+                          <span className="text-xs text-muted-foreground italic">
+                            aucun parent enregistré
+                          </span>
+                        ) : (
+                          <div className="flex gap-2 justify-end flex-wrap">
+                            {parentsParEleve[s.id].map(p => (
+                              <Button
+                                key={p.id}
+                                variant="outline"
+                                size="sm"
+                                onClick={() =>
+                                  navigate(
+                                    `/messages?compose=1&recipient=${p.id}&student=${s.id}`
+                                  )
+                                }
+                              >
+                                <Mail className="h-3.5 w-3.5 mr-1.5" />
+                                {parentsParEleve[s.id].length > 1
+                                  ? p.last_name
+                                  : 'Contacter'}
+                              </Button>
+                            ))}
+                          </div>
+                        )}
                       </td>
                     </tr>
                   ))}

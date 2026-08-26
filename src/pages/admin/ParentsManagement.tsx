@@ -127,8 +127,13 @@ const ParentsManagement = () => {
             title: "Parent modifié",
             description: `${formData.firstName} ${formData.lastName} a été mis à jour.`,
           });
-        } catch (err) {
+        } catch (err: any) {
           console.error(err);
+          toast({
+            title: 'Erreur',
+            description: err?.message || "L'opération sur le parent a échoué.",
+            variant: 'destructive',
+          });
         }
       } else {
         try {
@@ -157,8 +162,13 @@ const ParentsManagement = () => {
             title: "Parent ajouté",
             description: `${formData.firstName} ${formData.lastName} a été créé.`,
           });
-        } catch (err) {
+        } catch (err: any) {
           console.error(err);
+          toast({
+            title: 'Erreur',
+            description: err?.message || "L'opération sur le parent a échoué.",
+            variant: 'destructive',
+          });
         }
       }
       setIsModalOpen(false);
@@ -180,8 +190,13 @@ const ParentsManagement = () => {
         description: `${parent.firstName} ${parent.lastName} a été supprimé.`,
         variant: "destructive",
       });
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      toast({
+        title: 'Erreur',
+        description: err?.message || "L'opération sur le parent a échoué.",
+        variant: 'destructive',
+      });
     } finally {
       setDeletingId(null);
     }
@@ -198,8 +213,13 @@ const ParentsManagement = () => {
         title: "Mot de passe réinitialisé",
         description: "Le mot de passe a été remis à la valeur par défaut.",
       });
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      toast({
+        title: 'Erreur',
+        description: err?.message || "L'opération sur le parent a échoué.",
+        variant: 'destructive',
+      });
       toast({
         title: "Erreur",
         description: "Impossible de réinitialiser le mot de passe.",

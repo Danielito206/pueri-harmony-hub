@@ -132,6 +132,7 @@ const GalleryManagement = () => {
 
     const uploaded: GalleryImage[] = [];
     let failCount = 0;
+    let firstError = '';
 
     for (let i = 0; i < selectedFiles.length; i++) {
       const { file } = selectedFiles[i];
@@ -152,8 +153,12 @@ const GalleryManagement = () => {
           uploadedAt: new Date(created.uploaded_at),
           uploadedBy: created.uploaded_by?.id ? String(created.uploaded_by.id) : 'admin',
         });
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
+        // On retient la raison du premier echec : sans elle, un envoi refuse
+        // (droits insuffisants, fichier trop lourd, serveur injoignable)
+        // n'afficherait qu'un compteur, sans dire pourquoi.
+        if (!firstError) firstError = err?.message || '';
         failCount += 1;
       } finally {
         setUploadProgress({ done: i + 1, total: selectedFiles.length });
@@ -174,7 +179,9 @@ const GalleryManagement = () => {
     } else {
       toast({
         title: 'Envoi partiel',
-        description: `${uploaded.length} réussie(s), ${failCount} échouée(s). Réessaie pour les photos manquantes.`,
+        description: firstError
+          ? `${uploaded.length} réussie(s), ${failCount} échouée(s). Motif : ${firstError}`
+          : `${uploaded.length} réussie(s), ${failCount} échouée(s). Réessaie pour les photos manquantes.`,
         variant: 'destructive',
       });
     }
@@ -195,8 +202,13 @@ const GalleryManagement = () => {
         description: "La photo a été retirée de la galerie.",
         variant: "destructive",
       });
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      toast({
+        title: 'Erreur',
+        description: err?.message || "L'opération sur la galerie a échoué.",
+        variant: 'destructive',
+      });
     } finally {
       setDeletingId(null);
     }

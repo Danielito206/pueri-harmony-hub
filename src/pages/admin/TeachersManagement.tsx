@@ -43,7 +43,7 @@ const TeachersManagement = () => {
           email: t.email,
           firstName: t.first_name,
           lastName: t.last_name,
-          role: 'teacher',
+          role: 'teacher' as const,
           phone: t.phone || undefined,
           createdAt: new Date(t.date_joined),
         }))
@@ -131,8 +131,13 @@ const TeachersManagement = () => {
             title: "Professeur modifié",
             description: `${formData.firstName} ${formData.lastName} a été mis à jour.`,
           });
-        } catch (err) {
+        } catch (err: any) {
           console.error(err);
+          toast({
+            title: 'Erreur',
+            description: err?.message || "L'opération sur le professeur a échoué.",
+            variant: 'destructive',
+          });
         }
       } else {
         try {
@@ -148,7 +153,7 @@ const TeachersManagement = () => {
             email: created.email,
             firstName: created.first_name,
             lastName: created.last_name,
-            role: 'teacher',
+            role: 'teacher' as const,
             phone: created.phone || undefined,
             createdAt: new Date(created.date_joined),
           };
@@ -157,8 +162,13 @@ const TeachersManagement = () => {
             title: "Professeur ajouté",
             description: `${formData.firstName} ${formData.lastName} a été créé.`,
           });
-        } catch (err) {
+        } catch (err: any) {
           console.error(err);
+          toast({
+            title: 'Erreur',
+            description: err?.message || "L'opération sur le professeur a échoué.",
+            variant: 'destructive',
+          });
         }
       }
       setIsModalOpen(false);
@@ -180,8 +190,13 @@ const TeachersManagement = () => {
         description: `${teacher.firstName} ${teacher.lastName} a été supprimé.`,
         variant: "destructive",
       });
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      toast({
+        title: 'Erreur',
+        description: err?.message || "L'opération sur le professeur a échoué.",
+        variant: 'destructive',
+      });
     } finally {
       setDeletingId(null);
     }
@@ -198,8 +213,13 @@ const TeachersManagement = () => {
         title: "Mot de passe réinitialisé",
         description: "Le mot de passe a été remis à la valeur par défaut.",
       });
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      toast({
+        title: 'Erreur',
+        description: err?.message || "L'opération sur le professeur a échoué.",
+        variant: 'destructive',
+      });
       toast({
         title: "Erreur",
         description: "Impossible de réinitialiser le mot de passe.",

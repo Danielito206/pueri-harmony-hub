@@ -72,7 +72,7 @@ const StudentsManagement = () => {
           email: p.email,
           firstName: p.first_name,
           lastName: p.last_name,
-          role: 'parent',
+          role: 'parent' as const,
           childrenIds: [],
           phone: p.phone || undefined,
           address: p.address || undefined,
@@ -157,8 +157,13 @@ const StudentsManagement = () => {
             title: "Élève modifié",
             description: `${formData.firstName} ${formData.lastName} a été mis à jour.`,
           });
-        } catch (err) {
+        } catch (err: any) {
           console.error(err);
+          toast({
+            title: 'Erreur',
+            description: err?.message || "L'opération sur l'élève a échoué.",
+            variant: 'destructive',
+          });
         }
       } else {
         try {
@@ -178,8 +183,13 @@ const StudentsManagement = () => {
             title: "Élève ajouté",
             description: `${formData.firstName} ${formData.lastName} a été inscrit.`,
           });
-        } catch (err) {
+        } catch (err: any) {
           console.error(err);
+          toast({
+            title: 'Erreur',
+            description: err?.message || "L'opération sur l'élève a échoué.",
+            variant: 'destructive',
+          });
         }
       }
       setIsModalOpen(false);
@@ -201,8 +211,13 @@ const StudentsManagement = () => {
         description: `${student.firstName} ${student.lastName} a été supprimé.`,
         variant: "destructive",
       });
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      toast({
+        title: 'Erreur',
+        description: err?.message || "L'opération sur l'élève a échoué.",
+        variant: 'destructive',
+      });
     } finally {
       setDeletingId(null);
     }

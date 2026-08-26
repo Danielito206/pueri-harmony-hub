@@ -9,7 +9,9 @@ import { Calendar, Loader2 } from 'lucide-react';
 interface TeacherClassSchedule {
   id: string;
   name: string;
-  schedule: { id: string; day: string; startTime: string; endTime: string; subject: string }[];
+  // 'day' doit correspondre a l'union declaree dans Schedule (src/lib/types.ts),
+  // sinon la liste ne peut pas etre typee comme Schedule[] plus bas.
+  schedule: Schedule[];
 }
 
 const TeacherSchedule = () => {

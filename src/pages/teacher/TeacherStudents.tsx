@@ -13,11 +13,15 @@ interface TeacherStudentsResponse {
 const TeacherStudents = () => {
   const { user, isAuthenticated } = useAuth();
   const [data, setData] = useState<TeacherStudentsResponse | null>(null);
+  // Cet état manquait alors que le rendu s'en servait plus bas : la page
+  // plantait au chargement (ReferenceError) pour tous les professeurs.
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     apiGet<TeacherStudentsResponse>('/teacher/students/')
       .then(setData)
-      .catch(() => setData(null));
+      .catch(() => setData(null))
+      .finally(() => setIsLoading(false));
   }, []);
 
   if (!isAuthenticated || user?.role !== 'teacher') {

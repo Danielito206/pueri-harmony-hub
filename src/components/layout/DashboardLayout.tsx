@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   User, 
@@ -12,10 +12,12 @@ import {
   Settings,
   Key,
   ChevronRight,
-  CalendarRange
+  CalendarRange,
+  Mail
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
+import { apiGet } from '@/lib/api';
 import { cn } from '@/lib/utils';
 
 interface DashboardLayoutProps {
@@ -27,6 +29,16 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [nonLus, setNonLus] = useState(0);
+
+  // Compteur de messages non lus. Recharge a chaque changement de page :
+  // c'est suffisant ici et ca evite d'interroger le serveur en boucle.
+  useEffect(() => {
+    if (!user) return;
+    apiGet<{ unread: number }>('/messages/unread-count/')
+      .then(d => setNonLus(d?.unread ?? 0))
+      .catch(() => setNonLus(0));
+  }, [user, location.pathname]);
 
   const handleLogout = () => {
     logout();
@@ -35,6 +47,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
   const getNavItems = () => {
     const baseItems = [
+      { icon: Mail, label: 'Messages', href: '/messages', badge: nonLus },
       { icon: User, label: 'Mon profil', href: '/profile' },
       { icon: Key, label: 'Mot de passe', href: '/change-password' },
     ];
@@ -115,7 +128,19 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                   )}
                 >
                   <Icon className="h-4 w-4" />
-                  {item.label}
+                  <span className="flex-1">{item.label}</span>
+                  {'badge' in item && (item as any).badge > 0 && (
+                    <span
+                      className={cn(
+                        "px-1.5 py-0.5 text-xs font-semibold rounded-full",
+                        isActive
+                          ? "bg-primary-foreground text-primary"
+                          : "bg-primary text-primary-foreground"
+                      )}
+                    >
+                      {(item as any).badge}
+                    </span>
+                  )}
                 </Link>
               );
             })}

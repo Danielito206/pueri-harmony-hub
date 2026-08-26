@@ -7,8 +7,18 @@ import { Label } from '@/components/ui/label';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { apiGet, apiPost, apiDelete, apiPut } from '@/lib/api';
-import { Class, Teacher, AcademicYear } from '@/lib/types';
-import { UserPlus, UserMinus, Plus, Pencil, Trash2, Loader2, CalendarRange } from 'lucide-react';
+import { Teacher, AcademicYear } from '@/lib/types';
+import {
+  UserPlus,
+  UserMinus,
+  Plus,
+  Pencil,
+  Trash2,
+  Loader2,
+  CalendarRange,
+  DoorOpen,
+  Users,
+} from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -25,29 +35,55 @@ import {
 
 const NO_TEACHER_VALUE = '__none__';
 
+// Une classe côté administration porte plus d'informations que le type
+// partagé Class : son cycle (maternelle / primaire), son niveau et sa salle.
+interface AdminClass {
+  id: string;
+  name: string;
+  type: string;
+  level: number;
+  room: string | null;
+  teacherId?: string;
+  studentsCount: number;
+}
+
+const CYCLES = [
+  { value: 'maternelle', label: 'Maternelle' },
+  { value: 'primaire', label: 'Primaire' },
+];
+
+const mapClass = (c: any): AdminClass => ({
+  id: String(c.id),
+  name: c.name,
+  type: c.type || 'primaire',
+  level: c.level ?? 0,
+  room: c.room ?? null,
+  teacherId: c.teacher ? String(c.teacher.id) : undefined,
+  studentsCount: c.students_count ?? 0,
+});
+
 const ClassesManagement = () => {
   const { user, isAuthenticated } = useAuth();
   const { toast } = useToast();
-  const [classes, setClasses] = useState<Class[]>([]);
+
+  const [classes, setClasses] = useState<AdminClass[]>([]);
   const [teachers, setTeachers] = useState<Teacher[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedClass, setSelectedClass] = useState<Class | null>(null);
+  const [years, setYears] = useState<AcademicYear[]>([]);
+  const [selectedYearId, setSelectedYearId] = useState('');
+  const [listLoading, setListLoading] = useState(true);
+  const [classesLoading, setClassesLoading] = useState(false);
+
+  const [isTeacherModalOpen, setIsTeacherModalOpen] = useState(false);
+  const [selectedClass, setSelectedClass] = useState<AdminClass | null>(null);
   const [selectedTeacherId, setSelectedTeacherId] = useState<string>(NO_TEACHER_VALUE);
-  const [isClassModalOpen, setIsClassModalOpen] = useState(false);
-  const [editingClass, setEditingClass] = useState<Class | null>(null);
-  const [className, setClassName] = useState('');
-  const [classSubmitLoading, setClassSubmitLoading] = useState(false);
-  const [deletingClassId, setDeletingClassId] = useState<string | null>(null);
   const [assignLoading, setAssignLoading] = useState(false);
   const [removingTeacherClassId, setRemovingTeacherClassId] = useState<string | null>(null);
-  const [listLoading, setListLoading] = useState(true);
 
-  // Une classe appartient désormais à UNE année scolaire précise. Sans
-  // sélecteur, cette page n'afficherait que les classes de l'année active et
-  // il serait impossible d'atteindre celles des années passées.
-  const [years, setYears] = useState<AcademicYear[]>([]);
-  const [selectedYearId, setSelectedYearId] = useState<string>('');
-  const [classesLoading, setClassesLoading] = useState(false);
+  const [isClassModalOpen, setIsClassModalOpen] = useState(false);
+  const [editingClass, setEditingClass] = useState<AdminClass | null>(null);
+  const [form, setForm] = useState({ name: '', type: 'primaire', level: '1', room: '' });
+  const [classSubmitLoading, setClassSubmitLoading] = useState(false);
+  const [deletingClassId, setDeletingClassId] = useState<string | null>(null);
 
   const selectedYear = years.find(y => y.id === selectedYearId) || null;
 
@@ -58,17 +94,7 @@ const ClassesManagement = () => {
     }
     setClassesLoading(true);
     apiGet<any[]>(`/classes/?year=${yearId}`)
-      .then(data =>
-        setClasses(
-          data.map((c: any) => ({
-            id: String(c.id),
-            name: c.name,
-            teacherId: c.teacher ? String(c.teacher.id) : undefined,
-            studentIds: Array.from({ length: c.students_count ?? 0 }, (_, i) => String(i)),
-            schedule: c.schedule || [],
-          }))
-        )
-      )
+      .then(data => setClasses(data.map(mapClass)))
       .catch((err: any) => {
         setClasses([]);
         toast({
@@ -119,11 +145,6 @@ const ClassesManagement = () => {
       .finally(() => setListLoading(false));
   }, []);
 
-  const handleYearChange = (yearId: string) => {
-    setSelectedYearId(yearId);
-    loadClasses(yearId);
-  };
-
   if (!isAuthenticated || user?.role !== 'admin') {
     return <Navigate to="/login" replace />;
   }
@@ -139,25 +160,30 @@ const ClassesManagement = () => {
     );
   }
 
-  const getAvailableTeachers = () => {
-    const assignedTeacherIds = classes.filter(c => c.id !== selectedClass?.id).map(c => c.teacherId).filter(Boolean);
-    return teachers.filter(t => !assignedTeacherIds.includes(t.id));
+  const handleYearChange = (yearId: string) => {
+    setSelectedYearId(yearId);
+    loadClasses(yearId);
   };
 
-  const openClassModal = (classItem?: Class) => {
+  const openClassModal = (classItem?: AdminClass) => {
     if (classItem) {
       setEditingClass(classItem);
-      setClassName(classItem.name);
+      setForm({
+        name: classItem.name,
+        type: classItem.type,
+        level: String(classItem.level || 1),
+        room: classItem.room || '',
+      });
     } else {
       setEditingClass(null);
-      setClassName('');
+      setForm({ name: '', type: 'primaire', level: '1', room: '' });
     }
     setIsClassModalOpen(true);
   };
 
   const handleClassSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!className.trim()) return;
+    if (!form.name.trim()) return;
     if (!editingClass && !selectedYearId) {
       toast({
         title: 'Année scolaire requise',
@@ -167,34 +193,25 @@ const ClassesManagement = () => {
       return;
     }
 
+    const payload = {
+      name: form.name.trim(),
+      type: form.type,
+      level: Number(form.level) || 0,
+      room: form.room.trim() || null,
+    };
+
     setClassSubmitLoading(true);
     try {
       if (editingClass) {
-        const updated = await apiPut<any>(`/classes/${editingClass.id}/`, { name: className.trim() });
-        setClasses(prev =>
-          prev.map(c =>
-            c.id === editingClass.id
-              ? {
-                  ...c,
-                  name: updated.name,
-                }
-              : c
-          )
-        );
-        toast({ title: 'Classe mise à jour', description: `La classe a été renommée.` });
+        const updated = await apiPut<any>(`/classes/${editingClass.id}/`, payload);
+        setClasses(prev => prev.map(c => (c.id === editingClass.id ? mapClass(updated) : c)));
+        toast({ title: 'Classe mise à jour' });
       } else {
         const created = await apiPost<any>('/classes/', {
-          name: className.trim(),
+          ...payload,
           academic_year_id: selectedYearId,
         });
-        const newClass: Class = {
-          id: String(created.id),
-          name: created.name,
-          teacherId: created.teacher ? String(created.teacher.id) : undefined,
-          studentIds: [],
-          schedule: created.schedule || [],
-        };
-        setClasses(prev => [...prev, newClass]);
+        setClasses(prev => [...prev, mapClass(created)]);
         toast({
           title: 'Classe créée',
           description: `"${created.name}" a été ajoutée à l'année ${selectedYear?.name ?? ''}.`,
@@ -212,10 +229,8 @@ const ClassesManagement = () => {
     }
   };
 
-  const handleDeleteClass = async (classItem: Class) => {
-    if (!confirm(`Êtes-vous sûr de vouloir supprimer la classe ${classItem.name} ?`)) {
-      return;
-    }
+  const handleDeleteClass = async (classItem: AdminClass) => {
+    if (!confirm(`Êtes-vous sûr de vouloir supprimer la classe ${classItem.name} ?`)) return;
     setDeletingClassId(classItem.id);
     try {
       await apiDelete(`/classes/${classItem.id}/`);
@@ -227,7 +242,7 @@ const ClassesManagement = () => {
       });
     } catch (err: any) {
       toast({
-        title: 'Erreur',
+        title: 'Suppression impossible',
         description: err?.message || 'Impossible de supprimer cette classe.',
         variant: 'destructive',
       });
@@ -236,47 +251,43 @@ const ClassesManagement = () => {
     }
   };
 
-  const openAssignModal = (classItem: Class) => {
+  const openTeacherModal = (classItem: AdminClass) => {
     setSelectedClass(classItem);
     setSelectedTeacherId(classItem.teacherId || NO_TEACHER_VALUE);
-    setIsModalOpen(true);
+    setIsTeacherModalOpen(true);
+  };
+
+  const assignTeacher = async (classItem: AdminClass, teacherId: string | null) => {
+    const updated = await apiPost<any>(`/classes/${classItem.id}/assign_teacher/`, {
+      teacher_id: teacherId,
+    });
+    setClasses(prev =>
+      prev.map(c =>
+        c.id === classItem.id
+          ? { ...c, teacherId: updated.teacher ? String(updated.teacher.id) : undefined }
+          : c
+      )
+    );
   };
 
   const handleAssign = async () => {
     if (!selectedClass) return;
-
-    const nextTeacherId =
-      selectedTeacherId === NO_TEACHER_VALUE ? null : selectedTeacherId;
-
+    const nextTeacherId = selectedTeacherId === NO_TEACHER_VALUE ? null : selectedTeacherId;
     setAssignLoading(true);
     try {
-      const updated = await apiPost<any>(`/classes/${selectedClass.id}/assign_teacher/`, {
-        teacher_id: nextTeacherId,
-      });
-
-      setClasses(prev =>
-        prev.map(c =>
-          c.id === selectedClass.id
-            ? {
-                ...c,
-                teacherId: updated.teacher ? String(updated.teacher.id) : undefined,
-              }
-            : c
-        )
-      );
-
+      await assignTeacher(selectedClass, nextTeacherId);
       const teacher = teachers.find(t => t.id === nextTeacherId);
       toast({
-        title: nextTeacherId ? "Titulaire assigné" : "Titulaire retiré",
+        title: nextTeacherId ? 'Titulaire assigné' : 'Titulaire retiré',
         description: nextTeacherId
-          ? `${teacher?.firstName} ${teacher?.lastName} est maintenant titulaire de ${selectedClass.name}.`
+          ? `${teacher?.firstName} ${teacher?.lastName} est titulaire de ${selectedClass.name}.`
           : `Le titulaire de ${selectedClass.name} a été retiré.`,
       });
-      setIsModalOpen(false);
+      setIsTeacherModalOpen(false);
     } catch (err: any) {
       toast({
         title: 'Erreur',
-        description: err?.message || "Impossible de modifier le titulaire.",
+        description: err?.message || 'Impossible de modifier le titulaire.',
         variant: 'destructive',
       });
     } finally {
@@ -284,33 +295,16 @@ const ClassesManagement = () => {
     }
   };
 
-  const handleRemoveTeacher = async (classItem: Class) => {
-    if (!confirm(`Êtes-vous sûr de vouloir retirer le titulaire de ${classItem.name} ?`)) {
-      return;
-    }
+  const handleRemoveTeacher = async (classItem: AdminClass) => {
+    if (!confirm(`Retirer le titulaire de ${classItem.name} ?`)) return;
     setRemovingTeacherClassId(classItem.id);
     try {
-      const updated = await apiPost<any>(`/classes/${classItem.id}/assign_teacher/`, {
-        teacher_id: null,
-      });
-      setClasses(prev =>
-        prev.map(c =>
-          c.id === classItem.id
-            ? {
-                ...c,
-                teacherId: updated.teacher ? String(updated.teacher.id) : undefined,
-              }
-            : c
-        )
-      );
-      toast({
-        title: "Titulaire retiré",
-        description: `Le titulaire de ${classItem.name} a été retiré.`,
-      });
+      await assignTeacher(classItem, null);
+      toast({ title: 'Titulaire retiré' });
     } catch (err: any) {
       toast({
         title: 'Erreur',
-        description: err?.message || "Impossible de retirer le titulaire.",
+        description: err?.message || 'Impossible de retirer le titulaire.',
         variant: 'destructive',
       });
     } finally {
@@ -318,15 +312,126 @@ const ClassesManagement = () => {
     }
   };
 
+  const renderCard = (classItem: AdminClass) => {
+    const teacher = teachers.find(t => t.id === classItem.teacherId);
+    const busy = !!deletingClassId || !!removingTeacherClassId || assignLoading;
+    return (
+      <div key={classItem.id} className="card-elevated p-6">
+        <h3 className="font-heading text-lg font-semibold text-foreground mb-3">
+          {classItem.name}
+        </h3>
+        <div className="space-y-2 text-sm">
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground flex items-center gap-1.5">
+              <Users className="h-3.5 w-3.5" />
+              Élèves
+            </span>
+            <span className="font-medium text-foreground">{classItem.studentsCount}</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground">Titulaire</span>
+            {teacher ? (
+              <span className="font-medium text-foreground text-right">
+                {teacher.firstName} {teacher.lastName}
+              </span>
+            ) : (
+              <span className="text-destructive italic">Non assigné</span>
+            )}
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground flex items-center gap-1.5">
+              <DoorOpen className="h-3.5 w-3.5" />
+              Salle
+            </span>
+            <span
+              className={
+                classItem.room ? 'font-medium text-foreground' : 'text-muted-foreground italic'
+              }
+            >
+              {classItem.room || 'non renseignée'}
+            </span>
+          </div>
+        </div>
+        <div className="mt-4 pt-4 border-t border-border flex gap-2 justify-between">
+          <div className="flex gap-2 flex-1">
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex-1"
+              onClick={() => openTeacherModal(classItem)}
+              disabled={busy}
+            >
+              <UserPlus className="h-4 w-4 mr-2" />
+              {teacher ? 'Changer' : 'Assigner'}
+            </Button>
+            {teacher && (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-destructive hover:text-destructive"
+                onClick={() => handleRemoveTeacher(classItem)}
+                disabled={busy}
+              >
+                {removingTeacherClassId === classItem.id ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <UserMinus className="h-4 w-4" />
+                )}
+              </Button>
+            )}
+          </div>
+          <div className="flex gap-2">
+            <Button variant="ghost" size="sm" onClick={() => openClassModal(classItem)} disabled={busy}>
+              <Pencil className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-destructive hover:text-destructive"
+              onClick={() => handleDeleteClass(classItem)}
+              disabled={busy}
+            >
+              {deletingClassId === classItem.id ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Trash2 className="h-4 w-4" />
+              )}
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const parCycle = (type: string) =>
+    classes
+      .filter(c => c.type === type)
+      .sort((a, b) => a.level - b.level || a.name.localeCompare(b.name));
+
+  const maternelle = parCycle('maternelle');
+  const primaire = parCycle('primaire');
+  const autres = classes.filter(c => c.type !== 'maternelle' && c.type !== 'primaire');
+
+  const section = (titre: string, liste: AdminClass[]) =>
+    liste.length === 0 ? null : (
+      <div>
+        <div className="flex items-baseline gap-3 mb-4">
+          <h2 className="font-heading text-xl font-semibold text-foreground">{titre}</h2>
+          <span className="text-sm text-muted-foreground">{liste.length} classe(s)</span>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">{liste.map(renderCard)}</div>
+      </div>
+    );
+
   return (
     <DashboardLayout>
-      <div className="space-y-6">
+      <div className="space-y-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="font-heading text-3xl font-bold text-foreground">Classes</h1>
             <p className="text-muted-foreground mt-1">
-              Chaque classe appartient à une année scolaire précise. Choisis l'année pour voir ses
-              classes et leurs titulaires.
+              Chaque classe appartient à une année scolaire précise. Un professeur peut être
+              titulaire de plusieurs classes.
             </p>
           </div>
           <Button onClick={() => openClassModal()} disabled={!selectedYearId}>
@@ -335,7 +440,6 @@ const ClassesManagement = () => {
           </Button>
         </div>
 
-        {/* Sélecteur d'année scolaire */}
         <div className="card-elevated p-4 flex flex-col sm:flex-row sm:items-center gap-3">
           <div className="flex items-center gap-2 text-sm font-medium text-foreground shrink-0">
             <CalendarRange className="h-4 w-4 text-primary" />
@@ -379,122 +483,61 @@ const ClassesManagement = () => {
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
             <p className="text-muted-foreground">Chargement des classes...</p>
           </div>
+        ) : years.length > 0 && classes.length === 0 ? (
+          <div className="card-elevated p-8 text-center">
+            <h2 className="font-heading text-xl font-semibold text-foreground mb-2">
+              Aucune classe en {selectedYear?.name}
+            </h2>
+            <p className="text-muted-foreground">
+              Ajoute une classe : elle sera rattachée à cette année uniquement.
+            </p>
+          </div>
         ) : (
           <>
-            {years.length > 0 && classes.length === 0 && (
-              <div className="card-elevated p-8 text-center">
-                <h2 className="font-heading text-xl font-semibold text-foreground mb-2">
-                  Aucune classe en {selectedYear?.name}
-                </h2>
-                <p className="text-muted-foreground">
-                  Ajoute une classe : elle sera rattachée à cette année uniquement.
-                </p>
-              </div>
-            )}
-
-            {/* Classes Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {classes.map((classItem) => {
-                const teacher = teachers.find(t => t.id === classItem.teacherId);
-                return (
-                  <div key={classItem.id} className="card-elevated p-6">
-                    <h3 className="font-heading text-lg font-semibold text-foreground mb-2">
-                      {classItem.name}
-                    </h3>
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Élèves</span>
-                        <span className="font-medium text-foreground">{classItem.studentIds.length}</span>
-                      </div>
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Titulaire</span>
-                        {teacher ? (
-                          <span className="font-medium text-foreground">
-                            {teacher.firstName} {teacher.lastName}
-                          </span>
-                        ) : (
-                          <span className="text-destructive italic">Non assigné</span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="mt-4 pt-4 border-t border-border flex gap-2 justify-between">
-                      <div className="flex gap-2 flex-1">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="flex-1"
-                        onClick={() => openAssignModal(classItem)}
-                        disabled={!!deletingClassId || !!removingTeacherClassId || assignLoading}
-                      >
-                        <UserPlus className="h-4 w-4 mr-2" />
-                        {teacher ? 'Changer' : 'Assigner'}
-                      </Button>
-                      {teacher && (
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="text-destructive hover:text-destructive"
-                          onClick={() => handleRemoveTeacher(classItem)}
-                          disabled={removingTeacherClassId === classItem.id || !!deletingClassId || assignLoading}
-                        >
-                          {removingTeacherClassId === classItem.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <UserMinus className="h-4 w-4" />}
-                        </Button>
-                      )}
-                      </div>
-                      <div className="flex gap-2">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => openClassModal(classItem)}
-                          disabled={!!deletingClassId || !!removingTeacherClassId || assignLoading}
-                        >
-                          <Pencil className="h-4 w-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="text-destructive hover:text-destructive"
-                          onClick={() => handleDeleteClass(classItem)}
-                          disabled={deletingClassId === classItem.id || !!removingTeacherClassId || assignLoading}
-                        >
-                          {deletingClassId === classItem.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            {section('Maternelle', maternelle)}
+            {section('Primaire', primaire)}
+            {section('Autres', autres)}
           </>
         )}
 
-        {/* Assign Modal */}
-        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        {/* Titulaire */}
+        <Dialog open={isTeacherModalOpen} onOpenChange={setIsTeacherModalOpen}>
           <DialogContent className="bg-card">
             <DialogHeader>
               <DialogTitle className="font-heading">
-                Affecter un titulaire à {selectedClass?.name}
+                Titulaire de {selectedClass?.name}
               </DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label>Sélectionner un professeur</Label>
+                <Label>Professeur</Label>
                 <Select value={selectedTeacherId} onValueChange={setSelectedTeacherId}>
                   <SelectTrigger className="bg-background">
                     <SelectValue placeholder="Choisir un professeur" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover">
                     <SelectItem value={NO_TEACHER_VALUE}>Aucun (retirer le titulaire)</SelectItem>
-                    {getAvailableTeachers().map((teacher) => (
-                      <SelectItem key={teacher.id} value={teacher.id}>
-                        {teacher.firstName} {teacher.lastName}
-                      </SelectItem>
-                    ))}
+                    {teachers.map(teacher => {
+                      const nb = classes.filter(c => c.teacherId === teacher.id).length;
+                      return (
+                        <SelectItem key={teacher.id} value={teacher.id}>
+                          {teacher.firstName} {teacher.lastName}
+                          {nb > 0 ? ` — ${nb} classe(s)` : ''}
+                        </SelectItem>
+                      );
+                    })}
                   </SelectContent>
                 </Select>
+                <p className="text-xs text-muted-foreground">
+                  Un même professeur peut être titulaire de plusieurs classes.
+                </p>
               </div>
               <div className="flex justify-end gap-2 pt-4">
-                <Button variant="outline" onClick={() => setIsModalOpen(false)} disabled={assignLoading}>
+                <Button
+                  variant="outline"
+                  onClick={() => setIsTeacherModalOpen(false)}
+                  disabled={assignLoading}
+                >
                   Annuler
                 </Button>
                 <Button onClick={handleAssign} disabled={assignLoading}>
@@ -506,7 +549,7 @@ const ClassesManagement = () => {
           </DialogContent>
         </Dialog>
 
-        {/* Class create/edit modal */}
+        {/* Créer / modifier une classe */}
         <Dialog open={isClassModalOpen} onOpenChange={setIsClassModalOpen}>
           <DialogContent className="bg-card">
             <DialogHeader>
@@ -521,19 +564,62 @@ const ClassesManagement = () => {
                 <Label htmlFor="className">Nom de la classe</Label>
                 <Input
                   id="className"
-                  value={className}
-                  onChange={(e) => setClassName(e.target.value)}
+                  value={form.name}
+                  onChange={e => setForm({ ...form, name: e.target.value })}
+                  placeholder="ex : 3ème Primaire A"
                   required
                 />
-                {!editingClass && selectedYear && (
-                  <p className="text-xs text-muted-foreground">
-                    Cette classe appartiendra uniquement à {selectedYear.name}. Une classe du même
-                    nom dans une autre année reste une classe distincte, avec ses propres élèves.
-                  </p>
-                )}
               </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Cycle</Label>
+                  <Select value={form.type} onValueChange={v => setForm({ ...form, type: v })}>
+                    <SelectTrigger className="bg-background">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover">
+                      {CYCLES.map(c => (
+                        <SelectItem key={c.value} value={c.value}>
+                          {c.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="classLevel">Niveau</Label>
+                  <Input
+                    id="classLevel"
+                    type="number"
+                    min={1}
+                    max={6}
+                    value={form.level}
+                    onChange={e => setForm({ ...form, level: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="classRoom">Salle</Label>
+                <Input
+                  id="classRoom"
+                  value={form.room}
+                  onChange={e => setForm({ ...form, room: e.target.value })}
+                  placeholder="à renseigner plus tard"
+                />
+              </div>
+              {!editingClass && selectedYear && (
+                <p className="text-xs text-muted-foreground">
+                  Cette classe appartiendra uniquement à {selectedYear.name}. Une classe du même
+                  nom dans une autre année reste une classe distincte, avec ses propres élèves.
+                </p>
+              )}
               <div className="flex justify-end gap-2 pt-4">
-                <Button type="button" variant="outline" onClick={() => setIsClassModalOpen(false)} disabled={classSubmitLoading}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setIsClassModalOpen(false)}
+                  disabled={classSubmitLoading}
+                >
                   Annuler
                 </Button>
                 <Button type="submit" disabled={classSubmitLoading}>

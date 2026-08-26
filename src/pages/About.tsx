@@ -40,8 +40,8 @@ const About = () => {
               À propos de Pueri Angeli
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Depuis 1990, nous accompagnons les enfants dans leur développement 
-              avec passion et dévouement.
+              Ouverte en 2019, notre école accompagne les enfants de la première maternelle
+              à la sixième primaire.
             </p>
           </div>
         </section>
@@ -56,16 +56,19 @@ const About = () => {
                 </h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    L'École Pueri Angeli a été fondée en 1990 avec une vision claire : 
-                    offrir une éducation de qualité accessible à tous les enfants de notre communauté.
+                    L'École Pueri Angeli a ouvert ses portes en 2019, avec une conviction
+                    simple : un enfant apprend mieux là où on le connaît par son nom.
                   </p>
                   <p>
-                    Au fil des années, notre institution a grandi tout en préservant ses valeurs 
-                    fondamentales de bienveillance, d'excellence et d'intégrité.
+                    Nous couvrons les trois années de maternelle et les six années de
+                    primaire. Chaque classe a son titulaire, chaque élève son parcours,
+                    et chaque famille un interlocuteur identifié.
                   </p>
                   <p>
-                    Aujourd'hui, nous accueillons plus de 500 élèves de la maternelle au primaire, 
-                    encadrés par une équipe pédagogique passionnée et expérimentée.
+                    Ce parcours, nous le suivons année après année : la classe où l'enfant
+                    se trouvait, celle où il est aujourd'hui, les enseignants qui l'ont
+                    accompagné. Rien ne se perd d'une année à l'autre — et les parents
+                    y ont accès.
                   </p>
                 </div>
               </div>

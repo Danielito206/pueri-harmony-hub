@@ -172,7 +172,14 @@ const TeacherStudents = () => {
                               {s.firstName.charAt(0)}
                             </span>
                           </div>
-                          <span className="font-medium text-foreground">{nomComplet(s)}</span>
+                          <button
+                            type="button"
+                            onClick={() => navigate(`/students/${s.id}`)}
+                            className="font-medium text-foreground hover:text-primary hover:underline text-left"
+                            title="Ouvrir la fiche de l'élève"
+                          >
+                            {nomComplet(s)}
+                          </button>
                         </div>
                       </td>
                       <td className="py-2.5 text-right">

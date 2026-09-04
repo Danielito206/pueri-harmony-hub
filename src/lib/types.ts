@@ -60,6 +60,11 @@ export interface AcademicYear {
   active: boolean;
   archived: boolean;
   hasData: boolean;
+  // Effectifs renvoyes par le serveur, lus depuis les inscriptions de l'annee.
+  // Optionnels : les anciens appels qui ne les fournissent pas restent valides.
+  classesCount?: number;
+  studentsCount?: number;
+  classesWithoutTeacher?: number;
 }
 export interface GalleryImage {
   id: string;

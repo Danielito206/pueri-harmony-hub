@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -74,7 +74,11 @@ const StudentsManagement = () => {
   const [classes, setClasses] = useState<ClassOption[]>([]);
   const [parents, setParents] = useState<ParentOption[]>([]);
 
-  const [searchQuery, setSearchQuery] = useState('');
+  // La recherche peut être pré-remplie par l'URL : c'est ce qui permet de
+  // cliquer sur le nom d'un enfant depuis la fiche d'un parent et d'arriver
+  // directement sur son inscription.
+  const [searchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingStudent, setEditingStudent] = useState<StudentRow | null>(null);
   const [formData, setFormData] = useState({

@@ -130,6 +130,9 @@ const AcademicYearsManagement = () => {
           active: !!y.active,
           archived: !!y.archived,
           hasData: !!y.has_data,
+          classesCount: y.classes_count ?? undefined,
+          studentsCount: y.students_count ?? undefined,
+          classesWithoutTeacher: y.classes_without_teacher ?? undefined,
         })));
       })
       .catch(() => setYears([]))
@@ -819,10 +822,46 @@ const AcademicYearsManagement = () => {
                   <span className="px-2 py-1 text-xs font-medium bg-muted text-muted-foreground rounded">Archivée</span>
                 )}
               </div>
-              <p className="text-sm text-muted-foreground mb-4 flex items-center gap-1">
-                {year.hasData ? 'Contient des données' : 'Aucune donnée'}
-                <ChevronRight className="h-4 w-4" />
-              </p>
+              {/* Effectifs de l'annee : l'ecole doit voir d'un coup d'oeil si une
+                  annee est complete, sans avoir a l'ouvrir. */}
+              {year.classesCount === undefined ? (
+                <p className="text-sm text-muted-foreground mb-4 flex items-center gap-1">
+                  {year.hasData ? 'Contient des données' : 'Aucune donnée'}
+                  <ChevronRight className="h-4 w-4" />
+                </p>
+              ) : (
+                <div className="mb-4 space-y-2">
+                  <div className="flex items-center gap-4 text-sm">
+                    <span className="flex items-center gap-1.5 text-foreground">
+                      <GraduationCap className="h-4 w-4 text-primary" />
+                      <span className="font-medium">{year.classesCount}</span>
+                      <span className="text-muted-foreground">classe(s)</span>
+                    </span>
+                    <span className="flex items-center gap-1.5 text-foreground">
+                      <Users className="h-4 w-4 text-primary" />
+                      <span className="font-medium">{year.studentsCount ?? 0}</span>
+                      <span className="text-muted-foreground">élève(s)</span>
+                    </span>
+                  </div>
+                  {!!year.classesWithoutTeacher && year.classesWithoutTeacher > 0 ? (
+                    <p className="text-xs text-destructive flex items-center gap-1.5">
+                      <UserPlus className="h-3.5 w-3.5" />
+                      {year.classesWithoutTeacher} classe(s) sans titulaire
+                    </p>
+                  ) : year.classesCount > 0 ? (
+                    <p className="text-xs text-muted-foreground flex items-center gap-1.5">
+                      <CheckCircle2 className="h-3.5 w-3.5" />
+                      Toutes les classes ont un titulaire
+                    </p>
+                  ) : (
+                    <p className="text-xs text-muted-foreground">Aucune classe créée</p>
+                  )}
+                  <p className="text-xs text-primary flex items-center gap-1">
+                    Voir le détail
+                    <ChevronRight className="h-3.5 w-3.5" />
+                  </p>
+                </div>
+              )}
               <div
                 className="flex flex-wrap gap-2 pt-4 border-t border-border"
                 onClick={(e) => e.stopPropagation()}

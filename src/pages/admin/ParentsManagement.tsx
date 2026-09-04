@@ -312,15 +312,7 @@ const ParentsManagement = () => {
                               <button
                                 key={child.id}
                                 type="button"
-                                onClick={() =>
-                                  navigate(
-                                    `/admin/students?q=${encodeURIComponent(
-                                      [child.lastName, child.firstName]
-                                        .filter(Boolean)
-                                        .join(' ')
-                                    )}`
-                                  )
-                                }
+                                onClick={() => navigate(`/students/${child.id}`)}
                                 className="inline-block px-2 py-0.5 text-xs bg-primary/10 text-primary rounded hover:bg-primary/20 transition-colors"
                                 title="Voir la fiche de l'élève"
                               >

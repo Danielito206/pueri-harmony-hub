@@ -94,7 +94,7 @@ const StudentProfile = () => {
           </Button>
           <div className="card-elevated p-8 text-center">
             <ShieldAlert className="h-14 w-14 text-muted-foreground mx-auto mb-4" />
-            <h2 className="font-heading text-xl font-semibold text-foreground mb-2">
+            <h2 className="font-body text-xl font-semibold text-foreground mb-2">
               Fiche indisponible
             </h2>
             <p className="text-muted-foreground">{erreur}</p>
@@ -133,7 +133,7 @@ const StudentProfile = () => {
               <span className="text-2xl font-semibold text-primary">{initiale}</span>
             </div>
             <div className="min-w-0">
-              <h1 className="font-heading text-2xl sm:text-3xl font-bold text-foreground break-words">
+              <h1 className="font-body text-2xl sm:text-3xl font-bold text-foreground break-words">
                 {nomComplet}
               </h1>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-sm text-muted-foreground">
@@ -155,7 +155,7 @@ const StudentProfile = () => {
         <div className="grid md:grid-cols-2 gap-6">
           {/* Classe */}
           <div className="card-elevated p-6">
-            <h2 className="font-heading text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+            <h2 className="font-body text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
               <GraduationCap className="h-5 w-5 text-primary" />
               Classe
             </h2>
@@ -184,7 +184,7 @@ const StudentProfile = () => {
 
           {/* Titulaire */}
           <div className="card-elevated p-6">
-            <h2 className="font-heading text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+            <h2 className="font-body text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
               <UserCheck className="h-5 w-5 text-primary" />
               Titulaire
             </h2>
@@ -224,7 +224,7 @@ const StudentProfile = () => {
 
         {/* Parents */}
         <div className="card-elevated p-6">
-          <h2 className="font-heading text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-body text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
             <Users className="h-5 w-5 text-primary" />
             Parents
           </h2>

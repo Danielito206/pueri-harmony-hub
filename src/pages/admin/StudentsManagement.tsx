@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useSearchParams } from 'react-router-dom';
+import { Navigate, useSearchParams, useNavigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -77,6 +77,7 @@ const StudentsManagement = () => {
   // La recherche peut être pré-remplie par l'URL : c'est ce qui permet de
   // cliquer sur le nom d'un enfant depuis la fiche d'un parent et d'arriver
   // directement sur son inscription.
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -377,11 +378,16 @@ const StudentsManagement = () => {
                     return (
                       <tr key={student.id} className="hover:bg-muted/30">
                         <td className="px-6 py-4">
-                          <span className="font-medium text-foreground">
+                          <button
+                            type="button"
+                            onClick={() => navigate(`/students/${student.id}`)}
+                            className="font-medium text-foreground hover:text-primary hover:underline text-left"
+                            title="Ouvrir la fiche de l'élève"
+                          >
                             {[student.lastName, student.postName, student.firstName]
                               .filter(Boolean)
                               .join(' ')}
-                          </span>
+                          </button>
                         </td>
                         <td className="px-6 py-4">
                           {student.className ? (

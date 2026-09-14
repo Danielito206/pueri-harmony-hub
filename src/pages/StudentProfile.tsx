@@ -13,6 +13,8 @@ import {
   Mail,
   Phone,
   Cake,
+  MapPin,
+  User as UserIcon,
   ShieldAlert,
 } from 'lucide-react';
 
@@ -35,6 +37,8 @@ interface StudentProfileData {
   post_name: string | null;
   date_of_birth: string | null;
   age: number | null;
+  sex: string | null;
+  birth_place: string | null;
   academic_year: { id: string; name: string } | null;
   class: {
     id: string;
@@ -137,10 +141,22 @@ const StudentProfile = () => {
                 {nomComplet}
               </h1>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-sm text-muted-foreground">
+                {data.sex && (
+                  <span className="flex items-center gap-1.5">
+                    <UserIcon className="h-4 w-4" />
+                    {data.sex === 'F' ? 'Fille' : 'Garçon'}
+                  </span>
+                )}
                 <span className="flex items-center gap-1.5">
                   <Cake className="h-4 w-4" />
                   {data.age !== null ? `${data.age} ans` : 'âge non renseigné'}
                 </span>
+                {data.birth_place && (
+                  <span className="flex items-center gap-1.5">
+                    <MapPin className="h-4 w-4" />
+                    Né{data.sex === 'F' ? 'e' : ''} à {data.birth_place}
+                  </span>
+                )}
                 {data.academic_year && (
                   <span className="flex items-center gap-1.5">
                     <GraduationCap className="h-4 w-4" />

@@ -4,24 +4,37 @@ import { Button } from '@/components/ui/button';
 import { apiGet } from '@/lib/api';
 import { ArrowRight, BookOpen, Users, Award } from 'lucide-react';
 
+interface Photo {
+  url: string;
+  title: string;
+}
+
 export function HeroSection() {
   const navigate = useNavigate();
-  const [photo, setPhoto] = useState<{ url: string; title: string } | null>(null);
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    // La photo principale vient de la galerie de l'école : elle se met donc à
-    // jour toute seule quand l'administration publie de nouvelles images.
-    // Si la galerie est vide ou injoignable, le bloc de repli ci-dessous
-    // s'affiche à la place — jamais un espace vide.
+    // Les photos viennent de la galerie de l'école : le diaporama se met donc
+    // à jour tout seul quand l'administration publie de nouvelles images.
     apiGet<any[]>('/gallery/images/')
       .then(data => {
-        const premiere = Array.isArray(data) ? data[0] : null;
-        if (premiere?.url) {
-          setPhoto({ url: premiere.url, title: premiere.title || '' });
-        }
+        const liste = (Array.isArray(data) ? data : [])
+          .filter(img => img?.url)
+          .slice(0, 16)
+          .map(img => ({ url: img.url, title: img.title || '' }));
+        setPhotos(liste);
       })
-      .catch(() => setPhoto(null));
+      .catch(() => setPhotos([]));
   }, []);
+
+  useEffect(() => {
+    if (photos.length < 2) return;
+    const timer = setInterval(() => {
+      setIndex(i => (i + 1) % photos.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [photos.length]);
 
   return (
     <section className="relative bg-gradient-to-br from-sky-light via-background to-background overflow-hidden">
@@ -31,10 +44,16 @@ export function HeroSection() {
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-primary rounded-full blur-3xl" />
       </div>
 
-      <div className="container-narrow mx-auto px-4 pt-12 pb-16 md:pt-20 md:pb-24 relative z-10">
+      <div className="container-narrow mx-auto px-4 pt-10 pb-16 md:pt-16 md:pb-24 relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
           {/* Texte */}
           <div className="text-center lg:text-left animate-slide-up">
+            <img
+              src="/logo.png"
+              alt="Complexe Scolaire Pueri Angeli"
+              className="h-20 md:h-24 w-auto object-contain mx-auto lg:mx-0 mb-5"
+            />
+
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full mb-5">
               Maternelle et primaire · Kinshasa/Ngaliema · depuis 2014
             </span>
@@ -70,29 +89,42 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Image principale */}
+          {/* Diaporama des photos de l'école */}
           <div className="relative">
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl bg-sky-light">
-              {photo ? (
-                <img
-                  src={photo.url}
-                  alt={photo.title || "L'École Pueri Angeli"}
-                  className="w-full h-full object-cover"
-                  loading="eager"
-                />
-              ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-sky-light to-background">
+            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl bg-sky-light relative">
+              {photos.length > 0 ? (
+                photos.map((photo, i) => (
                   <img
-                    src="/logo.png"
-                    alt="École Pueri Angeli"
-                    className="w-28 h-28 object-contain"
+                    key={photo.url}
+                    src={photo.url}
+                    alt={photo.title || 'Complexe Scolaire Pueri Angeli'}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                      i === index ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    loading={i === 0 ? 'eager' : 'lazy'}
                   />
-                  <p className="text-sm text-muted-foreground px-6 text-center">
-                    Les photos de l'école apparaîtront ici
-                  </p>
-                </div>
+                ))
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-sky-light via-background to-sky-light" />
               )}
             </div>
+
+            {photos.length > 1 && (
+              <div className="flex justify-center gap-2 mt-4">
+                {photos.map((photo, i) => (
+                  <button
+                    key={photo.url}
+                    type="button"
+                    onClick={() => setIndex(i)}
+                    aria-label={`Photo ${i + 1}`}
+                    className={`h-2 rounded-full transition-all ${
+                      i === index ? 'w-6 bg-primary' : 'w-2 bg-primary/30 hover:bg-primary/50'
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
+
             <div className="absolute -bottom-5 -right-5 w-28 h-28 bg-primary/10 rounded-2xl -z-10 hidden sm:block" />
           </div>
         </div>
@@ -104,13 +136,13 @@ export function HeroSection() {
             { icon: Users, value: '292', label: 'Élèves accompagnés' },
             { icon: BookOpen, value: '15', label: 'Enseignants titulaires' },
             { icon: Award, value: '9', label: 'Niveaux, de la maternelle à la 6ème' },
-          ].map((stat, index) => {
+          ].map((stat, i) => {
             const Icon = stat.icon;
             return (
               <div
-                key={index}
+                key={i}
                 className="card-elevated p-5 sm:p-6 text-center"
-                style={{ animationDelay: `${index * 100}ms` }}
+                style={{ animationDelay: `${i * 100}ms` }}
               >
                 <div className="inline-flex items-center justify-center w-11 h-11 bg-primary/10 rounded-lg mb-3">
                   <Icon className="h-5 w-5 text-primary" />

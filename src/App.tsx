@@ -19,6 +19,7 @@ import Profile from "./pages/Profile";
 import ChangePassword from "./pages/ChangePassword";
 import Messages from "./pages/Messages";
 import StudentProfile from "./pages/StudentProfile";
+import ClassDetail from "./pages/ClassDetail";
 
 // Admin pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -62,6 +63,9 @@ const App = () => (
             {/* Fiche d'un eleve : accessible a tout compte connecte, le serveur
                 filtre ensuite selon le role (admin, titulaire, parent). */}
             <Route path="/students/:id" element={<ProtectedRoute><StudentProfile /></ProtectedRoute>} />
+            {/* Feuille de classe : le serveur limite le professeur a ses
+                propres classes. */}
+            <Route path="/classes/:id" element={<ProtectedRoute><ClassDetail /></ProtectedRoute>} />
 
             {/* Admin routes */}
             <Route path="/admin" element={<ProtectedRoute roles={['admin']}><AdminDashboard /></ProtectedRoute>} />

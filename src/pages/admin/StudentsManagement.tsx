@@ -34,6 +34,8 @@ interface StudentRow {
   className: string | null;
   parentIds: string[];
   dateOfBirth?: Date;
+  sex?: string;
+  birthPlace?: string;
 }
 
 interface YearOption {
@@ -62,6 +64,8 @@ const mapStudent = (s: any): StudentRow => ({
   className: s.class_name || null,
   parentIds: (s.parents_ids || []).map((id: any) => String(id)),
   dateOfBirth: s.date_of_birth ? new Date(s.date_of_birth) : undefined,
+  sex: s.sex || undefined,
+  birthPlace: s.birth_place || undefined,
 });
 
 const StudentsManagement = () => {
@@ -88,6 +92,8 @@ const StudentsManagement = () => {
     postName: '',
     classId: '',
     parentIds: [] as string[],
+    sex: '',
+    birthPlace: '',
   });
   const [submitLoading, setSubmitLoading] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -197,10 +203,15 @@ const StudentsManagement = () => {
         postName: student.postName || '',
         classId: student.classId || '',
         parentIds: student.parentIds,
+        sex: student.sex || '',
+        birthPlace: student.birthPlace || '',
       });
     } else {
       setEditingStudent(null);
-      setFormData({ firstName: '', lastName: '', postName: '', classId: '', parentIds: [] });
+      setFormData({
+        firstName: '', lastName: '', postName: '', classId: '',
+        parentIds: [], sex: '', birthPlace: '',
+      });
     }
     setIsModalOpen(true);
   };
@@ -216,6 +227,8 @@ const StudentsManagement = () => {
         class_id: formData.classId,
         parents_ids: formData.parentIds,
         academic_year_id: selectedYearId,
+        sex: formData.sex || null,
+        birth_place: formData.birthPlace.trim() || null,
       };
 
       if (editingStudent) {
@@ -485,6 +498,32 @@ const StudentsManagement = () => {
                   onChange={e => setFormData({ ...formData, firstName: e.target.value })}
                   required
                 />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Sexe</Label>
+                  <Select
+                    value={formData.sex}
+                    onValueChange={v => setFormData({ ...formData, sex: v })}
+                  >
+                    <SelectTrigger className="bg-background">
+                      <SelectValue placeholder="Non renseigné" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover">
+                      <SelectItem value="M">Garçon</SelectItem>
+                      <SelectItem value="F">Fille</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="birthPlace">Lieu de naissance</Label>
+                  <Input
+                    id="birthPlace"
+                    value={formData.birthPlace}
+                    onChange={e => setFormData({ ...formData, birthPlace: e.target.value })}
+                    placeholder="Kinshasa"
+                  />
+                </div>
               </div>
               <div className="space-y-2">
                 <Label>Classe ({selectedYear?.name})</Label>

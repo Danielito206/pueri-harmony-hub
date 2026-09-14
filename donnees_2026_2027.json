@@ -1,0 +1,5097 @@
+{
+  "annee": "2026-2027",
+  "classes": [
+    {
+      "nom": "1ère Maternelle A",
+      "type": "maternelle",
+      "niveau": 1,
+      "section": "A",
+      "titulaire": "MASEKA Nicole",
+      "libelle_source": "1ère Maternelle (A)",
+      "eleves": [
+        {
+          "nom_complet": "Katayi Maliyah-David",
+          "nom": "Katayi",
+          "post_nom": null,
+          "prenom": "Maliyah-David",
+          "sexe": "F",
+          "telephone": "0972026055",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-04-24",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Suangi Mutombo Attilio-Bonifacio",
+          "nom": "Suangi",
+          "post_nom": "Mutombo",
+          "prenom": "Attilio-Bonifacio",
+          "sexe": "M",
+          "telephone": "0825498897",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-09-10",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Diakiese Tandu Gabriel-Ethan",
+          "nom": "Diakiese",
+          "post_nom": "Tandu",
+          "prenom": "Gabriel-Ethan",
+          "sexe": "M",
+          "telephone": "0995675704",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-05-18",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Kabongo Kalonji Kenael Yohan",
+          "nom": "Kabongo",
+          "post_nom": "Kalonji Kenael",
+          "prenom": "Yohan",
+          "sexe": "M",
+          "telephone": "0822446173",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-06-11",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Tshimanga Disanka Owen",
+          "nom": "Tshimanga",
+          "post_nom": "Disanka",
+          "prenom": "Owen",
+          "sexe": "M",
+          "telephone": "0813421894",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-02-03",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Bukasa Leo Samuel",
+          "nom": "Bukasa",
+          "post_nom": "Leo",
+          "prenom": "Samuel",
+          "sexe": "M",
+          "telephone": "0824161334",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-03-29",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Malu Kabisu Malika",
+          "nom": "Malu",
+          "post_nom": "Kabisu",
+          "prenom": "Malika",
+          "sexe": "F",
+          "telephone": "0821349140",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-02-26",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Sanginga Ntwali Alexandre",
+          "nom": "Sanginga",
+          "post_nom": "Ntwali",
+          "prenom": "Alexandre",
+          "sexe": "M",
+          "telephone": "0998307600",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-05-23",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Nkashama Kamalu Ryan-Levi",
+          "nom": "Nkashama",
+          "post_nom": "Kamalu",
+          "prenom": "Ryan-Levi",
+          "sexe": "M",
+          "telephone": "0821271020",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-06-10",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Mbingu Mandiangu Imani",
+          "nom": "Mbingu",
+          "post_nom": "Mandiangu",
+          "prenom": "Imani",
+          "sexe": "F",
+          "telephone": "0816069155",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-07-25",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Nkanu Kayembe Odelia",
+          "nom": "Nkanu",
+          "post_nom": "Kayembe",
+          "prenom": "Odelia",
+          "sexe": "F",
+          "telephone": "0821585851",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-04-09",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Kabangu Ngala Malaika",
+          "nom": "Kabangu",
+          "post_nom": "Ngala",
+          "prenom": "Malaika",
+          "sexe": "F",
+          "telephone": "0823680055",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2024-02-13",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Zola Kabedi Rayna-Gabrielle",
+          "nom": "Zola",
+          "post_nom": "Kabedi",
+          "prenom": "Rayna-Gabrielle",
+          "sexe": "F",
+          "telephone": "0819291960",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-01-12",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Kibambe Lupanda Elior",
+          "nom": "Kibambe",
+          "post_nom": "Lupanda",
+          "prenom": "Elior",
+          "sexe": "M",
+          "telephone": "0818615511",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-03-14",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Bundule Wa Bundule Mila",
+          "nom": "Bundule",
+          "post_nom": "Wa Bundule",
+          "prenom": "Mila",
+          "sexe": "M",
+          "telephone": "0822001853",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-12-29",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Kondo Wa Kondo El Hatikvah",
+          "nom": "Kondo",
+          "post_nom": "Wa Kondo El",
+          "prenom": "Hatikvah",
+          "sexe": "F",
+          "telephone": "0819983240",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-04-22",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Kikolomfo Mazanga Eunice",
+          "nom": "Kikolomfo",
+          "post_nom": "Mazanga",
+          "prenom": "Eunice",
+          "sexe": "F",
+          "telephone": "0898900606",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-11-09",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Tsasa Ilunga Otalia",
+          "nom": "Tsasa",
+          "post_nom": "Ilunga",
+          "prenom": "Otalia",
+          "sexe": "F",
+          "telephone": "0816177779",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-12-05",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Koga Lumba Keyanna",
+          "nom": "Koga",
+          "post_nom": "Lumba",
+          "prenom": "Keyanna",
+          "sexe": "F",
+          "telephone": "0808513088",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-12-28",
+          "classe": "1ère Maternelle A"
+        },
+        {
+          "nom_complet": "Baruani Mpala Shukrani",
+          "nom": "Baruani",
+          "post_nom": "Mpala",
+          "prenom": "Shukrani",
+          "sexe": "F",
+          "telephone": "0821224600",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2024-01-06",
+          "classe": "1ère Maternelle A"
+        }
+      ]
+    },
+    {
+      "nom": "2ème Maternelle A",
+      "type": "maternelle",
+      "niveau": 2,
+      "section": "A",
+      "titulaire": "MPIA MAFUNDA Léontine",
+      "libelle_source": "2ème Maternelle (A)",
+      "eleves": [
+        {
+          "nom_complet": "Aila Ntambwe Asengo Anais-Christiane",
+          "nom": "Aila",
+          "post_nom": "Ntambwe Asengo",
+          "prenom": "Anais-Christiane",
+          "sexe": "F",
+          "telephone": "0813071967",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-03-18",
+          "classe": "2ème Maternelle A"
+        },
+        {
+          "nom_complet": "Mwamba Lombe Nail-Ilyan",
+          "nom": "Mwamba",
+          "post_nom": "Lombe",
+          "prenom": "Nail-Ilyan",
+          "sexe": "M",
+          "telephone": "0810885462",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-04-11",
+          "classe": "2ème Maternelle A"
+        },
+        {
+          "nom_complet": "Baruani Salima Amani",
+          "nom": "Baruani",
+          "post_nom": "Salima",
+          "prenom": "Amani",
+          "sexe": "F",
+          "telephone": "0821224600",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-12-13",
+          "classe": "2ème Maternelle A"
+        },
+        {
+          "nom_complet": "Domayi Mwanga Maeva-Ariah",
+          "nom": "Domayi",
+          "post_nom": "Mwanga",
+          "prenom": "Maeva-Ariah",
+          "sexe": "F",
+          "telephone": "0823420272",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-07-24",
+          "classe": "2ème Maternelle A"
+        },
+        {
+          "nom_complet": "Nkiangudi Amani Shama-Onyx",
+          "nom": "Nkiangudi",
+          "post_nom": "Amani",
+          "prenom": "Shama-Onyx",
+          "sexe": "F",
+          "telephone": "0819797392",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-12-22",
+          "classe": "2ème Maternelle A"
+        },
+        {
+          "nom_complet": "Kwenza Kundenga Elzira",
+          "nom": "Kwenza",
+          "post_nom": "Kundenga",
+          "prenom": "Elzira",
+          "sexe": "F",
+          "telephone": "0816374238",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-04-19",
+          "classe": "2ème Maternelle A"
+        },
+        {
+          "nom_complet": "Kimbu Bayolo Jonovie",
+          "nom": "Kimbu",
+          "post_nom": "Bayolo",
+          "prenom": "Jonovie",
+          "sexe": "F",
+          "telephone": "0892200110",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-09-03",
+          "classe": "2ème Maternelle A"
+        },
+        {
+          "nom_complet": "Kizema Zara Alexandra",
+          "nom": "Kizema",
+          "post_nom": "Zara",
+          "prenom": "Alexandra",
+          "sexe": "F",
+          "telephone": "0976664560",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-10-07",
+          "classe": "2ème Maternelle A"
+        },
+        {
+          "nom_complet": "Kavugho Katsambya Naelys",
+          "nom": "Kavugho",
+          "post_nom": "Katsambya",
+          "prenom": "Naelys",
+          "sexe": "F",
+          "telephone": "0819079509",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-12-10",
+          "classe": "2ème Maternelle A"
+        },
+        {
+          "nom_complet": "Kolomoni Kitenge Asaël-Ethan",
+          "nom": "Kolomoni",
+          "post_nom": "Kitenge",
+          "prenom": "Asaël-Ethan",
+          "sexe": "M",
+          "telephone": "0820957550",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-02-02",
+          "classe": "2ème Maternelle A"
+        },
+        {
+          "nom_complet": "Kuyimba Ngunza Brayden",
+          "nom": "Kuyimba",
+          "post_nom": "Ngunza",
+          "prenom": "Brayden",
+          "sexe": "M",
+          "telephone": "0821732628",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-10-14",
+          "classe": "2ème Maternelle A"
+        },
+        {
+          "nom_complet": "Kiala Kimya Acclamons",
+          "nom": "Kiala",
+          "post_nom": "Kimya",
+          "prenom": "Acclamons",
+          "sexe": "F",
+          "telephone": "0851977141",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-04-04",
+          "classe": "2ème Maternelle A"
+        },
+        {
+          "nom_complet": "Kandanda Muele Rayan Noah",
+          "nom": "Kandanda",
+          "post_nom": "Muele Rayan",
+          "prenom": "Noah",
+          "sexe": "M",
+          "telephone": "0813725318",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-03-17",
+          "classe": "2ème Maternelle A"
+        },
+        {
+          "nom_complet": "Matadi Batshini Elsa",
+          "nom": "Matadi",
+          "post_nom": "Batshini",
+          "prenom": "Elsa",
+          "sexe": "F",
+          "telephone": "0819409315",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-09-12",
+          "classe": "2ème Maternelle A"
+        },
+        {
+          "nom_complet": "Ngalamulume Luta Auréole-Acacia",
+          "nom": "Ngalamulume",
+          "post_nom": "Luta",
+          "prenom": "Auréole-Acacia",
+          "sexe": "F",
+          "telephone": "0810531531",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-12-15",
+          "classe": "2ème Maternelle A"
+        }
+      ]
+    },
+    {
+      "nom": "2ème Maternelle B",
+      "type": "maternelle",
+      "niveau": 2,
+      "section": "B",
+      "titulaire": "KADIFUAKO Nadine",
+      "libelle_source": "2ème Maternelle (B)",
+      "eleves": [
+        {
+          "nom_complet": "Mbala konyi Soan",
+          "nom": "Mbala",
+          "post_nom": "konyi",
+          "prenom": "Soan",
+          "sexe": "M",
+          "telephone": "0822829555",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-04-22",
+          "classe": "2ème Maternelle B"
+        },
+        {
+          "nom_complet": "Mibulumukini Ngombe Thalia-Eliora",
+          "nom": "Mibulumukini",
+          "post_nom": "Ngombe",
+          "prenom": "Thalia-Eliora",
+          "sexe": "F",
+          "telephone": "0852444165",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-10-13",
+          "classe": "2ème Maternelle B"
+        },
+        {
+          "nom_complet": "Mukendi Mukendi Dieudonné Junior",
+          "nom": "Mukendi",
+          "post_nom": "Mukendi Dieudonné",
+          "prenom": "Junior",
+          "sexe": "M",
+          "telephone": "0896022008",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-12-05",
+          "classe": "2ème Maternelle B"
+        },
+        {
+          "nom_complet": "Baruani Lula Imani",
+          "nom": "Baruani",
+          "post_nom": "Lula",
+          "prenom": "Imani",
+          "sexe": "F",
+          "telephone": "0821224600",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-12-13",
+          "classe": "2ème Maternelle B"
+        },
+        {
+          "nom_complet": "Mpona Minga Sunshine Urielle",
+          "nom": "Mpona",
+          "post_nom": "Minga Sunshine",
+          "prenom": "Urielle",
+          "sexe": "F",
+          "telephone": "0812442592",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-10-24",
+          "classe": "2ème Maternelle B"
+        },
+        {
+          "nom_complet": "Disanka Kabeya Yannis",
+          "nom": "Disanka",
+          "post_nom": "Kabeya",
+          "prenom": "Yannis",
+          "sexe": "M",
+          "telephone": "0815346961",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-12-06",
+          "classe": "2ème Maternelle B"
+        },
+        {
+          "nom_complet": "Ngisa Walubila Alem",
+          "nom": "Ngisa",
+          "post_nom": "Walubila",
+          "prenom": "Alem",
+          "sexe": "M",
+          "telephone": "0824615165",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-08-06",
+          "classe": "2ème Maternelle B"
+        },
+        {
+          "nom_complet": "Shamamba Nkumu Jada",
+          "nom": "Shamamba",
+          "post_nom": "Nkumu",
+          "prenom": "Jada",
+          "sexe": "M",
+          "telephone": "0998799736",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-06-21",
+          "classe": "2ème Maternelle B"
+        },
+        {
+          "nom_complet": "Ngandu Fwamba Mazungu Paul-Percé",
+          "nom": "Ngandu",
+          "post_nom": "Fwamba Mazungu",
+          "prenom": "Paul-Percé",
+          "sexe": "M",
+          "telephone": "0818888975",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-09-12",
+          "classe": "2ème Maternelle B"
+        },
+        {
+          "nom_complet": "Bola Bonkoto Shammah",
+          "nom": "Bola",
+          "post_nom": "Bonkoto",
+          "prenom": "Shammah",
+          "sexe": "F",
+          "telephone": "0814043237",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-10-16",
+          "classe": "2ème Maternelle B"
+        },
+        {
+          "nom_complet": "Nkiadiasivi Phemba Kimia-Loise",
+          "nom": "Nkiadiasivi",
+          "post_nom": "Phemba",
+          "prenom": "Kimia-Loise",
+          "sexe": "F",
+          "telephone": "0814892007",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-05-07",
+          "classe": "2ème Maternelle B"
+        },
+        {
+          "nom_complet": "Tshibangu Mwambi Wa Nzambi Israel-Shammah",
+          "nom": "Tshibangu",
+          "post_nom": "Mwambi Wa Nzambi",
+          "prenom": "Israel-Shammah",
+          "sexe": "M",
+          "telephone": "0853536829",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-11-13",
+          "classe": "2ème Maternelle B"
+        },
+        {
+          "nom_complet": "Yumba Wa Yumba Imaria-Amani",
+          "nom": "Yumba",
+          "post_nom": "Wa Yumba",
+          "prenom": "Imaria-Amani",
+          "sexe": "F",
+          "telephone": "0822348821",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2023-01-31",
+          "classe": "2ème Maternelle B"
+        },
+        {
+          "nom_complet": "Yanaku Yalida Loïc-Olivier",
+          "nom": "Yanaku",
+          "post_nom": "Yalida",
+          "prenom": "Loïc-Olivier",
+          "sexe": "M",
+          "telephone": "0997303980",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-11-12",
+          "classe": "2ème Maternelle B"
+        },
+        {
+          "nom_complet": "Yanduka Nseya Destiny-Nilaja",
+          "nom": "Yanduka",
+          "post_nom": "Nseya",
+          "prenom": "Destiny-Nilaja",
+          "sexe": "F",
+          "telephone": "0821828190",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-10-24",
+          "classe": "2ème Maternelle B"
+        }
+      ]
+    },
+    {
+      "nom": "3ème Maternelle A",
+      "type": "maternelle",
+      "niveau": 3,
+      "section": "A",
+      "titulaire": "PHEMBA Chantal",
+      "libelle_source": "3ème Maternelle (A)",
+      "eleves": [
+        {
+          "nom_complet": "Kabena Nyembwe Chloé",
+          "nom": "Kabena",
+          "post_nom": "Nyembwe",
+          "prenom": "Chloé",
+          "sexe": "F",
+          "telephone": "0819082185",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-04-07",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Ngalamulume Tshiwala Hope Elio",
+          "nom": "Ngalamulume",
+          "post_nom": "Tshiwala Hope",
+          "prenom": "Elio",
+          "sexe": "M",
+          "telephone": "0810531531",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-03-24",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Kavula Muheta Shai-Daniel",
+          "nom": "Kavula",
+          "post_nom": "Muheta",
+          "prenom": "Shai-Daniel",
+          "sexe": "M",
+          "telephone": "0817589301",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-06-03",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Okandja Yanga Nael",
+          "nom": "Okandja",
+          "post_nom": "Yanga",
+          "prenom": "Nael",
+          "sexe": "M",
+          "telephone": "0842580005",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-08-08",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Masungi Nzau Eliora",
+          "nom": "Masungi",
+          "post_nom": "Nzau",
+          "prenom": "Eliora",
+          "sexe": "F",
+          "telephone": "0824042929",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-05-20",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Puati Ntombo Dolbri",
+          "nom": "Puati",
+          "post_nom": "Ntombo",
+          "prenom": "Dolbri",
+          "sexe": "F",
+          "telephone": "0859272043",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-07-10",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Pende Agale Believe",
+          "nom": "Pende",
+          "post_nom": "Agale",
+          "prenom": "Believe",
+          "sexe": "F",
+          "telephone": "0808890830",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-07-05",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Ezaty Bibhiyo Ishay",
+          "nom": "Ezaty",
+          "post_nom": "Bibhiyo",
+          "prenom": "Ishay",
+          "sexe": "M",
+          "telephone": "0826479836",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-11-27",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Katona Kalama Anaelle",
+          "nom": "Katona",
+          "post_nom": "Kalama",
+          "prenom": "Anaelle",
+          "sexe": "F",
+          "telephone": "0842743413",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-05-27",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Kofi Kiesse Lael",
+          "nom": "Kofi",
+          "post_nom": "Kiesse",
+          "prenom": "Lael",
+          "sexe": "M",
+          "telephone": "0893869039",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-09-08",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Nyangwile Tshiamala Noah",
+          "nom": "Nyangwile",
+          "post_nom": "Tshiamala",
+          "prenom": "Noah",
+          "sexe": "M",
+          "telephone": "0813122551",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-01-08",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Makasi Shukrani Margueritte",
+          "nom": "Makasi",
+          "post_nom": "Shukrani",
+          "prenom": "Margueritte",
+          "sexe": "F",
+          "telephone": "0854630561",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-10-01",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Elembo Bokosse Malaika",
+          "nom": "Elembo",
+          "post_nom": "Bokosse",
+          "prenom": "Malaika",
+          "sexe": "F",
+          "telephone": "0829915095",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-01-07",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Alas Lazol Evanna",
+          "nom": "Alas",
+          "post_nom": "Lazol",
+          "prenom": "Evanna",
+          "sexe": "F",
+          "telephone": "0811272236",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-05-15",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Kahilu Aki Malia-Luna",
+          "nom": "Kahilu",
+          "post_nom": "Aki",
+          "prenom": "Malia-Luna",
+          "sexe": "F",
+          "telephone": "0894815144",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-03-03",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "N’Kambua Mutombo Thalya",
+          "nom": "N’Kambua",
+          "post_nom": "Mutombo",
+          "prenom": "Thalya",
+          "sexe": "F",
+          "telephone": "0971853597",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-05-20",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Kintadi Muteba Matthis",
+          "nom": "Kintadi",
+          "post_nom": "Muteba",
+          "prenom": "Matthis",
+          "sexe": "M",
+          "telephone": "0898543503",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-06-29",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Maneng Anaya-Anaïs",
+          "nom": "Maneng",
+          "post_nom": null,
+          "prenom": "Anaya-Anaïs",
+          "sexe": "F",
+          "telephone": "0812855558",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-07-30",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Bundule Ngoy Red",
+          "nom": "Bundule",
+          "post_nom": "Ngoy",
+          "prenom": "Red",
+          "sexe": "M",
+          "telephone": "0816432892",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-11-06",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Diawa Nsilu Praise",
+          "nom": "Diawa",
+          "post_nom": "Nsilu",
+          "prenom": "Praise",
+          "sexe": "M",
+          "telephone": "0824439243",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-02-14",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Mwenda Kilozo Saphir",
+          "nom": "Mwenda",
+          "post_nom": "Kilozo",
+          "prenom": "Saphir",
+          "sexe": "M",
+          "telephone": "0891357357",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-03-24",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Dyese Dia Leza Maelys-Michelle",
+          "nom": "Dyese",
+          "post_nom": "Dia Leza",
+          "prenom": "Maelys-Michelle",
+          "sexe": "F",
+          "telephone": "0853023568",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-01-23",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Ngyay Muley Liam",
+          "nom": "Ngyay",
+          "post_nom": "Muley",
+          "prenom": "Liam",
+          "sexe": "M",
+          "telephone": "0810341126",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-09-25",
+          "classe": "3ème Maternelle A"
+        },
+        {
+          "nom_complet": "Rwamugabu Muderwa Isaac",
+          "nom": "Rwamugabu",
+          "post_nom": "Muderwa",
+          "prenom": "Isaac",
+          "sexe": "M",
+          "telephone": "0994133658",
+          "lieu_naissance": "Goma",
+          "date_naissance": "2022-01-26",
+          "classe": "3ème Maternelle A"
+        }
+      ]
+    },
+    {
+      "nom": "3ème Maternelle B",
+      "type": "maternelle",
+      "niveau": 3,
+      "section": "B",
+      "titulaire": "MANGABU Maguy",
+      "libelle_source": "3ème Maternelle (B)",
+      "eleves": [
+        {
+          "nom_complet": "Malunda Onga Nael Aquila",
+          "nom": "Malunda",
+          "post_nom": "Onga Nael",
+          "prenom": "Aquila",
+          "sexe": "F",
+          "telephone": "0858565487",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-08-17",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "King Tshimanga Araçia",
+          "nom": "King",
+          "post_nom": "Tshimanga",
+          "prenom": "Araçia",
+          "sexe": "M",
+          "telephone": "0992825754",
+          "lieu_naissance": "Lubumbashi",
+          "date_naissance": "2021-03-06",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Amadi Kasindi Naeva-Christianne",
+          "nom": "Amadi",
+          "post_nom": "Kasindi",
+          "prenom": "Naeva-Christianne",
+          "sexe": "F",
+          "telephone": "082110165",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-04-13",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Bundule Ngoy Dylanne",
+          "nom": "Bundule",
+          "post_nom": "Ngoy",
+          "prenom": "Dylanne",
+          "sexe": "F",
+          "telephone": "0816432892",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-11-06",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Mpona Minga Milayilo Raphaëlle",
+          "nom": "Mpona",
+          "post_nom": "Minga Milayilo",
+          "prenom": "Raphaëlle",
+          "sexe": "F",
+          "telephone": "0976010314",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-08-03",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Makolo Kheta Yael",
+          "nom": "Makolo",
+          "post_nom": "Kheta",
+          "prenom": "Yael",
+          "sexe": "F",
+          "telephone": "0819069719",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-09-27",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Kalubanga Ngoy Ezra",
+          "nom": "Kalubanga",
+          "post_nom": "Ngoy",
+          "prenom": "Ezra",
+          "sexe": "M",
+          "telephone": "0997548318",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-02-07",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Khandi Vangu Taliah Faith",
+          "nom": "Khandi",
+          "post_nom": "Vangu Taliah",
+          "prenom": "Faith",
+          "sexe": "F",
+          "telephone": "0854681119",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-07-03",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Abeli Byaombe Archange Gabriel",
+          "nom": "Abeli",
+          "post_nom": "Byaombe Archange",
+          "prenom": "Gabriel",
+          "sexe": "M",
+          "telephone": "0827522039",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-05-07",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Loambo Wembi Lucas Bryan",
+          "nom": "Loambo",
+          "post_nom": "Wembi Lucas",
+          "prenom": "Bryan",
+          "sexe": "M",
+          "telephone": "0812343538",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-12-28",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Bahati Kalehezo Nathan",
+          "nom": "Bahati",
+          "post_nom": "Kalehezo",
+          "prenom": "Nathan",
+          "sexe": "M",
+          "telephone": "0995164861",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-03-28",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Mulenda Otepa Donel-Ezer",
+          "nom": "Mulenda",
+          "post_nom": "Otepa",
+          "prenom": "Donel-Ezer",
+          "sexe": "M",
+          "telephone": "0848447894",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-03-10",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Yanduka Longomba Royal-Kayden",
+          "nom": "Yanduka",
+          "post_nom": "Longomba",
+          "prenom": "Royal-Kayden",
+          "sexe": "M",
+          "telephone": "0821828190",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-03-10",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Luyindula Ditungamene Maïna Chloé",
+          "nom": "Luyindula",
+          "post_nom": "Ditungamene Maïna",
+          "prenom": "Chloé",
+          "sexe": "F",
+          "telephone": "0850942106",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-09-18",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Tsasa Matondo Ouriella",
+          "nom": "Tsasa",
+          "post_nom": "Matondo",
+          "prenom": "Ouriella",
+          "sexe": "F",
+          "telephone": "0824694894",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-11-13",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Mambu Léo Gabriel",
+          "nom": "Mambu",
+          "post_nom": "Léo",
+          "prenom": "Gabriel",
+          "sexe": "M",
+          "telephone": "0820908518",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-11-01",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Kabedi Tshizubu Andréa",
+          "nom": "Kabedi",
+          "post_nom": "Tshizubu",
+          "prenom": "Andréa",
+          "sexe": "F",
+          "telephone": "0819451807",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-09-25",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Kabibi Kasanga Britney",
+          "nom": "Kabibi",
+          "post_nom": "Kasanga",
+          "prenom": "Britney",
+          "sexe": "F",
+          "telephone": "0818296252",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-09-05",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Ntumba Kashala Heaven",
+          "nom": "Ntumba",
+          "post_nom": "Kashala",
+          "prenom": "Heaven",
+          "sexe": "M",
+          "telephone": "0824614513",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-08-22",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Bay Dikisha Milan",
+          "nom": "Bay",
+          "post_nom": "Dikisha",
+          "prenom": "Milan",
+          "sexe": "M",
+          "telephone": "0852222277",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-04-14",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Lopombo Biansueki Yael",
+          "nom": "Lopombo",
+          "post_nom": "Biansueki",
+          "prenom": "Yael",
+          "sexe": "M",
+          "telephone": "0821110027",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-11-14",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Banza Kabaseke Al-Zyon",
+          "nom": "Banza",
+          "post_nom": "Kabaseke",
+          "prenom": "Al-Zyon",
+          "sexe": "M",
+          "telephone": "0815654451",
+          "lieu_naissance": "Matadi",
+          "date_naissance": "2021-09-10",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Miyimi Muwawa Nathan",
+          "nom": "Miyimi",
+          "post_nom": "Muwawa",
+          "prenom": "Nathan",
+          "sexe": "M",
+          "telephone": "0814688600",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-08-09",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Matondo-Kuanzambi Lubanziladio Onyx-Blessing",
+          "nom": "Matondo-Kuanzambi",
+          "post_nom": "Lubanziladio",
+          "prenom": "Onyx-Blessing",
+          "sexe": "F",
+          "telephone": "0816060308",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-10-01",
+          "classe": "3ème Maternelle B"
+        },
+        {
+          "nom_complet": "Mbenza Senga Ivan",
+          "nom": "Mbenza",
+          "post_nom": "Senga",
+          "prenom": "Ivan",
+          "sexe": "M",
+          "telephone": "0895616973",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2022-06-12",
+          "classe": "3ème Maternelle B"
+        }
+      ]
+    },
+    {
+      "nom": "1ère Primaire A",
+      "type": "primaire",
+      "niveau": 1,
+      "section": "A",
+      "titulaire": "BIKUAKUA Bernard",
+      "libelle_source": "1ère Année Primaire (A)",
+      "eleves": [
+        {
+          "nom_complet": "Kalombo Tshabu Eunice",
+          "nom": "Kalombo",
+          "post_nom": "Tshabu",
+          "prenom": "Eunice",
+          "sexe": "F",
+          "telephone": "0810216403",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-06-29",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Azika Masapili Rayan",
+          "nom": "Azika",
+          "post_nom": "Masapili",
+          "prenom": "Rayan",
+          "sexe": "M",
+          "telephone": "0822239434",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-06-23",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Kambale Katsambya Jayden",
+          "nom": "Kambale",
+          "post_nom": "Katsambya",
+          "prenom": "Jayden",
+          "sexe": "M",
+          "telephone": "0819079509",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-08-14",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Mambuku Ndungidi Heaven",
+          "nom": "Mambuku",
+          "post_nom": "Ndungidi",
+          "prenom": "Heaven",
+          "sexe": "F",
+          "telephone": "0840665680",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-10-10",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Kitshinku Muele Nael-Ethan",
+          "nom": "Kitshinku",
+          "post_nom": "Muele",
+          "prenom": "Nael-Ethan",
+          "sexe": "M",
+          "telephone": "0813725318",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-08-05",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Diemby Uriel-Lorenzo",
+          "nom": "Diemby",
+          "post_nom": null,
+          "prenom": "Uriel-Lorenzo",
+          "sexe": "M",
+          "telephone": "0814354981",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-08-06",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Monoke Robert Ethan",
+          "nom": "Monoke",
+          "post_nom": "Robert",
+          "prenom": "Ethan",
+          "sexe": "M",
+          "telephone": "0822412606",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-04-29",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Muamba Muteba Elyakim-Allan",
+          "nom": "Muamba",
+          "post_nom": "Muteba",
+          "prenom": "Elyakim-Allan",
+          "sexe": "M",
+          "telephone": "0991150719",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-12-09",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Tenda Khonde Shanic",
+          "nom": "Tenda",
+          "post_nom": "Khonde",
+          "prenom": "Shanic",
+          "sexe": "F",
+          "telephone": "0829394436",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-10-19",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Mulume Muderwa Nathan",
+          "nom": "Mulume",
+          "post_nom": "Muderwa",
+          "prenom": "Nathan",
+          "sexe": "M",
+          "telephone": "0994133658",
+          "lieu_naissance": "Goma",
+          "date_naissance": "2020-01-22",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Muendeda Kabeya Marcus",
+          "nom": "Muendeda",
+          "post_nom": "Kabeya",
+          "prenom": "Marcus",
+          "sexe": "M",
+          "telephone": "0818358376",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-01-29",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Kapuya Kabeya Nolan",
+          "nom": "Kapuya",
+          "post_nom": "Kabeya",
+          "prenom": "Nolan",
+          "sexe": "M",
+          "telephone": "0814332821",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-11-29",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Kwenza Kilangalanga Eliora",
+          "nom": "Kwenza",
+          "post_nom": "Kilangalanga",
+          "prenom": "Eliora",
+          "sexe": "F",
+          "telephone": "0816374238",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-12-19",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Andjaki Iyolo Elroy",
+          "nom": "Andjaki",
+          "post_nom": "Iyolo",
+          "prenom": "Elroy",
+          "sexe": "M",
+          "telephone": "0824444577",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-12-03",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Kighovi Yana Yimbi Yvan",
+          "nom": "Kighovi",
+          "post_nom": "Yana Yimbi",
+          "prenom": "Yvan",
+          "sexe": "M",
+          "telephone": "0991509079",
+          "lieu_naissance": "Goma",
+          "date_naissance": "2021-03-06",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Elonga Belonga Yohanna-Elisa",
+          "nom": "Elonga",
+          "post_nom": "Belonga",
+          "prenom": "Yohanna-Elisa",
+          "sexe": "F",
+          "telephone": "0978387879",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-03-31",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Nzeba Kalume Nouria",
+          "nom": "Nzeba",
+          "post_nom": "Kalume",
+          "prenom": "Nouria",
+          "sexe": "F",
+          "telephone": "0811487333",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-07-24",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Zola Ndie Joshua",
+          "nom": "Zola",
+          "post_nom": "Ndie",
+          "prenom": "Joshua",
+          "sexe": "M",
+          "telephone": "0819291960",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-05-30",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Mayamonuswa Mbula Elsa",
+          "nom": "Mayamonuswa",
+          "post_nom": "Mbula",
+          "prenom": "Elsa",
+          "sexe": "F",
+          "telephone": "0814444528",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-04-28",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Yanaku Kuhana Malia-Christine",
+          "nom": "Yanaku",
+          "post_nom": "Kuhana",
+          "prenom": "Malia-Christine",
+          "sexe": "F",
+          "telephone": "0997303980",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-07-22",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Nyakabasa Mutijima Beni-Bona",
+          "nom": "Nyakabasa",
+          "post_nom": "Mutijima",
+          "prenom": "Beni-Bona",
+          "sexe": "M",
+          "telephone": "0843341202",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-09-27",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Kingombe Dishashi Evan",
+          "nom": "Kingombe",
+          "post_nom": "Dishashi",
+          "prenom": "Evan",
+          "sexe": "M",
+          "telephone": "0812566243",
+          "lieu_naissance": "Matadi",
+          "date_naissance": "2020-08-14",
+          "classe": "1ère Primaire A"
+        },
+        {
+          "nom_complet": "Mudingayi Mukendi Bryan",
+          "nom": "Mudingayi",
+          "post_nom": "Mukendi",
+          "prenom": "Bryan",
+          "sexe": "M",
+          "telephone": "0822262982",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-01-16",
+          "classe": "1ère Primaire A"
+        }
+      ]
+    },
+    {
+      "nom": "1ère Primaire B",
+      "type": "primaire",
+      "niveau": 1,
+      "section": "B",
+      "titulaire": "MALENGU Emmanuel",
+      "libelle_source": "1ère année Primaire B",
+      "eleves": [
+        {
+          "nom_complet": "Ibenge Walisi Aurel-Justin",
+          "nom": "Ibenge",
+          "post_nom": "Walisi",
+          "prenom": "Aurel-Justin",
+          "sexe": "M",
+          "telephone": "0822239434",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-03-26",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Nyembo Kabwiz Ericia",
+          "nom": "Nyembo",
+          "post_nom": "Kabwiz",
+          "prenom": "Ericia",
+          "sexe": "F",
+          "telephone": "0822361181",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-08-08",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Diabanza Mabonso Oindie",
+          "nom": "Diabanza",
+          "post_nom": "Mabonso",
+          "prenom": "Oindie",
+          "sexe": "M",
+          "telephone": "0991768788",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-05-10",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Langa Nzau Believe",
+          "nom": "Langa",
+          "post_nom": "Nzau",
+          "prenom": "Believe",
+          "sexe": "M",
+          "telephone": "0970103633",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-12-08",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Ntumba Madjunda Emmanuel",
+          "nom": "Ntumba",
+          "post_nom": "Madjunda",
+          "prenom": "Emmanuel",
+          "sexe": "M",
+          "telephone": "0816826262",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-12-13",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Matadi Kapinga Malia",
+          "nom": "Matadi",
+          "post_nom": "Kapinga",
+          "prenom": "Malia",
+          "sexe": "F",
+          "telephone": "0819409315",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-04-09",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Lizanga Lingele Malaika Pheloise",
+          "nom": "Lizanga",
+          "post_nom": "Lingele Malaika",
+          "prenom": "Pheloise",
+          "sexe": "F",
+          "telephone": "0855777804",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-11-12",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Yumba Sare Aksanti-Mareva",
+          "nom": "Yumba",
+          "post_nom": "Sare",
+          "prenom": "Aksanti-Mareva",
+          "sexe": "F",
+          "telephone": "0822348821",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-04-15",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Loambo Wongo Akake Maeva-Sarah",
+          "nom": "Loambo",
+          "post_nom": "Wongo Akake",
+          "prenom": "Maeva-Sarah",
+          "sexe": "F",
+          "telephone": "0812343538",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-06-20",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Kingombe Kalonda Enzo",
+          "nom": "Kingombe",
+          "post_nom": "Kalonda",
+          "prenom": "Enzo",
+          "sexe": "M",
+          "telephone": "0812566243",
+          "lieu_naissance": "Matadi",
+          "date_naissance": "2020-08-14",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Bongo Iyombe Sylvianna",
+          "nom": "Bongo",
+          "post_nom": "Iyombe",
+          "prenom": "Sylvianna",
+          "sexe": "F",
+          "telephone": "0811608863",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-06-15",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Koto Abiliki Golden",
+          "nom": "Koto",
+          "post_nom": "Abiliki",
+          "prenom": "Golden",
+          "sexe": "F",
+          "telephone": "0823385573",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-07-06",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Kalemba Tshibangu Sohen",
+          "nom": "Kalemba",
+          "post_nom": "Tshibangu",
+          "prenom": "Sohen",
+          "sexe": "F",
+          "telephone": "0817401428",
+          "lieu_naissance": "Kabinda",
+          "date_naissance": "2020-11-19",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Kabangu Ngandu Warren",
+          "nom": "Kabangu",
+          "post_nom": "Ngandu",
+          "prenom": "Warren",
+          "sexe": "M",
+          "telephone": "0816390980",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-01-06",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Malu Kayumba Amara",
+          "nom": "Malu",
+          "post_nom": "Kayumba",
+          "prenom": "Amara",
+          "sexe": "F",
+          "telephone": "0822848284",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-12-01",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Makaba Mazingu Tehilah",
+          "nom": "Makaba",
+          "post_nom": "Mazingu",
+          "prenom": "Tehilah",
+          "sexe": "F",
+          "telephone": "0819579056",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-09-13",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Tshibunda Kapa Joram",
+          "nom": "Tshibunda",
+          "post_nom": "Kapa",
+          "prenom": "Joram",
+          "sexe": "M",
+          "telephone": "0811650627",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-02-17",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Kiminu Kashimba Axel-Gabriel",
+          "nom": "Kiminu",
+          "post_nom": "Kashimba",
+          "prenom": "Axel-Gabriel",
+          "sexe": "M",
+          "telephone": "0812793659",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-11-22",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Mbungu Nsimba Elikya",
+          "nom": "Mbungu",
+          "post_nom": "Nsimba",
+          "prenom": "Elikya",
+          "sexe": "F",
+          "telephone": "0818553468",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-08-22",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Ezaty Mungu Edema Goshen-Amara",
+          "nom": "Ezaty",
+          "post_nom": "Mungu Edema",
+          "prenom": "Goshen-Amara",
+          "sexe": "F",
+          "telephone": "0824200281",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-01-13",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Gingweze O’Lagindz Keyla",
+          "nom": "Gingweze",
+          "post_nom": "O’Lagindz",
+          "prenom": "Keyla",
+          "sexe": "F",
+          "telephone": "0825558507",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-06-14",
+          "classe": "1ère Primaire B"
+        },
+        {
+          "nom_complet": "Ndaya Kabeya Myriam",
+          "nom": "Ndaya",
+          "post_nom": "Kabeya",
+          "prenom": "Myriam",
+          "sexe": "F",
+          "telephone": "0818358376",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2021-01-29",
+          "classe": "1ère Primaire B"
+        }
+      ]
+    },
+    {
+      "nom": "2ème Primaire A",
+      "type": "primaire",
+      "niveau": 2,
+      "section": "A",
+      "titulaire": "MUSUMBA Mamie",
+      "libelle_source": "2ème année Primaire A",
+      "eleves": [
+        {
+          "nom_complet": "Muzyumba Tangi Yves-Daniel",
+          "nom": "Muzyumba",
+          "post_nom": "Tangi",
+          "prenom": "Yves-Daniel",
+          "sexe": "M",
+          "telephone": "0814129819",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-02-24",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Kibambe Nseya Aela",
+          "nom": "Kibambe",
+          "post_nom": "Nseya",
+          "prenom": "Aela",
+          "sexe": "F",
+          "telephone": "0818615511",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-03-31",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Mwilambwe Tshimanga Agra",
+          "nom": "Mwilambwe",
+          "post_nom": "Tshimanga",
+          "prenom": "Agra",
+          "sexe": "F",
+          "telephone": "0992825754",
+          "lieu_naissance": "Lubumbashi",
+          "date_naissance": "2019-11-13",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Koto Eyigito Goshen",
+          "nom": "Koto",
+          "post_nom": "Eyigito",
+          "prenom": "Goshen",
+          "sexe": "F",
+          "telephone": "0823385573",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-04-30",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Wedina Lompika Esmeralda",
+          "nom": "Wedina",
+          "post_nom": "Lompika",
+          "prenom": "Esmeralda",
+          "sexe": "F",
+          "telephone": "0850146462",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-11-10",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Fundu Kasoki Maeva-Paty",
+          "nom": "Fundu",
+          "post_nom": "Kasoki",
+          "prenom": "Maeva-Paty",
+          "sexe": "M",
+          "telephone": "0999943457",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-08-20",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Kabwata Mpia Prefina",
+          "nom": "Kabwata",
+          "post_nom": "Mpia",
+          "prenom": "Prefina",
+          "sexe": "F",
+          "telephone": "0898083546",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-05-07",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Musampa Dan Lucas",
+          "nom": "Musampa",
+          "post_nom": "Dan",
+          "prenom": "Lucas",
+          "sexe": "M",
+          "telephone": "0815838581",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-02-01",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Kalubanga Mbuyi Ella",
+          "nom": "Kalubanga",
+          "post_nom": "Mbuyi",
+          "prenom": "Ella",
+          "sexe": "F",
+          "telephone": "0997548318",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-08-25",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Victoria Marisa Missi",
+          "nom": "Victoria",
+          "post_nom": "Marisa",
+          "prenom": "Missi",
+          "sexe": "F",
+          "telephone": "0998065893",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-01-10",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Banza Cikaya Genesis",
+          "nom": "Banza",
+          "post_nom": "Cikaya",
+          "prenom": "Genesis",
+          "sexe": "F",
+          "telephone": "0815654451",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-01-03",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Katomba Tshizubu Noah",
+          "nom": "Katomba",
+          "post_nom": "Tshizubu",
+          "prenom": "Noah",
+          "sexe": "M",
+          "telephone": "0819451807",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-05-24",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Kikudi Ngoyi Serena",
+          "nom": "Kikudi",
+          "post_nom": "Ngoyi",
+          "prenom": "Serena",
+          "sexe": "F",
+          "telephone": "0812222298",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-05-27",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Yumba Kajingu Yvan-Dimer",
+          "nom": "Yumba",
+          "post_nom": "Kajingu",
+          "prenom": "Yvan-Dimer",
+          "sexe": "M",
+          "telephone": "0822348821",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-10-02",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Koga Balungwe Keira",
+          "nom": "Koga",
+          "post_nom": "Balungwe",
+          "prenom": "Keira",
+          "sexe": "F",
+          "telephone": "0808513088",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-02-16",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Amadi Mzee Yohan-Nahel",
+          "nom": "Amadi",
+          "post_nom": "Mzee",
+          "prenom": "Yohan-Nahel",
+          "sexe": "M",
+          "telephone": "0824048878",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-09-24",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Mwenda Amani Shukrani",
+          "nom": "Mwenda",
+          "post_nom": "Amani",
+          "prenom": "Shukrani",
+          "sexe": "M",
+          "telephone": "0891357357",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-06-12",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Ibenge Bazaongo Divani-Aurore",
+          "nom": "Ibenge",
+          "post_nom": "Bazaongo",
+          "prenom": "Divani-Aurore",
+          "sexe": "F",
+          "telephone": "0891127863",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-02-01",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Masungi Muna Ethan-Ilyan",
+          "nom": "Masungi",
+          "post_nom": "Muna",
+          "prenom": "Ethan-Ilyan",
+          "sexe": "M",
+          "telephone": "0824042929",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-10-02",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Pandi Shindama Yoel",
+          "nom": "Pandi",
+          "post_nom": "Shindama",
+          "prenom": "Yoel",
+          "sexe": "M",
+          "telephone": "0810016605",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-10-19",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Kezipame Shukrani Yann’Ael",
+          "nom": "Kezipame",
+          "post_nom": "Shukrani",
+          "prenom": "Yann’Ael",
+          "sexe": "M",
+          "telephone": "0896559273",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-07-10",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Sabwa Mbuyamba Nathanael",
+          "nom": "Sabwa",
+          "post_nom": "Mbuyamba",
+          "prenom": "Nathanael",
+          "sexe": "M",
+          "telephone": "0814240130",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-06-24",
+          "classe": "2ème Primaire A"
+        },
+        {
+          "nom_complet": "Ngyay Dasilva Neila",
+          "nom": "Ngyay",
+          "post_nom": "Dasilva",
+          "prenom": "Neila",
+          "sexe": "F",
+          "telephone": "0810001993",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-04-08",
+          "classe": "2ème Primaire A"
+        }
+      ]
+    },
+    {
+      "nom": "2ème Primaire B",
+      "type": "primaire",
+      "niveau": 2,
+      "section": "B",
+      "titulaire": "ILENDA Nkosi Augustin",
+      "libelle_source": "2ème année Primaire B",
+      "eleves": [
+        {
+          "nom_complet": "Aila Ipoma Alissa-Grace",
+          "nom": "Aila",
+          "post_nom": "Ipoma",
+          "prenom": "Alissa-Grace",
+          "sexe": "F",
+          "telephone": "0970010663",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-10-16",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Bunda Dyese Ihsane",
+          "nom": "Bunda",
+          "post_nom": "Dyese",
+          "prenom": "Ihsane",
+          "sexe": "F",
+          "telephone": "0853023568",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-08-23",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Sanginga Nyota Marie",
+          "nom": "Sanginga",
+          "post_nom": "Nyota",
+          "prenom": "Marie",
+          "sexe": "F",
+          "telephone": "0820957550",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-02-02",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Ibenge Elemba Delice-Nael",
+          "nom": "Ibenge",
+          "post_nom": "Elemba",
+          "prenom": "Delice-Nael",
+          "sexe": "M",
+          "telephone": "0822239434",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-02-01",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Lopombo Munza Yannis-Enzo",
+          "nom": "Lopombo",
+          "post_nom": "Munza",
+          "prenom": "Yannis-Enzo",
+          "sexe": "M",
+          "telephone": "0812525389",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-05-27",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Kaseya Konyi Bienfaite",
+          "nom": "Kaseya",
+          "post_nom": "Konyi",
+          "prenom": "Bienfaite",
+          "sexe": "F",
+          "telephone": "0852606293",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-03-26",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Nyangwile Musoga Dulcia",
+          "nom": "Nyangwile",
+          "post_nom": "Musoga",
+          "prenom": "Dulcia",
+          "sexe": "F",
+          "telephone": "0813122551",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-12-07",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Ngisa Beliniba Louis-Pascal",
+          "nom": "Ngisa",
+          "post_nom": "Beliniba",
+          "prenom": "Louis-Pascal",
+          "sexe": "M",
+          "telephone": "0824615165",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-02-21",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Koga Ilunga Kayla",
+          "nom": "Koga",
+          "post_nom": "Ilunga",
+          "prenom": "Kayla",
+          "sexe": "F",
+          "telephone": "0808513088",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-02-16",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Saidi Kasuera Emmanuelle",
+          "nom": "Saidi",
+          "post_nom": "Kasuera",
+          "prenom": "Emmanuelle",
+          "sexe": "F",
+          "telephone": "0892724165",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-09-17",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Okandja Naseem Maftah",
+          "nom": "Okandja",
+          "post_nom": "Naseem",
+          "prenom": "Maftah",
+          "sexe": "M",
+          "telephone": "0991728341",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-04-14",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Mpezo Matondo Noah-Gloric",
+          "nom": "Mpezo",
+          "post_nom": "Matondo",
+          "prenom": "Noah-Gloric",
+          "sexe": "M",
+          "telephone": "0851819586",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-06-30",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Lizanga Lingele Jésus-Phelindra",
+          "nom": "Lizanga",
+          "post_nom": "Lingele",
+          "prenom": "Jésus-Phelindra",
+          "sexe": "F",
+          "telephone": "0855777804",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-12-12",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Mulenda Osango Daniel-Ezer",
+          "nom": "Mulenda",
+          "post_nom": "Osango",
+          "prenom": "Daniel-Ezer",
+          "sexe": "M",
+          "telephone": "0848447894",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-07-04",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Muyaya Mpompo Prunelle",
+          "nom": "Muyaya",
+          "post_nom": "Mpompo",
+          "prenom": "Prunelle",
+          "sexe": "F",
+          "telephone": "0815468677",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-03-25",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Ntumba Betu Jayden",
+          "nom": "Ntumba",
+          "post_nom": "Betu",
+          "prenom": "Jayden",
+          "sexe": "M",
+          "telephone": "0824614513",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-05-24",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Kabedi Tshibuyi Maria-Perla",
+          "nom": "Kabedi",
+          "post_nom": "Tshibuyi",
+          "prenom": "Maria-Perla",
+          "sexe": "F",
+          "telephone": "0854233888",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-11-08",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Felo Mbumba Delicia-Maelle",
+          "nom": "Felo",
+          "post_nom": "Mbumba",
+          "prenom": "Delicia-Maelle",
+          "sexe": "F",
+          "telephone": "0812596085",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-01-12",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Ker Safari Yanis-Marcel",
+          "nom": "Ker",
+          "post_nom": "Safari",
+          "prenom": "Yanis-Marcel",
+          "sexe": "M",
+          "telephone": "0981790566",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-03-17",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Kabwata Mbo Parfait",
+          "nom": "Kabwata",
+          "post_nom": "Mbo",
+          "prenom": "Parfait",
+          "sexe": "M",
+          "telephone": "0898035546",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-05-07",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Mbikayi Dinanga Gradela",
+          "nom": "Mbikayi",
+          "post_nom": "Dinanga",
+          "prenom": "Gradela",
+          "sexe": "F",
+          "telephone": "0897718880",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-02-20",
+          "classe": "2ème Primaire B"
+        },
+        {
+          "nom_complet": "Gingweze El’Lagingze Lerel",
+          "nom": "Gingweze",
+          "post_nom": "El’Lagingze",
+          "prenom": "Lerel",
+          "sexe": "F",
+          "telephone": "0825558507",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-06-07",
+          "classe": "2ème Primaire B"
+        }
+      ]
+    },
+    {
+      "nom": "3ème Primaire A",
+      "type": "primaire",
+      "niveau": 3,
+      "section": "A",
+      "titulaire": "Ngandu Trésor",
+      "libelle_source": "3ème année Primaire A",
+      "eleves": [
+        {
+          "nom_complet": "Muzyumba Apendaki Naila",
+          "nom": "Muzyumba",
+          "post_nom": "Apendaki",
+          "prenom": "Naila",
+          "sexe": "F",
+          "telephone": "0814129819",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-08-12",
+          "classe": "3ème Primaire A"
+        },
+        {
+          "nom_complet": "Mfuita Nolan",
+          "nom": "Mfuita",
+          "post_nom": null,
+          "prenom": "Nolan",
+          "sexe": "M",
+          "telephone": "0846000479",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-06-30",
+          "classe": "3ème Primaire A"
+        },
+        {
+          "nom_complet": "Ngoie Bunda Dylan",
+          "nom": "Ngoie",
+          "post_nom": "Bunda",
+          "prenom": "Dylan",
+          "sexe": "M",
+          "telephone": "0994053434",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-04-24",
+          "classe": "3ème Primaire A"
+        },
+        {
+          "nom_complet": "Okwewa Beya Chayili",
+          "nom": "Okwewa",
+          "post_nom": "Beya",
+          "prenom": "Chayili",
+          "sexe": "F",
+          "telephone": "0815705006",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-07-08",
+          "classe": "3ème Primaire A"
+        },
+        {
+          "nom_complet": "Banza Muya Isaiah",
+          "nom": "Banza",
+          "post_nom": "Muya",
+          "prenom": "Isaiah",
+          "sexe": "F",
+          "telephone": "0817054248",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-04-26",
+          "classe": "3ème Primaire A"
+        },
+        {
+          "nom_complet": "Kighovi Mwenge Anaelle",
+          "nom": "Kighovi",
+          "post_nom": "Mwenge",
+          "prenom": "Anaelle",
+          "sexe": "F",
+          "telephone": "0991509079",
+          "lieu_naissance": "Goma",
+          "date_naissance": "2018-09-11",
+          "classe": "3ème Primaire A"
+        },
+        {
+          "nom_complet": "Mubanji Tshidibi Gabriel",
+          "nom": "Mubanji",
+          "post_nom": "Tshidibi",
+          "prenom": "Gabriel",
+          "sexe": "M",
+          "telephone": "0858475164",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-04-06",
+          "classe": "3ème Primaire A"
+        },
+        {
+          "nom_complet": "Diabanza Mayola Ryan",
+          "nom": "Diabanza",
+          "post_nom": "Mayola",
+          "prenom": "Ryan",
+          "sexe": "M",
+          "telephone": "0991768788",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-03-26",
+          "classe": "3ème Primaire A"
+        },
+        {
+          "nom_complet": "Ngandu Mubenesha Disanka Hope-Marie Grace",
+          "nom": "Ngandu",
+          "post_nom": "Mubenesha Disanka Hope-Marie",
+          "prenom": "Grace",
+          "sexe": "F",
+          "telephone": "0818888975",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-02-18",
+          "classe": "3ème Primaire A"
+        },
+        {
+          "nom_complet": "Muamba Mutanga Eloane-Grace",
+          "nom": "Muamba",
+          "post_nom": "Mutanga",
+          "prenom": "Eloane-Grace",
+          "sexe": "F",
+          "telephone": "0997242443",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-02-01",
+          "classe": "3ème Primaire A"
+        },
+        {
+          "nom_complet": "Sanginga Baraka Abraham",
+          "nom": "Sanginga",
+          "post_nom": "Baraka",
+          "prenom": "Abraham",
+          "sexe": "M",
+          "telephone": "0815045176",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-11-12",
+          "classe": "3ème Primaire A"
+        },
+        {
+          "nom_complet": "Azika Nabintu Alice",
+          "nom": "Azika",
+          "post_nom": "Nabintu",
+          "prenom": "Alice",
+          "sexe": "F",
+          "telephone": "0821734316",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-05-06",
+          "classe": "3ème Primaire A"
+        },
+        {
+          "nom_complet": "N’Kambua Mukanku Warren",
+          "nom": "N’Kambua",
+          "post_nom": "Mukanku",
+          "prenom": "Warren",
+          "sexe": "M",
+          "telephone": "0971853597",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-03-17",
+          "classe": "3ème Primaire A"
+        },
+        {
+          "nom_complet": "Mbanze Kamanga Prunella",
+          "nom": "Mbanze",
+          "post_nom": "Kamanga",
+          "prenom": "Prunella",
+          "sexe": "F",
+          "telephone": "0810004722",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-11-22",
+          "classe": "3ème Primaire A"
+        },
+        {
+          "nom_complet": "Mbuyu Kasanga Bradley",
+          "nom": "Mbuyu",
+          "post_nom": "Kasanga",
+          "prenom": "Bradley",
+          "sexe": "M",
+          "telephone": "0818296252",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-10-28",
+          "classe": "3ème Primaire A"
+        }
+      ]
+    },
+    {
+      "nom": "3ème Primaire B",
+      "type": "primaire",
+      "niveau": 3,
+      "section": "B",
+      "titulaire": "MUKENDI Dieudonné",
+      "libelle_source": "3ème année Primaire B",
+      "eleves": [
+        {
+          "nom_complet": "Azika Ndasi Annie",
+          "nom": "Azika",
+          "post_nom": "Ndasi",
+          "prenom": "Annie",
+          "sexe": "F",
+          "telephone": "0821734316",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-05-06",
+          "classe": "3ème Primaire B"
+        },
+        {
+          "nom_complet": "Felo Twendimbadi Juanel",
+          "nom": "Felo",
+          "post_nom": "Twendimbadi",
+          "prenom": "Juanel",
+          "sexe": "M",
+          "telephone": "0812596085",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-11-12",
+          "classe": "3ème Primaire B"
+        },
+        {
+          "nom_complet": "N’Kambua Bibomba Zoé",
+          "nom": "N’Kambua",
+          "post_nom": "Bibomba",
+          "prenom": "Zoé",
+          "sexe": "F",
+          "telephone": "097183597",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-03-17",
+          "classe": "3ème Primaire B"
+        },
+        {
+          "nom_complet": "Lukeba Luamba Cheickh",
+          "nom": "Lukeba",
+          "post_nom": "Luamba",
+          "prenom": "Cheickh",
+          "sexe": "M",
+          "telephone": "0898622303",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-02-17",
+          "classe": "3ème Primaire B"
+        },
+        {
+          "nom_complet": "Bumba Bokungu Djhulya-Maria",
+          "nom": "Bumba",
+          "post_nom": "Bokungu",
+          "prenom": "Djhulya-Maria",
+          "sexe": "F",
+          "telephone": "0858470194",
+          "lieu_naissance": "Johannesburg",
+          "date_naissance": "2018-01-10",
+          "classe": "3ème Primaire B"
+        },
+        {
+          "nom_complet": "Kilolo Makaba Rose-Marie",
+          "nom": "Kilolo",
+          "post_nom": "Makaba",
+          "prenom": "Rose-Marie",
+          "sexe": "F",
+          "telephone": "0819579056",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-11-16",
+          "classe": "3ème Primaire B"
+        },
+        {
+          "nom_complet": "Mbenza Dienze Giovane",
+          "nom": "Mbenza",
+          "post_nom": "Dienze",
+          "prenom": "Giovane",
+          "sexe": "M",
+          "telephone": "0895616973",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-10-29",
+          "classe": "3ème Primaire B"
+        },
+        {
+          "nom_complet": "Olenga Lohata Yvan-Yohan",
+          "nom": "Olenga",
+          "post_nom": "Lohata",
+          "prenom": "Yvan-Yohan",
+          "sexe": "M",
+          "telephone": "0815256981",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-04-11",
+          "classe": "3ème Primaire B"
+        },
+        {
+          "nom_complet": "Luyindula Lompatshi Lyanna-Mila",
+          "nom": "Luyindula",
+          "post_nom": "Lompatshi",
+          "prenom": "Lyanna-Mila",
+          "sexe": "F",
+          "telephone": "0850942106",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-06-06",
+          "classe": "3ème Primaire B"
+        },
+        {
+          "nom_complet": "Kaja Beya Chaya",
+          "nom": "Kaja",
+          "post_nom": "Beya",
+          "prenom": "Chaya",
+          "sexe": "F",
+          "telephone": "0815705006",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-07-08",
+          "classe": "3ème Primaire B"
+        },
+        {
+          "nom_complet": "Kabeya Kabeya Yohan",
+          "nom": "Kabeya",
+          "post_nom": "Kabeya",
+          "prenom": "Yohan",
+          "sexe": "M",
+          "telephone": "0818358376",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-09-27",
+          "classe": "3ème Primaire B"
+        },
+        {
+          "nom_complet": "Domayi Ngwangu Yohan",
+          "nom": "Domayi",
+          "post_nom": "Ngwangu",
+          "prenom": "Yohan",
+          "sexe": "M",
+          "telephone": "0823420272",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-07-30",
+          "classe": "3ème Primaire B"
+        },
+        {
+          "nom_complet": "Ndaie Anael Alleria",
+          "nom": "Ndaie",
+          "post_nom": "Anael",
+          "prenom": "Alleria",
+          "sexe": "F",
+          "telephone": "0894206993",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2019-04-18",
+          "classe": "3ème Primaire B"
+        },
+        {
+          "nom_complet": "Mutombo Kalonji Teran-Eldad",
+          "nom": "Mutombo",
+          "post_nom": "Kalonji",
+          "prenom": "Teran-Eldad",
+          "sexe": "M",
+          "telephone": "0813151242",
+          "lieu_naissance": "Houston/USA",
+          "date_naissance": "2018-08-23",
+          "classe": "3ème Primaire B"
+        },
+        {
+          "nom_complet": "Moz-Asaph Tekila Graciela",
+          "nom": "Moz-Asaph",
+          "post_nom": "Tekila",
+          "prenom": "Graciela",
+          "sexe": "F",
+          "telephone": "0975273271",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-01-06",
+          "classe": "3ème Primaire B"
+        }
+      ]
+    },
+    {
+      "nom": "4ème Primaire A",
+      "type": "primaire",
+      "niveau": 4,
+      "section": "A",
+      "titulaire": "MUKOMBOZI Samuel",
+      "libelle_source": "4ème année Primaire A",
+      "eleves": [
+        {
+          "nom_complet": "Mbombo Kayembe Shukrani-Eunice",
+          "nom": "Mbombo",
+          "post_nom": "Kayembe",
+          "prenom": "Shukrani-Eunice",
+          "sexe": "F",
+          "telephone": "0810943589",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-05-13",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Ndiakuile Nangali Zendaya",
+          "nom": "Ndiakuile",
+          "post_nom": "Nangali",
+          "prenom": "Zendaya",
+          "sexe": "F",
+          "telephone": "0811485546",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-02-24",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Mude Gbale Elwin",
+          "nom": "Mude",
+          "post_nom": "Gbale",
+          "prenom": "Elwin",
+          "sexe": "M",
+          "telephone": "0899340128",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-04-22",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Lopombo Mopanga Yvan-Abraham",
+          "nom": "Lopombo",
+          "post_nom": "Mopanga",
+          "prenom": "Yvan-Abraham",
+          "sexe": "M",
+          "telephone": "0821110027",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-08-07",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Luabeya Tshibuyi David",
+          "nom": "Luabeya",
+          "post_nom": "Tshibuyi",
+          "prenom": "David",
+          "sexe": "M",
+          "telephone": "0854233888",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-02-09",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Mulanga Kazadi Satisfaite",
+          "nom": "Mulanga",
+          "post_nom": "Kazadi",
+          "prenom": "Satisfaite",
+          "sexe": "F",
+          "telephone": "0852606293",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-12-08",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Pandi Musungula Jewel",
+          "nom": "Pandi",
+          "post_nom": "Musungula",
+          "prenom": "Jewel",
+          "sexe": "F",
+          "telephone": "0810016605",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-10-29",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Aila Sifa Anaelle-Jade",
+          "nom": "Aila",
+          "post_nom": "Sifa",
+          "prenom": "Anaelle-Jade",
+          "sexe": "F",
+          "telephone": "0970010663",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-09-09",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Koga Bachidere Kenan",
+          "nom": "Koga",
+          "post_nom": "Bachidere",
+          "prenom": "Kenan",
+          "sexe": "M",
+          "telephone": "0808513088",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-10-07",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Langa Bagula Smile",
+          "nom": "Langa",
+          "post_nom": "Bagula",
+          "prenom": "Smile",
+          "sexe": "M",
+          "telephone": "0972229044",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-05-26",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Ubay Ker Maelle-Joyce",
+          "nom": "Ubay",
+          "post_nom": "Ker",
+          "prenom": "Maelle-Joyce",
+          "sexe": "F",
+          "telephone": "0981790566",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-01-25",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Kabamba Kananga Jayden-Sacré",
+          "nom": "Kabamba",
+          "post_nom": "Kananga",
+          "prenom": "Jayden-Sacré",
+          "sexe": "M",
+          "telephone": "0815093477",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-03-28",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Katika Berakah Marc-Heaven",
+          "nom": "Katika",
+          "post_nom": "Berakah",
+          "prenom": "Marc-Heaven",
+          "sexe": "M",
+          "telephone": "0815030352",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-08-03",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Muyaya Mbuyi Grace-Angel",
+          "nom": "Muyaya",
+          "post_nom": "Mbuyi",
+          "prenom": "Grace-Angel",
+          "sexe": "F",
+          "telephone": "0815468677",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-04-01",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Cikuru Hamuli Anne-Marie",
+          "nom": "Cikuru",
+          "post_nom": "Hamuli",
+          "prenom": "Anne-Marie",
+          "sexe": "F",
+          "telephone": "0991969976",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-05-09",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Ngisa Mboli Allanha",
+          "nom": "Ngisa",
+          "post_nom": "Mboli",
+          "prenom": "Allanha",
+          "sexe": "F",
+          "telephone": "0853074297",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-04-25",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Makasi Legrand Daniel",
+          "nom": "Makasi",
+          "post_nom": "Legrand",
+          "prenom": "Daniel",
+          "sexe": "M",
+          "telephone": "0854630561",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-03-17",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Moseka Adogo Surya",
+          "nom": "Moseka",
+          "post_nom": "Adogo",
+          "prenom": "Surya",
+          "sexe": "F",
+          "telephone": "0853402346",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-08-18",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Mudienda Mukendi Dieurci",
+          "nom": "Mudienda",
+          "post_nom": "Mukendi",
+          "prenom": "Dieurci",
+          "sexe": "F",
+          "telephone": "0896022008",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-02-28",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Tshipama Tendela Anaëlle",
+          "nom": "Tshipama",
+          "post_nom": "Tendela",
+          "prenom": "Anaëlle",
+          "sexe": "F",
+          "telephone": "0824323026",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-05-12",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Mibulumukini Liam Gabriel",
+          "nom": "Mibulumukini",
+          "post_nom": "Liam",
+          "prenom": "Gabriel",
+          "sexe": "M",
+          "telephone": "0852445165",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-05-26",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Kayeye Katabsi Océane",
+          "nom": "Kayeye",
+          "post_nom": "Katabsi",
+          "prenom": "Océane",
+          "sexe": "F",
+          "telephone": "0811907800",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-12-25",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Katende Kayembe Ekdad-Ishara",
+          "nom": "Katende",
+          "post_nom": "Kayembe",
+          "prenom": "Ekdad-Ishara",
+          "sexe": "M",
+          "telephone": "0810943589",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-05-13",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Diawa Nguanda Florian-Grace",
+          "nom": "Diawa",
+          "post_nom": "Nguanda",
+          "prenom": "Florian-Grace",
+          "sexe": "M",
+          "telephone": "0820082500",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-06-22",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Yanaku Manu Nathan",
+          "nom": "Yanaku",
+          "post_nom": "Manu",
+          "prenom": "Nathan",
+          "sexe": "M",
+          "telephone": "0997303980",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-06-20",
+          "classe": "4ème Primaire A"
+        },
+        {
+          "nom_complet": "Bilambo Mamboleo Priscollia",
+          "nom": "Bilambo",
+          "post_nom": "Mamboleo",
+          "prenom": "Priscollia",
+          "sexe": "F",
+          "telephone": "0990662488",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2018-01-13",
+          "classe": "4ème Primaire A"
+        }
+      ]
+    },
+    {
+      "nom": "5ème Primaire A",
+      "type": "primaire",
+      "niveau": 5,
+      "section": "A",
+      "titulaire": "BAYOLO Christian",
+      "libelle_source": "5ème année Primaire A",
+      "eleves": [
+        {
+          "nom_complet": "Tshibuabua Kabeya Emmanuella",
+          "nom": "Tshibuabua",
+          "post_nom": "Kabeya",
+          "prenom": "Emmanuella",
+          "sexe": "F",
+          "telephone": "0818358376",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2015-04-06",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Kalubanga Kulu Kulu Evan",
+          "nom": "Kalubanga",
+          "post_nom": "Kulu Kulu",
+          "prenom": "Evan",
+          "sexe": "M",
+          "telephone": "0997548318",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-10-15",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Ngalula Kapa Joviale",
+          "nom": "Ngalula",
+          "post_nom": "Kapa",
+          "prenom": "Joviale",
+          "sexe": "F",
+          "telephone": "0811650627",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-04-06",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Lungungu Tunda Tifenn-Elsa",
+          "nom": "Lungungu",
+          "post_nom": "Tunda",
+          "prenom": "Tifenn-Elsa",
+          "sexe": "F",
+          "telephone": "0812442579",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-05-31",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Citona Rais Yair",
+          "nom": "Citona",
+          "post_nom": "Rais",
+          "prenom": "Yair",
+          "sexe": "M",
+          "telephone": "0816888565",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-06-04",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Nkiangudi Aksanti Samia-Jovial",
+          "nom": "Nkiangudi",
+          "post_nom": "Aksanti",
+          "prenom": "Samia-Jovial",
+          "sexe": "M",
+          "telephone": "0999931498",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-04-30",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Puati Khonde Bioshak",
+          "nom": "Puati",
+          "post_nom": "Khonde",
+          "prenom": "Bioshak",
+          "sexe": "M",
+          "telephone": "0829394436",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-12-30",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Cheduah Atosha Bénie",
+          "nom": "Cheduah",
+          "post_nom": "Atosha",
+          "prenom": "Bénie",
+          "sexe": "F",
+          "telephone": "0974836839",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-11-13",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Mbungu Mbemba Elliot",
+          "nom": "Mbungu",
+          "post_nom": "Mbemba",
+          "prenom": "Elliot",
+          "sexe": "M",
+          "telephone": "0818553468",
+          "lieu_naissance": "Dallas/USA",
+          "date_naissance": "2017-02-16",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Luamba Telo Tryphène",
+          "nom": "Luamba",
+          "post_nom": "Telo",
+          "prenom": "Tryphène",
+          "sexe": "F",
+          "telephone": "0898622303",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-12-21",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Mugo Kasanga Brianna",
+          "nom": "Mugo",
+          "post_nom": "Kasanga",
+          "prenom": "Brianna",
+          "sexe": "F",
+          "telephone": "0818296252",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-11-29",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Kalala Mubabinge Peniel",
+          "nom": "Kalala",
+          "post_nom": "Mubabinge",
+          "prenom": "Peniel",
+          "sexe": "F",
+          "telephone": "0854602715",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-12-20",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Makaba Mbumba Isaac-Daylan",
+          "nom": "Makaba",
+          "post_nom": "Mbumba",
+          "prenom": "Isaac-Daylan",
+          "sexe": "M",
+          "telephone": "0819579056",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-05-16",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Mpoyi Mayamonuswa Noah",
+          "nom": "Mpoyi",
+          "post_nom": "Mayamonuswa",
+          "prenom": "Noah",
+          "sexe": "M",
+          "telephone": "0814444528",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-07-14",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Lusakweno Ngondo Chloé-Emilie",
+          "nom": "Lusakweno",
+          "post_nom": "Ngondo",
+          "prenom": "Chloé-Emilie",
+          "sexe": "F",
+          "telephone": "0815466876",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-11-12",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Mibulumukini Abigail Ashna",
+          "nom": "Mibulumukini",
+          "post_nom": "Abigail",
+          "prenom": "Ashna",
+          "sexe": "F",
+          "telephone": "0852445165",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-03-07",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Yumba Gamani Prince-Nathan",
+          "nom": "Yumba",
+          "post_nom": "Gamani",
+          "prenom": "Prince-Nathan",
+          "sexe": "M",
+          "telephone": "0822348821",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-03-27",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Domayi Ngweyi Tyan-Ange",
+          "nom": "Domayi",
+          "post_nom": "Ngweyi",
+          "prenom": "Tyan-Ange",
+          "sexe": "M",
+          "telephone": "0823420272",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-03-19",
+          "classe": "5ème Primaire A"
+        },
+        {
+          "nom_complet": "Kaloba Ndaie Horen",
+          "nom": "Kaloba",
+          "post_nom": "Ndaie",
+          "prenom": "Horen",
+          "sexe": "M",
+          "telephone": "0816895505",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-01-15",
+          "classe": "5ème Primaire A"
+        }
+      ]
+    },
+    {
+      "nom": "5ème Primaire B",
+      "type": "primaire",
+      "niveau": 5,
+      "section": "B",
+      "titulaire": "TOKWISI Jordan",
+      "libelle_source": "5ème année Primaire B",
+      "eleves": [
+        {
+          "nom_complet": "Khonde Mbambi Christiano",
+          "nom": "Khonde",
+          "post_nom": "Mbambi",
+          "prenom": "Christiano",
+          "sexe": "M",
+          "telephone": "0812442579",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-04-16",
+          "classe": "5ème Primaire B"
+        },
+        {
+          "nom_complet": "Mbiye Beya Kyle",
+          "nom": "Mbiye",
+          "post_nom": "Beya",
+          "prenom": "Kyle",
+          "sexe": "M",
+          "telephone": "0815705006",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-02-19",
+          "classe": "5ème Primaire B"
+        },
+        {
+          "nom_complet": "Muyayu Matela Pauline",
+          "nom": "Muyayu",
+          "post_nom": "Matela",
+          "prenom": "Pauline",
+          "sexe": "F",
+          "telephone": "0825035537",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2013-09-23",
+          "classe": "5ème Primaire B"
+        },
+        {
+          "nom_complet": "Luamba Thalos Cerimau Junior",
+          "nom": "Luamba",
+          "post_nom": "Thalos Cerimau",
+          "prenom": "Junior",
+          "sexe": "M",
+          "telephone": "0898622303",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-12-21",
+          "classe": "5ème Primaire B"
+        },
+        {
+          "nom_complet": "Matadi Mukoma Adriel",
+          "nom": "Matadi",
+          "post_nom": "Mukoma",
+          "prenom": "Adriel",
+          "sexe": "F",
+          "telephone": "0819409315",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-12-22",
+          "classe": "5ème Primaire B"
+        },
+        {
+          "nom_complet": "Sabwa Kabasele Cassia",
+          "nom": "Sabwa",
+          "post_nom": "Kabasele",
+          "prenom": "Cassia",
+          "sexe": "F",
+          "telephone": "0814240130",
+          "lieu_naissance": "Bukavu",
+          "date_naissance": "2016-11-25",
+          "classe": "5ème Primaire B"
+        },
+        {
+          "nom_complet": "Meji Tshidibi Emmanuel",
+          "nom": "Meji",
+          "post_nom": "Tshidibi",
+          "prenom": "Emmanuel",
+          "sexe": "M",
+          "telephone": "0858475164",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-08-22",
+          "classe": "5ème Primaire B"
+        },
+        {
+          "nom_complet": "Kafun Emmanuelle",
+          "nom": "Kafun",
+          "post_nom": null,
+          "prenom": "Emmanuelle",
+          "sexe": "F",
+          "telephone": "0817191983",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-04-02",
+          "classe": "5ème Primaire B"
+        },
+        {
+          "nom_complet": "Kezipame Ryan Sanders",
+          "nom": "Kezipame",
+          "post_nom": "Ryan",
+          "prenom": "Sanders",
+          "sexe": "M",
+          "telephone": "0896559273",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-02-09",
+          "classe": "5ème Primaire B"
+        },
+        {
+          "nom_complet": "Ndaie Owen Hansel",
+          "nom": "Ndaie",
+          "post_nom": "Owen",
+          "prenom": "Hansel",
+          "sexe": "M",
+          "telephone": "0894206993",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-07-14",
+          "classe": "5ème Primaire B"
+        },
+        {
+          "nom_complet": "Musampa Johanna Divine",
+          "nom": "Musampa",
+          "post_nom": "Johanna",
+          "prenom": "Divine",
+          "sexe": "F",
+          "telephone": "0815838581",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-08-05",
+          "classe": "5ème Primaire B"
+        },
+        {
+          "nom_complet": "Kikudi Mbongela Hope",
+          "nom": "Kikudi",
+          "post_nom": "Mbongela",
+          "prenom": "Hope",
+          "sexe": "F",
+          "telephone": "0812222298",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2017-02-02",
+          "classe": "5ème Primaire B"
+        },
+        {
+          "nom_complet": "Diawa Kalibo Prunelle",
+          "nom": "Diawa",
+          "post_nom": "Kalibo",
+          "prenom": "Prunelle",
+          "sexe": "F",
+          "telephone": "0820082500",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-05-20",
+          "classe": "5ème Primaire B"
+        },
+        {
+          "nom_complet": "Tshilumbu Mukendi Jayden",
+          "nom": "Tshilumbu",
+          "post_nom": "Mukendi",
+          "prenom": "Jayden",
+          "sexe": "M",
+          "telephone": "0833859393",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-05-22",
+          "classe": "5ème Primaire B"
+        }
+      ]
+    },
+    {
+      "nom": "6ème Primaire A",
+      "type": "primaire",
+      "niveau": 6,
+      "section": "A",
+      "titulaire": "Nvengo Ignace",
+      "libelle_source": "6ème année Primaire A",
+      "eleves": [
+        {
+          "nom_complet": "Olenga Ian Lilian",
+          "nom": "Olenga",
+          "post_nom": "Ian",
+          "prenom": "Lilian",
+          "sexe": "M",
+          "telephone": "0815256981",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2015-07-06",
+          "classe": "6ème Primaire A"
+        },
+        {
+          "nom_complet": "Mbungu Tobany Emmie-Maera",
+          "nom": "Mbungu",
+          "post_nom": "Tobany",
+          "prenom": "Emmie-Maera",
+          "sexe": "F",
+          "telephone": "0818553468",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2015-07-24",
+          "classe": "6ème Primaire A"
+        },
+        {
+          "nom_complet": "Kabeya Mwamba Schemayah",
+          "nom": "Kabeya",
+          "post_nom": "Mwamba",
+          "prenom": "Schemayah",
+          "sexe": "M",
+          "telephone": "0820451143",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-06-08",
+          "classe": "6ème Primaire A"
+        },
+        {
+          "nom_complet": "Marina Kapa Johanna",
+          "nom": "Marina",
+          "post_nom": "Kapa",
+          "prenom": "Johanna",
+          "sexe": "F",
+          "telephone": "0822828087",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-02-19",
+          "classe": "6ème Primaire A"
+        },
+        {
+          "nom_complet": "Kisenge Buhunda Rabby-Paul",
+          "nom": "Kisenge",
+          "post_nom": "Buhunda",
+          "prenom": "Rabby-Paul",
+          "sexe": "M",
+          "telephone": null,
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-01-08",
+          "classe": "6ème Primaire A"
+        },
+        {
+          "nom_complet": "Makasi Wavita Lucia",
+          "nom": "Makasi",
+          "post_nom": "Wavita",
+          "prenom": "Lucia",
+          "sexe": "F",
+          "telephone": "0856386816",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2015-06-24",
+          "classe": "6ème Primaire A"
+        },
+        {
+          "nom_complet": "Yombo Mukendi Dieumi",
+          "nom": "Yombo",
+          "post_nom": "Mukendi",
+          "prenom": "Dieumi",
+          "sexe": "F",
+          "telephone": "0896022008",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-03-18",
+          "classe": "6ème Primaire A"
+        },
+        {
+          "nom_complet": "Bitota Tshibanda Juanita",
+          "nom": "Bitota",
+          "post_nom": "Tshibanda",
+          "prenom": "Juanita",
+          "sexe": "F",
+          "telephone": "0898257759",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2015-05-06",
+          "classe": "6ème Primaire A"
+        },
+        {
+          "nom_complet": "Matadi Tshiala Daria",
+          "nom": "Matadi",
+          "post_nom": "Tshiala",
+          "prenom": "Daria",
+          "sexe": "F",
+          "telephone": "0819409315",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2015-05-28",
+          "classe": "6ème Primaire A"
+        },
+        {
+          "nom_complet": "Kashika Konyi Parfaite",
+          "nom": "Kashika",
+          "post_nom": "Konyi",
+          "prenom": "Parfaite",
+          "sexe": "F",
+          "telephone": "085606293",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2014-12-07",
+          "classe": "6ème Primaire A"
+        },
+        {
+          "nom_complet": "Ezaty Mungu Feni Ayiko Heaven",
+          "nom": "Ezaty",
+          "post_nom": "Mungu Feni Ayiko",
+          "prenom": "Heaven",
+          "sexe": "F",
+          "telephone": "0824200281",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2015-09-25",
+          "classe": "6ème Primaire A"
+        },
+        {
+          "nom_complet": "Tshamala Musau Anaelle",
+          "nom": "Tshamala",
+          "post_nom": "Musau",
+          "prenom": "Anaelle",
+          "sexe": "F",
+          "telephone": "0898881672",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2020-10-16",
+          "classe": "6ème Primaire A"
+        },
+        {
+          "nom_complet": "Okandja Imongo Celia-Nhuru",
+          "nom": "Okandja",
+          "post_nom": "Imongo",
+          "prenom": "Celia-Nhuru",
+          "sexe": "F",
+          "telephone": "0991728341",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-08-06",
+          "classe": "6ème Primaire A"
+        },
+        {
+          "nom_complet": "Mongapa Elikya Hope",
+          "nom": "Mongapa",
+          "post_nom": "Elikya",
+          "prenom": "Hope",
+          "sexe": "F",
+          "telephone": "0855084135",
+          "lieu_naissance": "Kinshasa",
+          "date_naissance": "2016-10-14",
+          "classe": "6ème Primaire A"
+        }
+      ]
+    }
+  ],
+  "parents": [
+    {
+      "telephone": "0808513088",
+      "nom": "Koga",
+      "prenom": "Parent",
+      "enfants": [
+        "Koga Lumba Keyanna",
+        "Koga Balungwe Keira",
+        "Koga Ilunga Kayla",
+        "Koga Bachidere Kenan"
+      ]
+    },
+    {
+      "telephone": "0808890830",
+      "nom": "Pende",
+      "prenom": "Parent",
+      "enfants": [
+        "Pende Agale Believe"
+      ]
+    },
+    {
+      "telephone": "0810001993",
+      "nom": "Ngyay",
+      "prenom": "Parent",
+      "enfants": [
+        "Ngyay Dasilva Neila"
+      ]
+    },
+    {
+      "telephone": "0810004722",
+      "nom": "Mbanze",
+      "prenom": "Parent",
+      "enfants": [
+        "Mbanze Kamanga Prunella"
+      ]
+    },
+    {
+      "telephone": "0810016605",
+      "nom": "Pandi",
+      "prenom": "Parent",
+      "enfants": [
+        "Pandi Shindama Yoel",
+        "Pandi Musungula Jewel"
+      ]
+    },
+    {
+      "telephone": "0810216403",
+      "nom": "Kalombo",
+      "prenom": "Parent",
+      "enfants": [
+        "Kalombo Tshabu Eunice"
+      ]
+    },
+    {
+      "telephone": "0810341126",
+      "nom": "Ngyay",
+      "prenom": "Parent",
+      "enfants": [
+        "Ngyay Muley Liam"
+      ]
+    },
+    {
+      "telephone": "0810531531",
+      "nom": "Ngalamulume",
+      "prenom": "Parent",
+      "enfants": [
+        "Ngalamulume Luta Auréole-Acacia",
+        "Ngalamulume Tshiwala Hope Elio"
+      ]
+    },
+    {
+      "telephone": "0810885462",
+      "nom": "Mwamba",
+      "prenom": "Parent",
+      "enfants": [
+        "Mwamba Lombe Nail-Ilyan"
+      ]
+    },
+    {
+      "telephone": "0810943589",
+      "nom": "Kayembe",
+      "prenom": "Parent",
+      "enfants": [
+        "Mbombo Kayembe Shukrani-Eunice",
+        "Katende Kayembe Ekdad-Ishara"
+      ]
+    },
+    {
+      "telephone": "0811272236",
+      "nom": "Alas",
+      "prenom": "Parent",
+      "enfants": [
+        "Alas Lazol Evanna"
+      ]
+    },
+    {
+      "telephone": "0811485546",
+      "nom": "Ndiakuile",
+      "prenom": "Parent",
+      "enfants": [
+        "Ndiakuile Nangali Zendaya"
+      ]
+    },
+    {
+      "telephone": "0811487333",
+      "nom": "Nzeba",
+      "prenom": "Parent",
+      "enfants": [
+        "Nzeba Kalume Nouria"
+      ]
+    },
+    {
+      "telephone": "0811608863",
+      "nom": "Bongo",
+      "prenom": "Parent",
+      "enfants": [
+        "Bongo Iyombe Sylvianna"
+      ]
+    },
+    {
+      "telephone": "0811650627",
+      "nom": "Kapa",
+      "prenom": "Parent",
+      "enfants": [
+        "Tshibunda Kapa Joram",
+        "Ngalula Kapa Joviale"
+      ]
+    },
+    {
+      "telephone": "0811907800",
+      "nom": "Kayeye",
+      "prenom": "Parent",
+      "enfants": [
+        "Kayeye Katabsi Océane"
+      ]
+    },
+    {
+      "telephone": "0812222298",
+      "nom": "Kikudi",
+      "prenom": "Parent",
+      "enfants": [
+        "Kikudi Ngoyi Serena",
+        "Kikudi Mbongela Hope"
+      ]
+    },
+    {
+      "telephone": "0812343538",
+      "nom": "Loambo",
+      "prenom": "Parent",
+      "enfants": [
+        "Loambo Wembi Lucas Bryan",
+        "Loambo Wongo Akake Maeva-Sarah"
+      ]
+    },
+    {
+      "telephone": "0812442579",
+      "nom": "Lungungu",
+      "prenom": "Parent",
+      "enfants": [
+        "Lungungu Tunda Tifenn-Elsa",
+        "Khonde Mbambi Christiano"
+      ]
+    },
+    {
+      "telephone": "0812442592",
+      "nom": "Mpona",
+      "prenom": "Parent",
+      "enfants": [
+        "Mpona Minga Sunshine Urielle"
+      ]
+    },
+    {
+      "telephone": "0812525389",
+      "nom": "Lopombo",
+      "prenom": "Parent",
+      "enfants": [
+        "Lopombo Munza Yannis-Enzo"
+      ]
+    },
+    {
+      "telephone": "0812566243",
+      "nom": "Kingombe",
+      "prenom": "Parent",
+      "enfants": [
+        "Kingombe Dishashi Evan",
+        "Kingombe Kalonda Enzo"
+      ]
+    },
+    {
+      "telephone": "0812596085",
+      "nom": "Felo",
+      "prenom": "Parent",
+      "enfants": [
+        "Felo Mbumba Delicia-Maelle",
+        "Felo Twendimbadi Juanel"
+      ]
+    },
+    {
+      "telephone": "0812793659",
+      "nom": "Kiminu",
+      "prenom": "Parent",
+      "enfants": [
+        "Kiminu Kashimba Axel-Gabriel"
+      ]
+    },
+    {
+      "telephone": "0812855558",
+      "nom": "Maneng",
+      "prenom": "Parent",
+      "enfants": [
+        "Maneng Anaya-Anaïs"
+      ]
+    },
+    {
+      "telephone": "0813071967",
+      "nom": "Aila",
+      "prenom": "Parent",
+      "enfants": [
+        "Aila Ntambwe Asengo Anais-Christiane"
+      ]
+    },
+    {
+      "telephone": "0813122551",
+      "nom": "Nyangwile",
+      "prenom": "Parent",
+      "enfants": [
+        "Nyangwile Tshiamala Noah",
+        "Nyangwile Musoga Dulcia"
+      ]
+    },
+    {
+      "telephone": "0813151242",
+      "nom": "Mutombo",
+      "prenom": "Parent",
+      "enfants": [
+        "Mutombo Kalonji Teran-Eldad"
+      ]
+    },
+    {
+      "telephone": "0813421894",
+      "nom": "Tshimanga",
+      "prenom": "Parent",
+      "enfants": [
+        "Tshimanga Disanka Owen"
+      ]
+    },
+    {
+      "telephone": "0813725318",
+      "nom": "Muele",
+      "prenom": "Parent",
+      "enfants": [
+        "Kandanda Muele Rayan Noah",
+        "Kitshinku Muele Nael-Ethan"
+      ]
+    },
+    {
+      "telephone": "0814043237",
+      "nom": "Bola",
+      "prenom": "Parent",
+      "enfants": [
+        "Bola Bonkoto Shammah"
+      ]
+    },
+    {
+      "telephone": "0814129819",
+      "nom": "Muzyumba",
+      "prenom": "Parent",
+      "enfants": [
+        "Muzyumba Tangi Yves-Daniel",
+        "Muzyumba Apendaki Naila"
+      ]
+    },
+    {
+      "telephone": "0814240130",
+      "nom": "Sabwa",
+      "prenom": "Parent",
+      "enfants": [
+        "Sabwa Mbuyamba Nathanael",
+        "Sabwa Kabasele Cassia"
+      ]
+    },
+    {
+      "telephone": "0814332821",
+      "nom": "Kapuya",
+      "prenom": "Parent",
+      "enfants": [
+        "Kapuya Kabeya Nolan"
+      ]
+    },
+    {
+      "telephone": "0814354981",
+      "nom": "Diemby",
+      "prenom": "Parent",
+      "enfants": [
+        "Diemby Uriel-Lorenzo"
+      ]
+    },
+    {
+      "telephone": "0814444528",
+      "nom": "Mayamonuswa",
+      "prenom": "Parent",
+      "enfants": [
+        "Mayamonuswa Mbula Elsa",
+        "Mpoyi Mayamonuswa Noah"
+      ]
+    },
+    {
+      "telephone": "0814688600",
+      "nom": "Miyimi",
+      "prenom": "Parent",
+      "enfants": [
+        "Miyimi Muwawa Nathan"
+      ]
+    },
+    {
+      "telephone": "0814892007",
+      "nom": "Nkiadiasivi",
+      "prenom": "Parent",
+      "enfants": [
+        "Nkiadiasivi Phemba Kimia-Loise"
+      ]
+    },
+    {
+      "telephone": "0815030352",
+      "nom": "Katika",
+      "prenom": "Parent",
+      "enfants": [
+        "Katika Berakah Marc-Heaven"
+      ]
+    },
+    {
+      "telephone": "0815045176",
+      "nom": "Sanginga",
+      "prenom": "Parent",
+      "enfants": [
+        "Sanginga Baraka Abraham"
+      ]
+    },
+    {
+      "telephone": "0815093477",
+      "nom": "Kabamba",
+      "prenom": "Parent",
+      "enfants": [
+        "Kabamba Kananga Jayden-Sacré"
+      ]
+    },
+    {
+      "telephone": "0815256981",
+      "nom": "Olenga",
+      "prenom": "Parent",
+      "enfants": [
+        "Olenga Lohata Yvan-Yohan",
+        "Olenga Ian Lilian"
+      ]
+    },
+    {
+      "telephone": "0815346961",
+      "nom": "Disanka",
+      "prenom": "Parent",
+      "enfants": [
+        "Disanka Kabeya Yannis"
+      ]
+    },
+    {
+      "telephone": "0815466876",
+      "nom": "Lusakweno",
+      "prenom": "Parent",
+      "enfants": [
+        "Lusakweno Ngondo Chloé-Emilie"
+      ]
+    },
+    {
+      "telephone": "0815468677",
+      "nom": "Muyaya",
+      "prenom": "Parent",
+      "enfants": [
+        "Muyaya Mpompo Prunelle",
+        "Muyaya Mbuyi Grace-Angel"
+      ]
+    },
+    {
+      "telephone": "0815654451",
+      "nom": "Banza",
+      "prenom": "Parent",
+      "enfants": [
+        "Banza Kabaseke Al-Zyon",
+        "Banza Cikaya Genesis"
+      ]
+    },
+    {
+      "telephone": "0815705006",
+      "nom": "Beya",
+      "prenom": "Parent",
+      "enfants": [
+        "Okwewa Beya Chayili",
+        "Kaja Beya Chaya",
+        "Mbiye Beya Kyle"
+      ]
+    },
+    {
+      "telephone": "0815838581",
+      "nom": "Musampa",
+      "prenom": "Parent",
+      "enfants": [
+        "Musampa Dan Lucas",
+        "Musampa Johanna Divine"
+      ]
+    },
+    {
+      "telephone": "0816060308",
+      "nom": "Matondo-Kuanzambi",
+      "prenom": "Parent",
+      "enfants": [
+        "Matondo-Kuanzambi Lubanziladio Onyx-Blessing"
+      ]
+    },
+    {
+      "telephone": "0816069155",
+      "nom": "Mbingu",
+      "prenom": "Parent",
+      "enfants": [
+        "Mbingu Mandiangu Imani"
+      ]
+    },
+    {
+      "telephone": "0816177779",
+      "nom": "Tsasa",
+      "prenom": "Parent",
+      "enfants": [
+        "Tsasa Ilunga Otalia"
+      ]
+    },
+    {
+      "telephone": "0816374238",
+      "nom": "Kwenza",
+      "prenom": "Parent",
+      "enfants": [
+        "Kwenza Kundenga Elzira",
+        "Kwenza Kilangalanga Eliora"
+      ]
+    },
+    {
+      "telephone": "0816390980",
+      "nom": "Kabangu",
+      "prenom": "Parent",
+      "enfants": [
+        "Kabangu Ngandu Warren"
+      ]
+    },
+    {
+      "telephone": "0816432892",
+      "nom": "Bundule",
+      "prenom": "Parent",
+      "enfants": [
+        "Bundule Ngoy Red",
+        "Bundule Ngoy Dylanne"
+      ]
+    },
+    {
+      "telephone": "0816826262",
+      "nom": "Ntumba",
+      "prenom": "Parent",
+      "enfants": [
+        "Ntumba Madjunda Emmanuel"
+      ]
+    },
+    {
+      "telephone": "0816888565",
+      "nom": "Citona",
+      "prenom": "Parent",
+      "enfants": [
+        "Citona Rais Yair"
+      ]
+    },
+    {
+      "telephone": "0816895505",
+      "nom": "Kaloba",
+      "prenom": "Parent",
+      "enfants": [
+        "Kaloba Ndaie Horen"
+      ]
+    },
+    {
+      "telephone": "0817054248",
+      "nom": "Banza",
+      "prenom": "Parent",
+      "enfants": [
+        "Banza Muya Isaiah"
+      ]
+    },
+    {
+      "telephone": "0817191983",
+      "nom": "Kafun",
+      "prenom": "Parent",
+      "enfants": [
+        "Kafun Emmanuelle"
+      ]
+    },
+    {
+      "telephone": "0817401428",
+      "nom": "Kalemba",
+      "prenom": "Parent",
+      "enfants": [
+        "Kalemba Tshibangu Sohen"
+      ]
+    },
+    {
+      "telephone": "0817589301",
+      "nom": "Kavula",
+      "prenom": "Parent",
+      "enfants": [
+        "Kavula Muheta Shai-Daniel"
+      ]
+    },
+    {
+      "telephone": "0818296252",
+      "nom": "Kasanga",
+      "prenom": "Parent",
+      "enfants": [
+        "Kabibi Kasanga Britney",
+        "Mbuyu Kasanga Bradley",
+        "Mugo Kasanga Brianna"
+      ]
+    },
+    {
+      "telephone": "0818358376",
+      "nom": "Kabeya",
+      "prenom": "Parent",
+      "enfants": [
+        "Muendeda Kabeya Marcus",
+        "Ndaya Kabeya Myriam",
+        "Kabeya Kabeya Yohan",
+        "Tshibuabua Kabeya Emmanuella"
+      ]
+    },
+    {
+      "telephone": "0818553468",
+      "nom": "Mbungu",
+      "prenom": "Parent",
+      "enfants": [
+        "Mbungu Nsimba Elikya",
+        "Mbungu Mbemba Elliot",
+        "Mbungu Tobany Emmie-Maera"
+      ]
+    },
+    {
+      "telephone": "0818615511",
+      "nom": "Kibambe",
+      "prenom": "Parent",
+      "enfants": [
+        "Kibambe Lupanda Elior",
+        "Kibambe Nseya Aela"
+      ]
+    },
+    {
+      "telephone": "0818888975",
+      "nom": "Ngandu",
+      "prenom": "Parent",
+      "enfants": [
+        "Ngandu Fwamba Mazungu Paul-Percé",
+        "Ngandu Mubenesha Disanka Hope-Marie Grace"
+      ]
+    },
+    {
+      "telephone": "0819069719",
+      "nom": "Makolo",
+      "prenom": "Parent",
+      "enfants": [
+        "Makolo Kheta Yael"
+      ]
+    },
+    {
+      "telephone": "0819079509",
+      "nom": "Katsambya",
+      "prenom": "Parent",
+      "enfants": [
+        "Kavugho Katsambya Naelys",
+        "Kambale Katsambya Jayden"
+      ]
+    },
+    {
+      "telephone": "0819082185",
+      "nom": "Kabena",
+      "prenom": "Parent",
+      "enfants": [
+        "Kabena Nyembwe Chloé"
+      ]
+    },
+    {
+      "telephone": "0819291960",
+      "nom": "Zola",
+      "prenom": "Parent",
+      "enfants": [
+        "Zola Kabedi Rayna-Gabrielle",
+        "Zola Ndie Joshua"
+      ]
+    },
+    {
+      "telephone": "0819409315",
+      "nom": "Matadi",
+      "prenom": "Parent",
+      "enfants": [
+        "Matadi Batshini Elsa",
+        "Matadi Kapinga Malia",
+        "Matadi Mukoma Adriel",
+        "Matadi Tshiala Daria"
+      ]
+    },
+    {
+      "telephone": "0819451807",
+      "nom": "Tshizubu",
+      "prenom": "Parent",
+      "enfants": [
+        "Kabedi Tshizubu Andréa",
+        "Katomba Tshizubu Noah"
+      ]
+    },
+    {
+      "telephone": "0819579056",
+      "nom": "Makaba",
+      "prenom": "Parent",
+      "enfants": [
+        "Makaba Mazingu Tehilah",
+        "Kilolo Makaba Rose-Marie",
+        "Makaba Mbumba Isaac-Daylan"
+      ]
+    },
+    {
+      "telephone": "0819797392",
+      "nom": "Nkiangudi",
+      "prenom": "Parent",
+      "enfants": [
+        "Nkiangudi Amani Shama-Onyx"
+      ]
+    },
+    {
+      "telephone": "0819983240",
+      "nom": "Kondo",
+      "prenom": "Parent",
+      "enfants": [
+        "Kondo Wa Kondo El Hatikvah"
+      ]
+    },
+    {
+      "telephone": "0820082500",
+      "nom": "Diawa",
+      "prenom": "Parent",
+      "enfants": [
+        "Diawa Nguanda Florian-Grace",
+        "Diawa Kalibo Prunelle"
+      ]
+    },
+    {
+      "telephone": "0820451143",
+      "nom": "Kabeya",
+      "prenom": "Parent",
+      "enfants": [
+        "Kabeya Mwamba Schemayah"
+      ]
+    },
+    {
+      "telephone": "0820908518",
+      "nom": "Mambu",
+      "prenom": "Parent",
+      "enfants": [
+        "Mambu Léo Gabriel"
+      ]
+    },
+    {
+      "telephone": "0820957550",
+      "nom": "Kolomoni",
+      "prenom": "Parent",
+      "enfants": [
+        "Kolomoni Kitenge Asaël-Ethan",
+        "Sanginga Nyota Marie"
+      ]
+    },
+    {
+      "telephone": "082110165",
+      "nom": "Amadi",
+      "prenom": "Parent",
+      "enfants": [
+        "Amadi Kasindi Naeva-Christianne"
+      ]
+    },
+    {
+      "telephone": "0821110027",
+      "nom": "Lopombo",
+      "prenom": "Parent",
+      "enfants": [
+        "Lopombo Biansueki Yael",
+        "Lopombo Mopanga Yvan-Abraham"
+      ]
+    },
+    {
+      "telephone": "0821224600",
+      "nom": "Baruani",
+      "prenom": "Parent",
+      "enfants": [
+        "Baruani Mpala Shukrani",
+        "Baruani Salima Amani",
+        "Baruani Lula Imani"
+      ]
+    },
+    {
+      "telephone": "0821271020",
+      "nom": "Nkashama",
+      "prenom": "Parent",
+      "enfants": [
+        "Nkashama Kamalu Ryan-Levi"
+      ]
+    },
+    {
+      "telephone": "0821349140",
+      "nom": "Malu",
+      "prenom": "Parent",
+      "enfants": [
+        "Malu Kabisu Malika"
+      ]
+    },
+    {
+      "telephone": "0821585851",
+      "nom": "Nkanu",
+      "prenom": "Parent",
+      "enfants": [
+        "Nkanu Kayembe Odelia"
+      ]
+    },
+    {
+      "telephone": "0821732628",
+      "nom": "Kuyimba",
+      "prenom": "Parent",
+      "enfants": [
+        "Kuyimba Ngunza Brayden"
+      ]
+    },
+    {
+      "telephone": "0821734316",
+      "nom": "Azika",
+      "prenom": "Parent",
+      "enfants": [
+        "Azika Nabintu Alice",
+        "Azika Ndasi Annie"
+      ]
+    },
+    {
+      "telephone": "0821828190",
+      "nom": "Yanduka",
+      "prenom": "Parent",
+      "enfants": [
+        "Yanduka Nseya Destiny-Nilaja",
+        "Yanduka Longomba Royal-Kayden"
+      ]
+    },
+    {
+      "telephone": "0822001853",
+      "nom": "Bundule",
+      "prenom": "Parent",
+      "enfants": [
+        "Bundule Wa Bundule Mila"
+      ]
+    },
+    {
+      "telephone": "0822239434",
+      "nom": "Azika",
+      "prenom": "Parent",
+      "enfants": [
+        "Azika Masapili Rayan",
+        "Ibenge Walisi Aurel-Justin",
+        "Ibenge Elemba Delice-Nael"
+      ]
+    },
+    {
+      "telephone": "0822262982",
+      "nom": "Mudingayi",
+      "prenom": "Parent",
+      "enfants": [
+        "Mudingayi Mukendi Bryan"
+      ]
+    },
+    {
+      "telephone": "0822348821",
+      "nom": "Yumba",
+      "prenom": "Parent",
+      "enfants": [
+        "Yumba Wa Yumba Imaria-Amani",
+        "Yumba Sare Aksanti-Mareva",
+        "Yumba Kajingu Yvan-Dimer",
+        "Yumba Gamani Prince-Nathan"
+      ]
+    },
+    {
+      "telephone": "0822361181",
+      "nom": "Nyembo",
+      "prenom": "Parent",
+      "enfants": [
+        "Nyembo Kabwiz Ericia"
+      ]
+    },
+    {
+      "telephone": "0822412606",
+      "nom": "Monoke",
+      "prenom": "Parent",
+      "enfants": [
+        "Monoke Robert Ethan"
+      ]
+    },
+    {
+      "telephone": "0822446173",
+      "nom": "Kabongo",
+      "prenom": "Parent",
+      "enfants": [
+        "Kabongo Kalonji Kenael Yohan"
+      ]
+    },
+    {
+      "telephone": "0822828087",
+      "nom": "Marina",
+      "prenom": "Parent",
+      "enfants": [
+        "Marina Kapa Johanna"
+      ]
+    },
+    {
+      "telephone": "0822829555",
+      "nom": "Mbala",
+      "prenom": "Parent",
+      "enfants": [
+        "Mbala konyi Soan"
+      ]
+    },
+    {
+      "telephone": "0822848284",
+      "nom": "Malu",
+      "prenom": "Parent",
+      "enfants": [
+        "Malu Kayumba Amara"
+      ]
+    },
+    {
+      "telephone": "0823385573",
+      "nom": "Koto",
+      "prenom": "Parent",
+      "enfants": [
+        "Koto Abiliki Golden",
+        "Koto Eyigito Goshen"
+      ]
+    },
+    {
+      "telephone": "0823420272",
+      "nom": "Domayi",
+      "prenom": "Parent",
+      "enfants": [
+        "Domayi Mwanga Maeva-Ariah",
+        "Domayi Ngwangu Yohan",
+        "Domayi Ngweyi Tyan-Ange"
+      ]
+    },
+    {
+      "telephone": "0823680055",
+      "nom": "Kabangu",
+      "prenom": "Parent",
+      "enfants": [
+        "Kabangu Ngala Malaika"
+      ]
+    },
+    {
+      "telephone": "0824042929",
+      "nom": "Masungi",
+      "prenom": "Parent",
+      "enfants": [
+        "Masungi Nzau Eliora",
+        "Masungi Muna Ethan-Ilyan"
+      ]
+    },
+    {
+      "telephone": "0824048878",
+      "nom": "Amadi",
+      "prenom": "Parent",
+      "enfants": [
+        "Amadi Mzee Yohan-Nahel"
+      ]
+    },
+    {
+      "telephone": "0824161334",
+      "nom": "Bukasa",
+      "prenom": "Parent",
+      "enfants": [
+        "Bukasa Leo Samuel"
+      ]
+    },
+    {
+      "telephone": "0824200281",
+      "nom": "Ezaty",
+      "prenom": "Parent",
+      "enfants": [
+        "Ezaty Mungu Edema Goshen-Amara",
+        "Ezaty Mungu Feni Ayiko Heaven"
+      ]
+    },
+    {
+      "telephone": "0824323026",
+      "nom": "Tshipama",
+      "prenom": "Parent",
+      "enfants": [
+        "Tshipama Tendela Anaëlle"
+      ]
+    },
+    {
+      "telephone": "0824439243",
+      "nom": "Diawa",
+      "prenom": "Parent",
+      "enfants": [
+        "Diawa Nsilu Praise"
+      ]
+    },
+    {
+      "telephone": "0824444577",
+      "nom": "Andjaki",
+      "prenom": "Parent",
+      "enfants": [
+        "Andjaki Iyolo Elroy"
+      ]
+    },
+    {
+      "telephone": "0824614513",
+      "nom": "Ntumba",
+      "prenom": "Parent",
+      "enfants": [
+        "Ntumba Kashala Heaven",
+        "Ntumba Betu Jayden"
+      ]
+    },
+    {
+      "telephone": "0824615165",
+      "nom": "Ngisa",
+      "prenom": "Parent",
+      "enfants": [
+        "Ngisa Walubila Alem",
+        "Ngisa Beliniba Louis-Pascal"
+      ]
+    },
+    {
+      "telephone": "0824694894",
+      "nom": "Tsasa",
+      "prenom": "Parent",
+      "enfants": [
+        "Tsasa Matondo Ouriella"
+      ]
+    },
+    {
+      "telephone": "0825035537",
+      "nom": "Muyayu",
+      "prenom": "Parent",
+      "enfants": [
+        "Muyayu Matela Pauline"
+      ]
+    },
+    {
+      "telephone": "0825498897",
+      "nom": "Suangi",
+      "prenom": "Parent",
+      "enfants": [
+        "Suangi Mutombo Attilio-Bonifacio"
+      ]
+    },
+    {
+      "telephone": "0825558507",
+      "nom": "Gingweze",
+      "prenom": "Parent",
+      "enfants": [
+        "Gingweze O’Lagindz Keyla",
+        "Gingweze El’Lagingze Lerel"
+      ]
+    },
+    {
+      "telephone": "0826479836",
+      "nom": "Ezaty",
+      "prenom": "Parent",
+      "enfants": [
+        "Ezaty Bibhiyo Ishay"
+      ]
+    },
+    {
+      "telephone": "0827522039",
+      "nom": "Abeli",
+      "prenom": "Parent",
+      "enfants": [
+        "Abeli Byaombe Archange Gabriel"
+      ]
+    },
+    {
+      "telephone": "0829394436",
+      "nom": "Khonde",
+      "prenom": "Parent",
+      "enfants": [
+        "Tenda Khonde Shanic",
+        "Puati Khonde Bioshak"
+      ]
+    },
+    {
+      "telephone": "0829915095",
+      "nom": "Elembo",
+      "prenom": "Parent",
+      "enfants": [
+        "Elembo Bokosse Malaika"
+      ]
+    },
+    {
+      "telephone": "0833859393",
+      "nom": "Tshilumbu",
+      "prenom": "Parent",
+      "enfants": [
+        "Tshilumbu Mukendi Jayden"
+      ]
+    },
+    {
+      "telephone": "0840665680",
+      "nom": "Mambuku",
+      "prenom": "Parent",
+      "enfants": [
+        "Mambuku Ndungidi Heaven"
+      ]
+    },
+    {
+      "telephone": "0842580005",
+      "nom": "Okandja",
+      "prenom": "Parent",
+      "enfants": [
+        "Okandja Yanga Nael"
+      ]
+    },
+    {
+      "telephone": "0842743413",
+      "nom": "Katona",
+      "prenom": "Parent",
+      "enfants": [
+        "Katona Kalama Anaelle"
+      ]
+    },
+    {
+      "telephone": "0843341202",
+      "nom": "Nyakabasa",
+      "prenom": "Parent",
+      "enfants": [
+        "Nyakabasa Mutijima Beni-Bona"
+      ]
+    },
+    {
+      "telephone": "0846000479",
+      "nom": "Mfuita",
+      "prenom": "Parent",
+      "enfants": [
+        "Mfuita Nolan"
+      ]
+    },
+    {
+      "telephone": "0848447894",
+      "nom": "Mulenda",
+      "prenom": "Parent",
+      "enfants": [
+        "Mulenda Otepa Donel-Ezer",
+        "Mulenda Osango Daniel-Ezer"
+      ]
+    },
+    {
+      "telephone": "0850146462",
+      "nom": "Wedina",
+      "prenom": "Parent",
+      "enfants": [
+        "Wedina Lompika Esmeralda"
+      ]
+    },
+    {
+      "telephone": "0850942106",
+      "nom": "Luyindula",
+      "prenom": "Parent",
+      "enfants": [
+        "Luyindula Ditungamene Maïna Chloé",
+        "Luyindula Lompatshi Lyanna-Mila"
+      ]
+    },
+    {
+      "telephone": "0851819586",
+      "nom": "Mpezo",
+      "prenom": "Parent",
+      "enfants": [
+        "Mpezo Matondo Noah-Gloric"
+      ]
+    },
+    {
+      "telephone": "0851977141",
+      "nom": "Kiala",
+      "prenom": "Parent",
+      "enfants": [
+        "Kiala Kimya Acclamons"
+      ]
+    },
+    {
+      "telephone": "0852222277",
+      "nom": "Bay",
+      "prenom": "Parent",
+      "enfants": [
+        "Bay Dikisha Milan"
+      ]
+    },
+    {
+      "telephone": "0852444165",
+      "nom": "Mibulumukini",
+      "prenom": "Parent",
+      "enfants": [
+        "Mibulumukini Ngombe Thalia-Eliora"
+      ]
+    },
+    {
+      "telephone": "0852445165",
+      "nom": "Mibulumukini",
+      "prenom": "Parent",
+      "enfants": [
+        "Mibulumukini Liam Gabriel",
+        "Mibulumukini Abigail Ashna"
+      ]
+    },
+    {
+      "telephone": "0852606293",
+      "nom": "Kaseya",
+      "prenom": "Parent",
+      "enfants": [
+        "Kaseya Konyi Bienfaite",
+        "Mulanga Kazadi Satisfaite"
+      ]
+    },
+    {
+      "telephone": "0853023568",
+      "nom": "Dyese",
+      "prenom": "Parent",
+      "enfants": [
+        "Dyese Dia Leza Maelys-Michelle",
+        "Bunda Dyese Ihsane"
+      ]
+    },
+    {
+      "telephone": "0853074297",
+      "nom": "Ngisa",
+      "prenom": "Parent",
+      "enfants": [
+        "Ngisa Mboli Allanha"
+      ]
+    },
+    {
+      "telephone": "0853402346",
+      "nom": "Moseka",
+      "prenom": "Parent",
+      "enfants": [
+        "Moseka Adogo Surya"
+      ]
+    },
+    {
+      "telephone": "0853536829",
+      "nom": "Tshibangu",
+      "prenom": "Parent",
+      "enfants": [
+        "Tshibangu Mwambi Wa Nzambi Israel-Shammah"
+      ]
+    },
+    {
+      "telephone": "0854233888",
+      "nom": "Tshibuyi",
+      "prenom": "Parent",
+      "enfants": [
+        "Kabedi Tshibuyi Maria-Perla",
+        "Luabeya Tshibuyi David"
+      ]
+    },
+    {
+      "telephone": "0854602715",
+      "nom": "Kalala",
+      "prenom": "Parent",
+      "enfants": [
+        "Kalala Mubabinge Peniel"
+      ]
+    },
+    {
+      "telephone": "0854630561",
+      "nom": "Makasi",
+      "prenom": "Parent",
+      "enfants": [
+        "Makasi Shukrani Margueritte",
+        "Makasi Legrand Daniel"
+      ]
+    },
+    {
+      "telephone": "0854681119",
+      "nom": "Khandi",
+      "prenom": "Parent",
+      "enfants": [
+        "Khandi Vangu Taliah Faith"
+      ]
+    },
+    {
+      "telephone": "0855084135",
+      "nom": "Mongapa",
+      "prenom": "Parent",
+      "enfants": [
+        "Mongapa Elikya Hope"
+      ]
+    },
+    {
+      "telephone": "0855777804",
+      "nom": "Lizanga",
+      "prenom": "Parent",
+      "enfants": [
+        "Lizanga Lingele Malaika Pheloise",
+        "Lizanga Lingele Jésus-Phelindra"
+      ]
+    },
+    {
+      "telephone": "085606293",
+      "nom": "Kashika",
+      "prenom": "Parent",
+      "enfants": [
+        "Kashika Konyi Parfaite"
+      ]
+    },
+    {
+      "telephone": "0856386816",
+      "nom": "Makasi",
+      "prenom": "Parent",
+      "enfants": [
+        "Makasi Wavita Lucia"
+      ]
+    },
+    {
+      "telephone": "0858470194",
+      "nom": "Bumba",
+      "prenom": "Parent",
+      "enfants": [
+        "Bumba Bokungu Djhulya-Maria"
+      ]
+    },
+    {
+      "telephone": "0858475164",
+      "nom": "Tshidibi",
+      "prenom": "Parent",
+      "enfants": [
+        "Mubanji Tshidibi Gabriel",
+        "Meji Tshidibi Emmanuel"
+      ]
+    },
+    {
+      "telephone": "0858565487",
+      "nom": "Malunda",
+      "prenom": "Parent",
+      "enfants": [
+        "Malunda Onga Nael Aquila"
+      ]
+    },
+    {
+      "telephone": "0859272043",
+      "nom": "Puati",
+      "prenom": "Parent",
+      "enfants": [
+        "Puati Ntombo Dolbri"
+      ]
+    },
+    {
+      "telephone": "0891127863",
+      "nom": "Ibenge",
+      "prenom": "Parent",
+      "enfants": [
+        "Ibenge Bazaongo Divani-Aurore"
+      ]
+    },
+    {
+      "telephone": "0891357357",
+      "nom": "Mwenda",
+      "prenom": "Parent",
+      "enfants": [
+        "Mwenda Kilozo Saphir",
+        "Mwenda Amani Shukrani"
+      ]
+    },
+    {
+      "telephone": "0892200110",
+      "nom": "Kimbu",
+      "prenom": "Parent",
+      "enfants": [
+        "Kimbu Bayolo Jonovie"
+      ]
+    },
+    {
+      "telephone": "0892724165",
+      "nom": "Saidi",
+      "prenom": "Parent",
+      "enfants": [
+        "Saidi Kasuera Emmanuelle"
+      ]
+    },
+    {
+      "telephone": "0893869039",
+      "nom": "Kofi",
+      "prenom": "Parent",
+      "enfants": [
+        "Kofi Kiesse Lael"
+      ]
+    },
+    {
+      "telephone": "0894206993",
+      "nom": "Ndaie",
+      "prenom": "Parent",
+      "enfants": [
+        "Ndaie Anael Alleria",
+        "Ndaie Owen Hansel"
+      ]
+    },
+    {
+      "telephone": "0894815144",
+      "nom": "Kahilu",
+      "prenom": "Parent",
+      "enfants": [
+        "Kahilu Aki Malia-Luna"
+      ]
+    },
+    {
+      "telephone": "0895616973",
+      "nom": "Mbenza",
+      "prenom": "Parent",
+      "enfants": [
+        "Mbenza Senga Ivan",
+        "Mbenza Dienze Giovane"
+      ]
+    },
+    {
+      "telephone": "0896022008",
+      "nom": "Mukendi",
+      "prenom": "Parent",
+      "enfants": [
+        "Mukendi Mukendi Dieudonné Junior",
+        "Mudienda Mukendi Dieurci",
+        "Yombo Mukendi Dieumi"
+      ]
+    },
+    {
+      "telephone": "0896559273",
+      "nom": "Kezipame",
+      "prenom": "Parent",
+      "enfants": [
+        "Kezipame Shukrani Yann’Ael",
+        "Kezipame Ryan Sanders"
+      ]
+    },
+    {
+      "telephone": "0897718880",
+      "nom": "Mbikayi",
+      "prenom": "Parent",
+      "enfants": [
+        "Mbikayi Dinanga Gradela"
+      ]
+    },
+    {
+      "telephone": "0898035546",
+      "nom": "Kabwata",
+      "prenom": "Parent",
+      "enfants": [
+        "Kabwata Mbo Parfait"
+      ]
+    },
+    {
+      "telephone": "0898083546",
+      "nom": "Kabwata",
+      "prenom": "Parent",
+      "enfants": [
+        "Kabwata Mpia Prefina"
+      ]
+    },
+    {
+      "telephone": "0898257759",
+      "nom": "Bitota",
+      "prenom": "Parent",
+      "enfants": [
+        "Bitota Tshibanda Juanita"
+      ]
+    },
+    {
+      "telephone": "0898543503",
+      "nom": "Kintadi",
+      "prenom": "Parent",
+      "enfants": [
+        "Kintadi Muteba Matthis"
+      ]
+    },
+    {
+      "telephone": "0898622303",
+      "nom": "Luamba",
+      "prenom": "Parent",
+      "enfants": [
+        "Lukeba Luamba Cheickh",
+        "Luamba Telo Tryphène",
+        "Luamba Thalos Cerimau Junior"
+      ]
+    },
+    {
+      "telephone": "0898881672",
+      "nom": "Tshamala",
+      "prenom": "Parent",
+      "enfants": [
+        "Tshamala Musau Anaelle"
+      ]
+    },
+    {
+      "telephone": "0898900606",
+      "nom": "Kikolomfo",
+      "prenom": "Parent",
+      "enfants": [
+        "Kikolomfo Mazanga Eunice"
+      ]
+    },
+    {
+      "telephone": "0899340128",
+      "nom": "Mude",
+      "prenom": "Parent",
+      "enfants": [
+        "Mude Gbale Elwin"
+      ]
+    },
+    {
+      "telephone": "0970010663",
+      "nom": "Aila",
+      "prenom": "Parent",
+      "enfants": [
+        "Aila Ipoma Alissa-Grace",
+        "Aila Sifa Anaelle-Jade"
+      ]
+    },
+    {
+      "telephone": "0970103633",
+      "nom": "Langa",
+      "prenom": "Parent",
+      "enfants": [
+        "Langa Nzau Believe"
+      ]
+    },
+    {
+      "telephone": "097183597",
+      "nom": "N’Kambua",
+      "prenom": "Parent",
+      "enfants": [
+        "N’Kambua Bibomba Zoé"
+      ]
+    },
+    {
+      "telephone": "0971853597",
+      "nom": "N’Kambua",
+      "prenom": "Parent",
+      "enfants": [
+        "N’Kambua Mutombo Thalya",
+        "N’Kambua Mukanku Warren"
+      ]
+    },
+    {
+      "telephone": "0972026055",
+      "nom": "Katayi",
+      "prenom": "Parent",
+      "enfants": [
+        "Katayi Maliyah-David"
+      ]
+    },
+    {
+      "telephone": "0972229044",
+      "nom": "Langa",
+      "prenom": "Parent",
+      "enfants": [
+        "Langa Bagula Smile"
+      ]
+    },
+    {
+      "telephone": "0974836839",
+      "nom": "Cheduah",
+      "prenom": "Parent",
+      "enfants": [
+        "Cheduah Atosha Bénie"
+      ]
+    },
+    {
+      "telephone": "0975273271",
+      "nom": "Moz-Asaph",
+      "prenom": "Parent",
+      "enfants": [
+        "Moz-Asaph Tekila Graciela"
+      ]
+    },
+    {
+      "telephone": "0976010314",
+      "nom": "Mpona",
+      "prenom": "Parent",
+      "enfants": [
+        "Mpona Minga Milayilo Raphaëlle"
+      ]
+    },
+    {
+      "telephone": "0976664560",
+      "nom": "Kizema",
+      "prenom": "Parent",
+      "enfants": [
+        "Kizema Zara Alexandra"
+      ]
+    },
+    {
+      "telephone": "0978387879",
+      "nom": "Elonga",
+      "prenom": "Parent",
+      "enfants": [
+        "Elonga Belonga Yohanna-Elisa"
+      ]
+    },
+    {
+      "telephone": "0981790566",
+      "nom": "Ker",
+      "prenom": "Parent",
+      "enfants": [
+        "Ker Safari Yanis-Marcel",
+        "Ubay Ker Maelle-Joyce"
+      ]
+    },
+    {
+      "telephone": "0990662488",
+      "nom": "Bilambo",
+      "prenom": "Parent",
+      "enfants": [
+        "Bilambo Mamboleo Priscollia"
+      ]
+    },
+    {
+      "telephone": "0991150719",
+      "nom": "Muamba",
+      "prenom": "Parent",
+      "enfants": [
+        "Muamba Muteba Elyakim-Allan"
+      ]
+    },
+    {
+      "telephone": "0991509079",
+      "nom": "Kighovi",
+      "prenom": "Parent",
+      "enfants": [
+        "Kighovi Yana Yimbi Yvan",
+        "Kighovi Mwenge Anaelle"
+      ]
+    },
+    {
+      "telephone": "0991728341",
+      "nom": "Okandja",
+      "prenom": "Parent",
+      "enfants": [
+        "Okandja Naseem Maftah",
+        "Okandja Imongo Celia-Nhuru"
+      ]
+    },
+    {
+      "telephone": "0991768788",
+      "nom": "Diabanza",
+      "prenom": "Parent",
+      "enfants": [
+        "Diabanza Mabonso Oindie",
+        "Diabanza Mayola Ryan"
+      ]
+    },
+    {
+      "telephone": "0991969976",
+      "nom": "Cikuru",
+      "prenom": "Parent",
+      "enfants": [
+        "Cikuru Hamuli Anne-Marie"
+      ]
+    },
+    {
+      "telephone": "0992825754",
+      "nom": "Tshimanga",
+      "prenom": "Parent",
+      "enfants": [
+        "King Tshimanga Araçia",
+        "Mwilambwe Tshimanga Agra"
+      ]
+    },
+    {
+      "telephone": "0994053434",
+      "nom": "Ngoie",
+      "prenom": "Parent",
+      "enfants": [
+        "Ngoie Bunda Dylan"
+      ]
+    },
+    {
+      "telephone": "0994133658",
+      "nom": "Muderwa",
+      "prenom": "Parent",
+      "enfants": [
+        "Rwamugabu Muderwa Isaac",
+        "Mulume Muderwa Nathan"
+      ]
+    },
+    {
+      "telephone": "0995164861",
+      "nom": "Bahati",
+      "prenom": "Parent",
+      "enfants": [
+        "Bahati Kalehezo Nathan"
+      ]
+    },
+    {
+      "telephone": "0995675704",
+      "nom": "Diakiese",
+      "prenom": "Parent",
+      "enfants": [
+        "Diakiese Tandu Gabriel-Ethan"
+      ]
+    },
+    {
+      "telephone": "0997242443",
+      "nom": "Muamba",
+      "prenom": "Parent",
+      "enfants": [
+        "Muamba Mutanga Eloane-Grace"
+      ]
+    },
+    {
+      "telephone": "0997303980",
+      "nom": "Yanaku",
+      "prenom": "Parent",
+      "enfants": [
+        "Yanaku Yalida Loïc-Olivier",
+        "Yanaku Kuhana Malia-Christine",
+        "Yanaku Manu Nathan"
+      ]
+    },
+    {
+      "telephone": "0997548318",
+      "nom": "Kalubanga",
+      "prenom": "Parent",
+      "enfants": [
+        "Kalubanga Ngoy Ezra",
+        "Kalubanga Mbuyi Ella",
+        "Kalubanga Kulu Kulu Evan"
+      ]
+    },
+    {
+      "telephone": "0998065893",
+      "nom": "Victoria",
+      "prenom": "Parent",
+      "enfants": [
+        "Victoria Marisa Missi"
+      ]
+    },
+    {
+      "telephone": "0998307600",
+      "nom": "Sanginga",
+      "prenom": "Parent",
+      "enfants": [
+        "Sanginga Ntwali Alexandre"
+      ]
+    },
+    {
+      "telephone": "0998799736",
+      "nom": "Shamamba",
+      "prenom": "Parent",
+      "enfants": [
+        "Shamamba Nkumu Jada"
+      ]
+    },
+    {
+      "telephone": "0999931498",
+      "nom": "Nkiangudi",
+      "prenom": "Parent",
+      "enfants": [
+        "Nkiangudi Aksanti Samia-Jovial"
+      ]
+    },
+    {
+      "telephone": "0999943457",
+      "nom": "Fundu",
+      "prenom": "Parent",
+      "enfants": [
+        "Fundu Kasoki Maeva-Paty"
+      ]
+    }
+  ],
+  "anomalies": [
+    {
+      "eleve": "Shamamba Nkumu Jada",
+      "classe": "2ème Maternelle B",
+      "probleme": "date recollee (source : 21/062022)"
+    },
+    {
+      "eleve": "Amadi Kasindi Naeva-Christianne",
+      "classe": "3ème Maternelle B",
+      "probleme": "numero a 9 chiffres (source : 082110165)"
+    },
+    {
+      "eleve": "N’Kambua Bibomba Zoé",
+      "classe": "3ème Primaire B",
+      "probleme": "numero a 9 chiffres (source : 097183597)"
+    },
+    {
+      "eleve": "Kisenge Buhunda Rabby-Paul",
+      "classe": "6ème Primaire A",
+      "probleme": "telephone absent"
+    },
+    {
+      "eleve": "Kashika Konyi Parfaite",
+      "classe": "6ème Primaire A",
+      "probleme": "numero a 9 chiffres (source : 085606293)"
+    },
+    {
+      "eleve": "Tshamala Musau Anaelle",
+      "classe": "6ème Primaire A",
+      "probleme": "annee sur 2 chiffres (source : 16/10/20)"
+    }
+  ],
+  "resume": {
+    "classes": 15,
+    "eleves": 292,
+    "professeurs": 15,
+    "parents": 199,
+    "classes_vides_ignorees": [
+      "4ème Primaire A"
+    ],
+    "sans_telephone": [
+      "Kisenge Buhunda Rabby-Paul"
+    ]
+  }
+}

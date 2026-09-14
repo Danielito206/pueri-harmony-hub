@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -64,6 +64,7 @@ const mapClass = (c: any): AdminClass => ({
 });
 
 const ClassesManagement = () => {
+  const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth();
   const { toast } = useToast();
 
@@ -318,9 +319,14 @@ const ClassesManagement = () => {
     const busy = !!deletingClassId || !!removingTeacherClassId || assignLoading;
     return (
       <div key={classItem.id} className="card-elevated p-6">
-        <h3 className="font-heading text-lg font-semibold text-foreground mb-3">
+        <button
+          type="button"
+          onClick={() => navigate(`/classes/${classItem.id}`)}
+          className="font-heading text-lg font-semibold text-foreground mb-3 hover:text-primary hover:underline text-left block"
+          title="Ouvrir la feuille de classe"
+        >
           {classItem.name}
-        </h3>
+        </button>
         <div className="space-y-2 text-sm">
           <div className="flex items-center justify-between">
             <span className="text-muted-foreground flex items-center gap-1.5">

@@ -35,12 +35,12 @@ const Contact = () => {
     {
       icon: MapPin,
       title: 'Adresse',
-      content: 'Avenue de l\'Université, 123\nKinshasa, RDC',
+      content: 'Avenue Lubau n\u00b0 14, quartier Brikin Lubau\nCommune de Ngaliema, Kinshasa, RDC',
     },
     {
       icon: Phone,
       title: 'Téléphone',
-      content: '+243 999 000 000',
+      content: '+243 840 021 616',
     },
     {
       icon: Mail,

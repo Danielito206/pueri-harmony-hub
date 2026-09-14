@@ -40,8 +40,8 @@ const About = () => {
               À propos de Pueri Angeli
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Ouverte en 2019, notre école accompagne les enfants de la première maternelle
-              à la sixième primaire.
+              Ouvert en 2014 à Ngaliema, le Complexe Scolaire Pueri Angeli accompagne les
+              enfants de la première maternelle à la sixième primaire.
             </p>
           </div>
         </section>
@@ -56,8 +56,9 @@ const About = () => {
                 </h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    L'École Pueri Angeli a ouvert ses portes en 2019, avec une conviction
-                    simple : un enfant apprend mieux là où on le connaît par son nom.
+                    Le Complexe Scolaire Pueri Angeli a ouvert ses portes en 2014 à Ngaliema,
+                    avec une conviction simple : un enfant apprend mieux là où on le connaît
+                    par son nom. Plus de dix ans plus tard, c'est toujours ce qui nous guide.
                   </p>
                   <p>
                     Nous couvrons les trois années de maternelle et les six années de

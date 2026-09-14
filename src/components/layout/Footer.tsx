@@ -51,11 +51,13 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-background/70">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <span>Avenue de l'Université, 123<br />Kinshasa, RDC</span>
+                <span>Av. Lubau n° 14, q. Brikin Lubau<br />Ngaliema, Kinshasa, RDC</span>
               </li>
               <li className="flex items-center gap-2 text-sm text-background/70">
                 <Phone className="h-4 w-4 flex-shrink-0" />
-                <span>+243 999 000 000</span>
+                <a href="tel:+243840021616" className="hover:text-background transition-colors">
+                  +243 840 021 616
+                </a>
               </li>
               <li className="flex items-center gap-2 text-sm text-background/70">
                 <Mail className="h-4 w-4 flex-shrink-0" />
@@ -67,7 +69,7 @@ export function Footer() {
 
         <div className="border-t border-background/20 mt-8 pt-8 text-center">
           <p className="text-sm text-background/50">
-            © {new Date().getFullYear()} École Pueri Angeli. Tous droits réservés.
+            © {new Date().getFullYear()} Complexe Scolaire Pueri Angeli. Tous droits réservés.
           </p>
         </div>
       </div>

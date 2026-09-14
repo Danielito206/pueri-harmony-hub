@@ -24,9 +24,10 @@ export function AboutPreview() {
               Former les leaders de demain
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              Depuis plus de 30 ans, l'École Pueri Angeli s'engage à offrir une éducation 
-              de qualité dans un environnement propice à l'épanouissement de chaque enfant. 
-              Notre approche pédagogique allie tradition et innovation.
+              Depuis 2014, le Complexe Scolaire Pueri Angeli accueille les enfants de
+              Kinshasa, de la première maternelle à la sixième primaire. Des classes à
+              taille humaine, un titulaire par classe, et des parents tenus au courant
+              du parcours de leur enfant.
             </p>
 
             <ul className="space-y-3 mb-8">

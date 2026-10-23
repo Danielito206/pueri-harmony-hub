@@ -48,7 +48,6 @@ interface OverviewStudent {
   first_name: string;
   last_name: string;
   post_name: string | null;
-  matricule: string;
 }
 
 interface OverviewTeacher {
@@ -187,7 +186,6 @@ const AcademicYearsManagement = () => {
               first_name: s.first_name,
               last_name: s.last_name,
               post_name: s.post_name || null,
-              matricule: s.matricule,
             }))
           )
         )
@@ -370,7 +368,6 @@ const AcademicYearsManagement = () => {
             first_name: created.first_name,
             last_name: created.last_name,
             post_name: created.post_name || null,
-            matricule: created.matricule,
           },
         ]);
       } else {
@@ -436,7 +433,7 @@ const AcademicYearsManagement = () => {
     const totalStudents = overview?.classes.reduce((n, c) => n + c.students.length, 0) ?? 0;
     const filteredStudents = allStudents.filter(s =>
       studentSearch.trim()
-        ? (fullName(s) + ' ' + s.matricule).toLowerCase().includes(studentSearch.trim().toLowerCase())
+        ? fullName(s).toLowerCase().includes(studentSearch.trim().toLowerCase())
         : true
     );
 
@@ -534,15 +531,13 @@ const AcademicYearsManagement = () => {
                         <thead>
                           <tr className="text-left text-muted-foreground">
                             <th className="pb-2 font-medium">Élève</th>
-                            <th className="pb-2 font-medium">Matricule</th>
                           </tr>
                         </thead>
                         <tbody>
                           {classItem.students.map(s => (
                             <tr key={s.id} className="border-t border-border">
                               <td className="py-2 text-foreground">{fullName(s)}</td>
-                              <td className="py-2 text-muted-foreground font-mono text-xs">{s.matricule}</td>
-                            </tr>
+                              </tr>
                           ))}
                         </tbody>
                       </table>
@@ -654,7 +649,6 @@ const AcademicYearsManagement = () => {
                       />
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      Le matricule est généré automatiquement.
                     </p>
                   </>
                 ) : (
@@ -665,7 +659,7 @@ const AcademicYearsManagement = () => {
                         id="sSearch"
                         value={studentSearch}
                         onChange={e => setStudentSearch(e.target.value)}
-                        placeholder="Nom ou matricule"
+                        placeholder="Nom de l'élève"
                       />
                     </div>
                     <div className="space-y-2">
@@ -682,7 +676,7 @@ const AcademicYearsManagement = () => {
                           ) : (
                             filteredStudents.map(s => (
                               <SelectItem key={s.id} value={s.id}>
-                                {fullName(s)} — {s.matricule}
+                                {fullName(s)}
                               </SelectItem>
                             ))
                           )}

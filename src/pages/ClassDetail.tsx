@@ -11,6 +11,7 @@ import {
   UserCheck,
   Users,
   Phone,
+  Info,
   ShieldAlert,
 } from 'lucide-react';
 
@@ -42,7 +43,12 @@ interface FeuilleClasse {
     email: string | null;
     phone: string | null;
   } | null;
-  academic_year: { id: string; name: string; active: boolean } | null;
+  academic_year: {
+    id: string;
+    name: string;
+    active: boolean;
+    reconstituted?: boolean;
+  } | null;
   students: Ligne[];
   count: number;
 }
@@ -150,6 +156,8 @@ const ClassDetail = () => {
                 <p className="font-medium text-foreground">
                   {data.titulaire.last_name} {data.titulaire.first_name}
                 </p>
+              ) : data.academic_year?.reconstituted ? (
+                <p className="text-muted-foreground italic text-sm">Non enregistré</p>
               ) : (
                 <p className="text-destructive italic">Non assigné</p>
               )}
@@ -166,6 +174,17 @@ const ClassDetail = () => {
             <span className="text-muted-foreground">{filles} fille(s)</span>
           </div>
         </div>
+
+        {data.academic_year?.reconstituted && (
+          <div className="flex items-start gap-3 rounded-lg border border-border bg-muted/40 px-4 py-3 print:hidden">
+            <Info className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
+            <p className="text-sm text-muted-foreground">
+              Année reconstituée à partir du niveau actuel des élèves. Les sections et
+              les titulaires de cette année-là n'ont pas été enregistrés ; la liste sera
+              remplacée dès que l'école fournira celle d'origine.
+            </p>
+          </div>
+        )}
 
         {/* Liste */}
         <div className="card-elevated overflow-hidden">

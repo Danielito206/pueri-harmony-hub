@@ -133,6 +133,7 @@ const AcademicYearsManagement = () => {
           classesCount: y.classes_count ?? undefined,
           studentsCount: y.students_count ?? undefined,
           classesWithoutTeacher: y.classes_without_teacher ?? undefined,
+          reconstituted: !!y.reconstituted,
         })));
       })
       .catch(() => setYears([]))
@@ -778,6 +779,148 @@ const AcademicYearsManagement = () => {
     );
   }
 
+  // L'annee en cours d'abord ; les autres en dessous, les plus recentes en tete.
+  const anneeCourante = years.find(y => y.active) || null;
+  const anneesPassees = years
+    .filter(y => !y.active)
+    .sort((a, b) => (b.name || '').localeCompare(a.name || ''));
+
+  // Une annee passee n'a pas besoin de titulaire : signaler son absence en
+  // rouge ferait passer une situation normale pour une anomalie. L'alerte ne
+  // concerne donc que l'annee en cours.
+  const renderYearCard = (year: AcademicYear) => (
+    <div
+      key={year.id}
+      className="card-elevated p-6 cursor-pointer transition-colors hover:border-primary/50"
+      onClick={() => openYear(year)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openYear(year);
+        }
+      }}
+    >
+      <div className="flex items-start justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <CalendarRange className="h-5 w-5 text-primary" />
+          <h3 className="font-heading text-lg font-semibold text-foreground">{year.name}</h3>
+        </div>
+        {year.active && (
+          <span className="px-2 py-1 text-xs font-medium bg-primary/10 text-primary rounded">
+            En cours
+          </span>
+        )}
+        {!year.active && year.reconstituted && (
+          <span className="px-2 py-1 text-xs font-medium bg-muted text-muted-foreground rounded">
+            Reconstituée
+          </span>
+        )}
+        {!year.active && !year.reconstituted && year.archived && (
+          <span className="px-2 py-1 text-xs font-medium bg-muted text-muted-foreground rounded">
+            Archivée
+          </span>
+        )}
+      </div>
+
+      {year.classesCount === undefined ? (
+        <p className="text-sm text-muted-foreground mb-4 flex items-center gap-1">
+          {year.hasData ? 'Contient des données' : 'Aucune donnée'}
+          <ChevronRight className="h-4 w-4" />
+        </p>
+      ) : (
+        <div className="mb-4 space-y-2">
+          <div className="flex items-center gap-4 text-sm">
+            <span className="flex items-center gap-1.5 text-foreground">
+              <GraduationCap className="h-4 w-4 text-primary" />
+              <span className="font-medium">{year.classesCount}</span>
+              <span className="text-muted-foreground">classe(s)</span>
+            </span>
+            <span className="flex items-center gap-1.5 text-foreground">
+              <Users className="h-4 w-4 text-primary" />
+              <span className="font-medium">{year.studentsCount ?? 0}</span>
+              <span className="text-muted-foreground">élève(s)</span>
+            </span>
+          </div>
+
+          {year.reconstituted ? (
+            <p className="text-xs text-muted-foreground">
+              Déduite des niveaux actuels — sans sections ni titulaires
+            </p>
+          ) : !year.active ? (
+            <p className="text-xs text-muted-foreground">Année passée</p>
+          ) : !!year.classesWithoutTeacher && year.classesWithoutTeacher > 0 ? (
+            <p className="text-xs text-destructive flex items-center gap-1.5">
+              <UserPlus className="h-3.5 w-3.5" />
+              {year.classesWithoutTeacher} classe(s) sans titulaire
+            </p>
+          ) : year.classesCount > 0 ? (
+            <p className="text-xs text-muted-foreground flex items-center gap-1.5">
+              <CheckCircle2 className="h-3.5 w-3.5" />
+              Toutes les classes ont un titulaire
+            </p>
+          ) : (
+            <p className="text-xs text-muted-foreground">Aucune classe créée</p>
+          )}
+
+          <p className="text-xs text-primary flex items-center gap-1">
+            Voir le détail
+            <ChevronRight className="h-3.5 w-3.5" />
+          </p>
+        </div>
+      )}
+
+      <div
+        className="flex flex-wrap gap-2 pt-4 border-t border-border"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {!year.active && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleActivate(year)}
+            disabled={busyId === year.id}
+          >
+            {busyId === year.id ? (
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+            ) : (
+              <CheckCircle2 className="h-4 w-4 mr-2" />
+            )}
+            Activer
+          </Button>
+        )}
+        {!year.archived && !year.active && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleArchive(year)}
+            disabled={busyId === year.id}
+          >
+            <Archive className="h-4 w-4 mr-2" />
+            Archiver
+          </Button>
+        )}
+        <Button variant="ghost" size="sm" onClick={() => openModal(year)} disabled={!!busyId}>
+          <Pencil className="h-4 w-4" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-destructive hover:text-destructive"
+          onClick={() => handleDelete(year)}
+          disabled={busyId === year.id}
+        >
+          {busyId === year.id ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Trash2 className="h-4 w-4" />
+          )}
+        </Button>
+      </div>
+    </div>
+  );
+
   return (
     <DashboardLayout>
       <div className="space-y-6">
@@ -795,115 +938,27 @@ const AcademicYearsManagement = () => {
           </Button>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {years.map((year) => (
-            <div
-              key={year.id}
-              className="card-elevated p-6 cursor-pointer transition-colors hover:border-primary/50"
-              onClick={() => openYear(year)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  openYear(year);
-                }
-              }}
-            >
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center gap-2">
-                  <CalendarRange className="h-5 w-5 text-primary" />
-                  <h3 className="font-heading text-lg font-semibold text-foreground">{year.name}</h3>
-                </div>
-                {year.active && (
-                  <span className="px-2 py-1 text-xs font-medium bg-primary/10 text-primary rounded">Active</span>
-                )}
-                {year.archived && (
-                  <span className="px-2 py-1 text-xs font-medium bg-muted text-muted-foreground rounded">Archivée</span>
-                )}
-              </div>
-              {/* Effectifs de l'annee : l'ecole doit voir d'un coup d'oeil si une
-                  annee est complete, sans avoir a l'ouvrir. */}
-              {year.classesCount === undefined ? (
-                <p className="text-sm text-muted-foreground mb-4 flex items-center gap-1">
-                  {year.hasData ? 'Contient des données' : 'Aucune donnée'}
-                  <ChevronRight className="h-4 w-4" />
-                </p>
-              ) : (
-                <div className="mb-4 space-y-2">
-                  <div className="flex items-center gap-4 text-sm">
-                    <span className="flex items-center gap-1.5 text-foreground">
-                      <GraduationCap className="h-4 w-4 text-primary" />
-                      <span className="font-medium">{year.classesCount}</span>
-                      <span className="text-muted-foreground">classe(s)</span>
-                    </span>
-                    <span className="flex items-center gap-1.5 text-foreground">
-                      <Users className="h-4 w-4 text-primary" />
-                      <span className="font-medium">{year.studentsCount ?? 0}</span>
-                      <span className="text-muted-foreground">élève(s)</span>
-                    </span>
-                  </div>
-                  {!!year.classesWithoutTeacher && year.classesWithoutTeacher > 0 ? (
-                    <p className="text-xs text-destructive flex items-center gap-1.5">
-                      <UserPlus className="h-3.5 w-3.5" />
-                      {year.classesWithoutTeacher} classe(s) sans titulaire
-                    </p>
-                  ) : year.classesCount > 0 ? (
-                    <p className="text-xs text-muted-foreground flex items-center gap-1.5">
-                      <CheckCircle2 className="h-3.5 w-3.5" />
-                      Toutes les classes ont un titulaire
-                    </p>
-                  ) : (
-                    <p className="text-xs text-muted-foreground">Aucune classe créée</p>
-                  )}
-                  <p className="text-xs text-primary flex items-center gap-1">
-                    Voir le détail
-                    <ChevronRight className="h-3.5 w-3.5" />
-                  </p>
-                </div>
-              )}
-              <div
-                className="flex flex-wrap gap-2 pt-4 border-t border-border"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {!year.active && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleActivate(year)}
-                    disabled={busyId === year.id}
-                  >
-                    {busyId === year.id ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <CheckCircle2 className="h-4 w-4 mr-2" />}
-                    Activer
-                  </Button>
-                )}
-                {!year.archived && !year.active && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleArchive(year)}
-                    disabled={busyId === year.id}
-                  >
-                    <Archive className="h-4 w-4 mr-2" />
-                    Archiver
-                  </Button>
-                )}
-                <Button variant="ghost" size="sm" onClick={() => openModal(year)} disabled={!!busyId}>
-                  <Pencil className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-destructive hover:text-destructive"
-                  onClick={() => handleDelete(year)}
-                  disabled={busyId === year.id}
-                >
-                  {busyId === year.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
-                </Button>
-              </div>
+        {anneeCourante && (
+          <div>
+            <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">
+              Année en cours
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {renderYearCard(anneeCourante)}
             </div>
-          ))}
-        </div>
+          </div>
+        )}
+
+        {anneesPassees.length > 0 && (
+          <div className="pt-2">
+            <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">
+              Années précédentes
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {anneesPassees.map(year => renderYearCard(year))}
+            </div>
+          </div>
+        )}
 
         {years.length === 0 && (
           <div className="card-elevated p-8 text-center">

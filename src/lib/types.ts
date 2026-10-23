@@ -65,6 +65,8 @@ export interface AcademicYear {
   classesCount?: number;
   studentsCount?: number;
   classesWithoutTeacher?: number;
+  // Annee deduite du niveau actuel des eleves, pas lue sur une liste.
+  reconstituted?: boolean;
 }
 export interface GalleryImage {
   id: string;
